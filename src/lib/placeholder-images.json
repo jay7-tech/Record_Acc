@@ -1,0 +1,58 @@
+{
+  "placeholderImages": [
+    {
+      "id": "yolomart",
+      "description": "Smart retail project image",
+      "imageUrl": "https://images.unsplash.com/photo-1722058130459-c3efb68d6653?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHJldGFpbHxlbnwwfHx8fDE3NjcwODE3MjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "smart retail"
+    },
+    {
+      "id": "highfive",
+      "description": "Social platform project image",
+      "imageUrl": "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c29jaWFsJTIwbWVkaWF8ZW58MHx8fHwxNzY2OTk4MDY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social media"
+    },
+    {
+      "id": "movifi",
+      "description": "Movie booking project image",
+      "imageUrl": "https://images.unsplash.com/photo-1732294672274-123daf18e101?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtb3ZpZSUyMHRpY2tldHN8ZW58MHx8fHwxNzY3MDgxNzIwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie tickets"
+    },
+    {
+      "id": "anveshana",
+      "description": "Power generation project image",
+      "imageUrl": "/images/anveshana.jpg",
+      "imageHint": "energy innovation"
+    },
+    {
+      "id": "profile-picture",
+      "description": "A placeholder image for the author's profile picture",
+      "imageUrl": "/images/profile-picture.jpg",
+      "imageHint": "profile portrait"
+    },
+    {
+      "id": "neuro-ai-hero",
+      "description": "Hero image for Neuro-AI project",
+      "imageUrl": "/images/project-assets/neuro-ai-hero.png",
+      "imageHint": "neuro ai dementia care"
+    },
+    {
+      "id": "neuro-ai-2",
+      "description": "Feature image for Neuro-AI project",
+      "imageUrl": "/images/project-assets/neuro-ai-2.png",
+      "imageHint": "neuro ai features"
+    },
+    {
+      "id": "high-five-1",
+      "description": "Main image for High Five project",
+      "imageUrl": "/images/project-assets/high-five-1.jpg",
+      "imageHint": "high five social app"
+    },
+    {
+      "id": "high-five-2",
+      "description": "Feature image for High Five project",
+      "imageUrl": "/images/project-assets/high-five-2.jpg",
+      "imageHint": "high five features"
+    }
+  ]
+}
