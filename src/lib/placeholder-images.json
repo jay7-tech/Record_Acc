@@ -45,13 +45,13 @@
     {
       "id": "high-five-1",
       "description": "Main image for High Five project",
-      "imageUrl": "/images/project-assets/high-five-1.jpg",
+      "imageUrl": "/images/project-assets/high-five-hero-v2.png",
       "imageHint": "high five social app"
     },
     {
       "id": "high-five-2",
       "description": "Feature image for High Five project",
-      "imageUrl": "/images/project-assets/high-five-2.jpg",
+      "imageUrl": "/images/project-assets/high-five-feature-v2.png",
       "imageHint": "high five features"
     }
   ]
