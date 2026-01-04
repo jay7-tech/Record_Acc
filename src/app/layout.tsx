@@ -7,7 +7,7 @@ import { ClickSparkle } from '@/components/click-sparkle';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Jayadeep Gowda KB | Portfolio',
+  title: 'Jayadeep Gowda',
   description: 'Visionary Robotics & AI Engineer and Full-Stack Development Architect.',
 };
 

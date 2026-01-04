@@ -1,168 +1,221 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from 'react';
 
-const Star = ({ x, y, size, delay }: { x: number; y: number; size: number; delay: number }) => (
-    <motion.div
-        className="absolute rounded-full bg-white dark:bg-white bg-black"
-        style={{
-            left: `${x}%`,
-            top: `${y}%`,
-            width: `${size}px`,
-            height: `${size}px`,
-        }}
-        animate={{
-            opacity: [0.2, 1, 0.2],
-            scale: [1, 1.2, 1],
-        }}
-        transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: delay,
-            ease: "easeInOut",
-        }}
-    />
-);
-
-const Grid = () => (
-    <div className="absolute inset-0 pointer-events-none">
-        {/* Horizontal Lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] dark:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-    </div>
-);
-
-const OrbitalLine = ({ size, duration, delay, reverse = false }: { size: number; duration: number; delay: number; reverse?: boolean }) => (
-    <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10 dark:border-white/5 border-dashed"
-        style={{
-            width: `${size}vw`,
-            height: `${size}vw`,
-            maxWidth: `${size * 10}px`,
-            maxHeight: `${size * 10}px`,
-        }}
-        animate={{
-            rotate: reverse ? -360 : 360,
-        }}
-        transition={{
-            duration: duration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: delay,
-        }}
-    />
-);
-
-const TwinkleStar = ({ x, y, delay, duration }: { x: number; y: number; delay: number; duration: number }) => (
-    <motion.div
-        className="absolute"
-        style={{ left: `${x}%`, top: `${y}%` }}
-        animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 0.5], rotate: [0, 180] }}
-        transition={{ duration: duration, repeat: Infinity, delay: delay, ease: "easeInOut" }}
-    >
-        <div className="w-[1px] h-4 bg-white/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]" />
-        <div className="w-4 h-[1px] bg-white/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]" />
-    </motion.div>
-);
-
-const SpaceDust = () => {
-    const [dust, setDust] = useState<{ x: number; y: number; duration: number; delay: number }[]>([]);
-
-    useEffect(() => {
-        const newDust = Array.from({ length: 40 }).map(() => ({
-            x: Math.random() * 100,
-            y: Math.random() * 100,
-            duration: Math.random() * 20 + 20, // Slow drift
-            delay: Math.random() * 10,
-        }));
-        setDust(newDust);
-    }, []);
-
-    return (
-        <div className="absolute inset-0 z-0">
-            {dust.map((d, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute w-[2px] h-[2px] bg-white/30 rounded-full"
-                    style={{ left: `${d.x}%`, top: `${d.y}%` }}
-                    animate={{ y: [0, -100], x: [0, Math.random() * 50 - 25], opacity: [0, 0.5, 0] }}
-                    transition={{ duration: d.duration, repeat: Infinity, delay: d.delay, ease: "linear" }}
-                />
-            ))}
-        </div>
-    );
-};
+interface Star {
+    x: number;
+    y: number;
+    size: number;
+    opacity: number;
+    twinkleSpeed: number;
+    twinkleOffset: number;
+    vx: number;
+    vy: number;
+}
 
 export function AestheticBackground() {
-    const [stars, setStars] = useState<{ x: number; y: number; size: number; delay: number }[]>([]);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const starsRef = useRef<Star[]>([]);
+    const mouseRef = useRef({ x: 0, y: 0 });
+    const animationFrameRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
-        // Generate static stars
-        const newStars = Array.from({ length: 50 }).map(() => ({
-            x: Math.random() * 100,
-            y: Math.random() * 100,
-            size: Math.random() * 2 + 1,
-            delay: Math.random() * 5,
-        }));
-        setStars(newStars);
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Set canvas size
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Initialize stars
+        const initStars = () => {
+            const stars: Star[] = [];
+            const starCount = Math.floor((canvas.width * canvas.height) / 8000); // Responsive star count
+
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    opacity: Math.random() * 0.5 + 0.3,
+                    twinkleSpeed: Math.random() * 0.02 + 0.01,
+                    twinkleOffset: Math.random() * Math.PI * 2,
+                    vx: 0,
+                    vy: 0,
+                });
+            }
+            starsRef.current = stars;
+        };
+        initStars();
+
+        // Mouse move handler
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseRef.current = { x: e.clientX, y: e.clientY };
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+
+        // Animation loop
+        let time = 0;
+        const animate = () => {
+            time += 0.01;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Detect theme
+            const isDarkMode = document.documentElement.classList.contains('dark');
+
+            // Draw grid with theme-aware colors
+            ctx.strokeStyle = isDarkMode
+                ? 'rgba(168, 85, 247, 0.07)'
+                : 'rgba(168, 85, 247, 0.1)';
+            ctx.lineWidth = 1;
+            const gridSize = 22; // Balanced spacing
+
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Draw and animate stars
+            starsRef.current.forEach((star) => {
+                // Calculate distance from mouse
+                const dx = mouseRef.current.x - star.x;
+                const dy = mouseRef.current.y - star.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = 150;
+
+                // Interactive movement
+                if (distance < maxDistance) {
+                    const force = (maxDistance - distance) / maxDistance;
+                    star.vx += (dx / distance) * force * 0.5;
+                    star.vy += (dy / distance) * force * 0.5;
+                }
+
+                // Apply velocity with damping
+                star.x += star.vx;
+                star.y += star.vy;
+                star.vx *= 0.95;
+                star.vy *= 0.95;
+
+                // Wrap around edges
+                if (star.x < 0) star.x = canvas.width;
+                if (star.x > canvas.width) star.x = 0;
+                if (star.y < 0) star.y = canvas.height;
+                if (star.y > canvas.height) star.y = 0;
+
+                // Pulsing effect
+                const pulse = Math.sin(time * star.twinkleSpeed + star.twinkleOffset);
+                const currentOpacity = (star.opacity + pulse * 0.3) * 0.4; // Lighter, more transparent
+                const currentSize = star.size * (1 + pulse * 0.2);
+
+                // Color based on size - theme aware
+                let color;
+                if (star.size > 2) {
+                    color = isDarkMode ? '168, 85, 247' : '109, 40, 217'; // Deep purple for light mode
+                } else if (star.size > 1.5) {
+                    color = isDarkMode ? '147, 197, 253' : '37, 99, 235'; // Royal blue for light mode
+                } else {
+                    color = isDarkMode ? '255, 255, 255' : '75, 85, 99'; // Dark gray for light mode
+                }
+
+                // Draw outer glow
+                const glowGradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, currentSize * 5);
+                glowGradient.addColorStop(0, `rgba(${color}, ${currentOpacity * 0.5})`);
+                glowGradient.addColorStop(0.4, `rgba(${color}, ${currentOpacity * 0.2})`);
+                glowGradient.addColorStop(1, `rgba(${color}, 0)`);
+
+                ctx.fillStyle = glowGradient;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, currentSize * 5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw 8-pointed sparkle/starburst
+                ctx.save();
+                ctx.translate(star.x, star.y);
+
+                // Main sparkle shape with alternating ray lengths
+                ctx.fillStyle = `rgba(${color}, ${currentOpacity})`;
+                ctx.beginPath();
+
+                // Create 8-pointed star with alternating long and short rays
+                const points = 8;
+                const longRadius = currentSize * 3;
+                const shortRadius = currentSize * 1.5;
+                const innerRadius = currentSize * 0.3;
+
+                for (let i = 0; i < points * 2; i++) {
+                    let radius;
+                    if (i % 2 === 0) {
+                        // Outer points - alternate between long and short
+                        radius = (i / 2) % 2 === 0 ? longRadius : shortRadius;
+                    } else {
+                        // Inner points
+                        radius = innerRadius;
+                    }
+
+                    const angle = (Math.PI / points) * i - Math.PI / 2; // Start from top
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+
+                ctx.closePath();
+                ctx.fill();
+
+                // Add bright center core
+                const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, currentSize * 0.8);
+                centerGradient.addColorStop(0, isDarkMode
+                    ? `rgba(255, 255, 255, ${currentOpacity})`
+                    : `rgba(${color}, ${currentOpacity})`);
+                centerGradient.addColorStop(1, `rgba(${color}, ${currentOpacity * 0.5})`);
+
+                ctx.fillStyle = centerGradient;
+                ctx.beginPath();
+                ctx.arc(0, 0, currentSize * 0.8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            });
+
+            animationFrameRef.current = requestAnimationFrame(animate);
+        };
+        animate();
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+        };
     }, []);
 
     return (
-        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-
-            {/* 1. Base Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background dark:via-background/50 dark:to-background z-0" />
-
-            {/* 2. Technical Grid */}
-            <Grid />
-
-            {/* 2.1 Nebula / Auroras */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse dark:opacity-30 opacity-60 pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] mix-blend-screen animate-pulse animation-delay-4000 dark:opacity-20 opacity-50 pointer-events-none" />
-
-            {/* 2.2 Distant Planet */}
-            <div className="absolute top-20 right-20 w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-600/5 blur-2xl opacity-50 dark:opacity-80 pointer-events-none" />
-
-            {/* 3. Space/Orbital Lines */}
-            <div className="absolute inset-0 overflow-hidden opacity-30 dark:opacity-50">
-                <OrbitalLine size={40} duration={60} delay={0} />
-                <OrbitalLine size={60} duration={80} delay={5} reverse />
-                <OrbitalLine size={90} duration={100} delay={2} />
-            </div>
-
-            {/* 4. Stars */}
-            <div className="absolute inset-0 z-0">
-                {stars.map((star, i) => (
-                    <Star key={i} {...star} />
-                ))}
-            </div>
-
-            {/* 4.1 Twinkling Flare Stars (Big Crosses) */}
-            <TwinkleStar x={15} y={25} delay={0} duration={4} />
-            <TwinkleStar x={85} y={15} delay={2} duration={5} />
-            <TwinkleStar x={50} y={80} delay={1} duration={6} />
-
-            {/* 4.2 Floating Space Dust */}
-            <SpaceDust />
-
-            {/* 5. Shooting Star (Occasional) */}
-            <motion.div
-                className="absolute top-0 left-0 w-[100px] h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
-                initial={{ x: -100, y: 100, opacity: 0, rotate: 45 }}
-                animate={{
-                    x: ['0vw', '100vw'],
-                    y: ['0vh', '100vh'],
-                    opacity: [0, 1, 0]
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 10,
-                    ease: "easeIn"
-                }}
-            />
-
-        </div>
+        <canvas
+            ref={canvasRef}
+            className="fixed inset-0 w-full h-full pointer-events-none z-0"
+            style={{ background: 'transparent' }}
+        />
     );
 }
