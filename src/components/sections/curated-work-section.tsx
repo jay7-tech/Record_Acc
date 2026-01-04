@@ -49,12 +49,18 @@ export function CuratedWorkSection() {
                   transition: { type: "spring", stiffness: 40, damping: 15 }
                 }
               }}
-              className={`relative rounded-3xl overflow-hidden border border-white/10 ${project.color} transition-all duration-500 hover:border-primary/20 bg-black/40 backdrop-blur-xl shadow-2xl`}
+              className="relative rounded-3xl overflow-hidden border border-white/10 transition-all duration-700 hover:border-white/20 bg-gradient-to-br from-white/5 via-white/5 to-transparent backdrop-blur-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]"
             >
-              {/* Opaque backing to hide cards below during stack */}
-              <div className="absolute inset-0 bg-background/80 -z-10" />
+              {/* Opaque backing to ensure legibility when stacked */}
+              <div className="absolute inset-0 bg-background/60 -z-20" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+              {/* Ambient Color Glow Blob */}
+              <div className={`absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[100px] opacity-40 pointer-events-none ${project.color}`} />
+
+              {/* Noise Texture (Optional, simulates high-end feel) */}
+              <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] -z-10 brightness-100 invert" />
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center relative z-10">
 
                 {/* Image Side (Left) - Spans 7 cols */}
                 <div className="lg:col-span-7 relative h-[300px] md:h-[400px] w-full flex items-center justify-center group cursor-pointer perspective-1000">
