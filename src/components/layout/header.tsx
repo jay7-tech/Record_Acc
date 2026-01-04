@@ -8,6 +8,7 @@ export default function Header() {
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
+    { name: 'CV', href: '/resume.pdf', target: '_blank' },
   ];
 
   return (
@@ -29,7 +30,7 @@ export default function Header() {
           {navLinks.map((link) => (
             <li key={link.href}>
               <Button variant="ghost" size="sm" asChild>
-                <Link href={link.href}>{link.name}</Link>
+                <Link href={link.href} target={link.target}>{link.name}</Link>
               </Button>
             </li>
           ))}
