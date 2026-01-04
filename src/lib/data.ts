@@ -11,7 +11,7 @@ export const personalInfo = {
     socials: [
         { name: "LinkedIn", url: "https://linkedin.com/in/jay7788", icon: Linkedin },
         { name: "GitHub", url: "https://github.com/jay7-tech", icon: SiGithub },
-        { name: "Instagram", url: "https://instagram.com", icon: SiInstagram },
+        { name: "Instagram", url: "https://www.instagram.com/jayadeep_gowda_?igsh=MWZsMGNud25qcjFyaw==", icon: SiInstagram },
     ],
     summary: "An impact-focused Engineering undergraduate specializing in Robotics and Artificial Intelligence. I drive innovation by fusing cutting-edge technology with an entrepreneurial mindset to architect sustainable solutions with tangible real-world impact. Proficient across the MERN stack, advanced machine learning, and autonomous hardware, I am a strategic communicator who excels at mastering complex technical challenges through excellence and strategic communication.",
 };
@@ -150,8 +150,8 @@ export const experiences = [
         role: "Core Organizer",
         organization: "IDEATHON 2025",
         details: [
-            "Spearheaded the orchestration of a national-level hackathon, hosting over 200+ teams and engaging 50+ colleges.",
-            "Directed large-scale operational logistics, crisis resolution, and led a dynamic core team.",
+            "Spearheaded the orchestration of a national-level ideathon, hosting over 200+ teams and engaging 50+ colleges.",
+            "Directed large-scale operational logistics, crisis resolution, in coordination with a dynamic core team.",
         ],
         image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop",
         images: [
@@ -192,11 +192,11 @@ export const experiences = [
 export const marqueeSkills = [
     "HEY THERE",
     "CIAO",
-    "LOADING...",
     "INTERACTIVE",
+    "LOADING...",
     "RELIABLE",
-    "SCALABLE",
     "PERFECTION",
+    "SCALABLE",
     "PRESS START ▶",
 ];
 

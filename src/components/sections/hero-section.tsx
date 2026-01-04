@@ -12,10 +12,10 @@ export function HeroSection() {
       <HeroBackground3D />
 
       <div className="relative z-10 max-w-4xl pt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-        <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl leading-tight tracking-tight">
+        <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl leading-tight tracking-tight drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]">
           JAYADEEP GOWDA
         </h1>
-        <h2 className="mt-6 font-headline text-2xl md:text-3xl lg:text-4xl max-w-2xl mx-auto text-foreground/90 leading-snug">
+        <h2 className="mt-6 font-headline text-2xl md:text-3xl lg:text-4xl max-w-2xl mx-auto text-foreground/90 leading-snug drop-shadow-md">
           {personalInfo.title}
         </h2>
 
