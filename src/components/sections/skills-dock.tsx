@@ -42,7 +42,33 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 
+import { motion } from 'framer-motion';
+
 export function SkillsDock() {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0, scale: 0.8 },
+    show: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
   return (
     <AnimatedSection id="skills">
       <div className="text-center">
@@ -54,15 +80,24 @@ export function SkillsDock() {
 
       <div className="mt-16">
         <TooltipProvider>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 md:gap-6"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {skills.map((skill) => {
               const Icon = typeof skill.icon === 'string' ? iconMap[skill.icon] : skill.icon;
               return (
                 <Tooltip key={skill.name}>
                   <TooltipTrigger asChild>
-                    <div className="group flex h-20 w-20 items-center justify-center rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-4 transition-all duration-300 hover:border-primary/50 hover:bg-white/10 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20">
-                      <Icon className="h-full w-full text-muted-foreground transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
-                    </div>
+                    <motion.div
+                      variants={item}
+                      className="group flex h-20 w-20 items-center justify-center rounded-2xl bg-background/40 border border-white/20 backdrop-blur-md p-4 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:-translate-y-2 hover:shadow-lg hover:shadow-violet-500/20"
+                    >
+                      <Icon className="h-full w-full text-foreground/80 transition-all duration-300 group-hover:text-violet-600 group-hover:scale-110" />
+                    </motion.div>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{skill.name}</p>
@@ -70,7 +105,7 @@ export function SkillsDock() {
                 </Tooltip>
               );
             })}
-          </div>
+          </motion.div>
         </TooltipProvider>
       </div>
     </AnimatedSection>
