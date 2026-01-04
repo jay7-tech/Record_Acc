@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from 'framer-motion';
 import { useActionState, useEffect, useRef } from "react";
 import { FileDown, Info } from "lucide-react";
 import { useFormStatus } from "react-dom";
@@ -66,8 +66,13 @@ export function ContactSection() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
                 <h3 className="text-xl font-bold mb-4 text-primary">Contact Information</h3>
                 <div className="flex gap-4 mb-8">
                   {personalInfo.socials.map((social) => {
@@ -110,25 +115,33 @@ export function ContactSection() {
                     </Link>
                   </Button>
                 </div>
-              </div>
-              <form ref={formRef} action={dispatch} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" name="name" placeholder="Your Name" className="bg-white/5 border-white/10 focus:border-primary/50" />
-                  {state.errors?.name && <p className="text-sm text-destructive">{state.errors.name[0]}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" placeholder="your.email@example.com" className="bg-white/5 border-white/10 focus:border-primary/50" />
-                  {state.errors?.email && <p className="text-sm text-destructive">{state.errors.email[0]}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" name="message" placeholder="Your message..." className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[120px]" />
-                  {state.errors?.message && <p className="text-sm text-destructive">{state.errors.message[0]}</p>}
-                </div>
-                <SubmitButton />
-              </form>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <form ref={formRef} action={dispatch} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input id="name" name="name" placeholder="Your Name" className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    {state.errors?.name && <p className="text-sm text-destructive">{state.errors.name[0]}</p>}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    {state.errors?.email && <p className="text-sm text-destructive">{state.errors.email[0]}</p>}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" name="message" placeholder="Your message..." className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[120px]" />
+                    {state.errors?.message && <p className="text-sm text-destructive">{state.errors.message[0]}</p>}
+                  </div>
+                  <SubmitButton />
+                </form>
+              </motion.div>
             </div>
           </CardContent>
         </Card>

@@ -1,6 +1,9 @@
+"use client";
+
 import { experiences } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ExperienceCard } from '../experience-card';
 import { AnimatedSection } from '../animated-section';
 import { ArrowRight } from 'lucide-react';
@@ -18,19 +21,39 @@ export function ExperienceSection() {
         </p>
       </div>
 
-      <div className="mt-12 max-w-5xl mx-auto space-y-12">
+      <motion.div
+        className="mt-12 max-w-5xl mx-auto space-y-12"
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.2
+            }
+          }
+        }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+      >
         {experiences.map((exp: any, index) => (
-          /* Provide default category/images since data.ts might not have them fully populated for all entries yet */
-          <ExperienceCard
+          <motion.div
             key={index}
-            exp={{
-              ...exp,
-              category: "Work Experience",
-              images: exp.images || (exp.image ? [exp.image] : [])
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 50, damping: 20 } }
             }}
-          />
+          >
+            <ExperienceCard
+              exp={{
+                ...exp,
+                category: "Work Experience",
+                images: exp.images || (exp.image ? [exp.image] : [])
+              }}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="mt-12 flex justify-center">
         <Button variant="outline" className="group gap-2 border-primary/20 hover:border-primary/50" asChild>

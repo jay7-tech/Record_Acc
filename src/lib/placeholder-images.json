@@ -7,6 +7,18 @@
       "imageHint": "smart retail"
     },
     {
+      "id": "yolomart-1",
+      "description": "Main image for YoloMart - Smart Storefront",
+      "imageUrl": "https://images.unsplash.com/photo-1722058130459-c3efb68d6653?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHJldGFpbHxlbnwwfHx8fDE3NjcwODE3MjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "yolomart storefront"
+    },
+    {
+      "id": "yolomart-2",
+      "description": "Feature image for YoloMart - RFID Scanning",
+      "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYXltZW50fGVufDB8fHx8MTc2NzA4MTcyMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "yolomart rfid"
+    },
+    {
       "id": "highfive",
       "description": "Social platform project image",
       "imageUrl": "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c29jaWFsJTIwbWVkaWF8ZW58MHx8fHwxNzY2OTk4MDY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -44,14 +56,14 @@
     },
     {
       "id": "high-five-1",
-      "description": "Main image for High Five project",
-      "imageUrl": "/images/project-assets/high-five-hero-v2.png",
-      "imageHint": "high five social app"
+      "description": "Main image for High Five project - Mobile Dashboard Combo",
+      "imageUrl": "/images/project-assets/high-five-dashboard-ultra-safe.png",
+      "imageHint": "high five mobile dashboard"
     },
     {
       "id": "high-five-2",
-      "description": "Feature image for High Five project",
-      "imageUrl": "/images/project-assets/high-five-feature-v2.png",
+      "description": "Feature image for High Five project - Dark Consent UI",
+      "imageUrl": "/images/project-assets/high-five-dark-consent-zoomed.png",
       "imageHint": "high five features"
     }
   ]

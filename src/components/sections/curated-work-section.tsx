@@ -1,5 +1,8 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { projects } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { AnimatedSection } from '../animated-section';
@@ -22,15 +25,35 @@ export function CuratedWorkSection() {
         </h2>
       </div>
 
-      <div className="mt-16 space-y-12">
+      <div className="mt-16 flex flex-col gap-32 pb-32">
         {projects.filter(p => p.isFeatured).map((project, index) => {
-          const projectImages = project.images.map(id => getImage(id)).filter(Boolean);
+          const projectImages = project.images.map(id => getImage(id)).filter((img): img is typeof PlaceHolderImages[0] => !!img);
+
+          // Calculate sticky top offset
+          const uniqueTop = 80 + (index * 40);
 
           return (
-            <div
+            <motion.div
               key={project.title}
-              className={`relative rounded-3xl overflow-hidden border border-white/10 ${project.color} transition-all duration-500 hover:border-primary/20`}
+              style={{
+                position: 'sticky',
+                top: `${uniqueTop}px`,
+                zIndex: index + 10,
+              }}
+              variants={{
+                hidden: { opacity: 0, y: 100, scale: 0.9 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { type: "spring", stiffness: 40, damping: 15 }
+                }
+              }}
+              className={`relative rounded-3xl overflow-hidden border border-white/10 ${project.color} transition-all duration-500 hover:border-primary/20 bg-black/40 backdrop-blur-xl shadow-2xl`}
             >
+              {/* Opaque backing to hide cards below during stack */}
+              <div className="absolute inset-0 bg-background/80 -z-10" />
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
 
                 {/* Image Side (Left) - Spans 7 cols */}
@@ -206,7 +229,7 @@ export function CuratedWorkSection() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine } from "lucide-react";
 import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs } from "react-icons/si";
 import type { IconType } from "react-icons";
@@ -45,7 +46,7 @@ type Project = {
     recognition: string | null;
     images: string[];
     color: string;
-    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan';
+    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery';
     description: {
         paragraph: string;
         features: string[];
@@ -59,23 +60,23 @@ export const projects: Project[] = [
     {
         title: "YoloMart | Smart Retail Ecosystem",
         recognition: "Secured 2nd Place at GlitchVerse 2k25 Project Expo at BIT.",
-        images: ["yolomart", "highfive"],
+        images: ["yolomart-1", "yolomart-2"],
         color: "bg-[#FF3366]/10", // Pinkish
-        animationType: "deck-shuffle",
+        animationType: "perspective-push",
         description: {
-            paragraph: "Pioneered an intelligent agent for product reasoning and an ML-driven camera system for autonomous user tracking, creating a seamless and futuristic shopping experience.",
+            paragraph: "A seamless 'Phygital' retail ecosystem merging in-store RFID interactions with a smart digital storefront. Connects physical product interactions to a real-time digital cart, featuring an AI-powered nutrition assistant and smart comparison engine.",
             features: [
-                "Engineered a synchronized Smart Cart with high-speed QR/Barcode scanning.",
-                "Integrated allergy-safe filtering and behavior-based recommendations.",
-                "Developed smart in-store navigation mapping for optimized shopping routes."
+                "Scan & Go: Advanced client-side barcode/QR scanning with @zxing for instant product details and comparative nutrition analysis.",
+                "RFID 'Magic' Cart: Real-time WebSocket synchronization that instantly updates the digital cart when physical items are picked up (RFID-tagged).",
+                "AI Shopping Assistant: Integrated ChatWidget providing personalized dietary recommendations and recipe suggestions based on user preferences."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/yolomart",
         tags: [
-            { name: "React", icon: SiReact },
-            { name: "Node.js", icon: SiNodedotjs },
-            { name: "MongoDB", icon: SiMongodb },
-            { name: "Python", icon: SiPython },
+            { name: "React + Vite", icon: SiReact },
+            { name: "Node.js & WS", icon: SiNodedotjs },
+            { name: "RFID Tech", icon: Share2 }, // Using Share2 as a proxy for connection/radio if Radio isn't available, or I'll add imports
+            { name: "WebSockets", icon: Waves },
         ],
         isFeatured: true,
     },
