@@ -52,6 +52,7 @@ type Project = {
     };
     githubUrl: string;
     tags: { name: string; icon: IconType | ((props: any) => JSX.Element) }[];
+    isFeatured: boolean;
 }
 
 export const projects: Project[] = [
@@ -76,6 +77,7 @@ export const projects: Project[] = [
             { name: "MongoDB", icon: SiMongodb },
             { name: "Python", icon: SiPython },
         ],
+        isFeatured: true,
     },
     {
         title: "Neuro-AI | Cognitive Care Ecosystem",
@@ -98,13 +100,14 @@ export const projects: Project[] = [
             { name: "Gemini AI", icon: Bot },
             { name: "TypeScript", icon: SiTypescript },
         ],
+        isFeatured: true,
     },
     {
         title: "High Five | Real-Time Social Platform",
         recognition: null,
         images: ["high-five-1", "high-five-2"],
         color: "bg-[#8e44ad]/10", // Purple
-        animationType: "perspective-push",
+        animationType: "vertical-shuffle",
         description: {
             paragraph: "Conceptualized and deployed a high-energy platform for anonymous voice connections using Flask and WebSockets, fostering spontaneous social interactions.",
             features: [
@@ -120,6 +123,7 @@ export const projects: Project[] = [
             { name: "WebRTC", icon: SiWebrtc },
             { name: "JavaScript", icon: SiJavascript },
         ],
+        isFeatured: true,
     },
     {
         title: "Movifi | Online Show Booking Website",
@@ -142,6 +146,7 @@ export const projects: Project[] = [
             { name: "Express.js", icon: SiExpress },
             { name: "MongoDB", icon: SiMongodb },
         ],
+        isFeatured: false,
     }
 ];
 

@@ -23,7 +23,7 @@ export function CuratedWorkSection() {
       </div>
 
       <div className="mt-16 space-y-12">
-        {projects.map((project, index) => {
+        {projects.filter(p => p.isFeatured).map((project, index) => {
           const projectImages = project.images.map(id => getImage(id)).filter(Boolean);
 
           return (
