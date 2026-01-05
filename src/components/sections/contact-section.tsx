@@ -108,7 +108,7 @@ export function ContactSection() {
                     className="w-full sm:w-auto border-primary/20 hover:bg-primary/10 hover:border-primary group relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(124,58,237,0.3)]"
                     asChild
                   >
-                    <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    <Link href="/JayadeepGowda_CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                       <span className="relative z-10">Download CV</span>
                       <FileDown className="w-4 h-4 relative z-10 group-hover:translate-y-1 transition-transform duration-300" />
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />

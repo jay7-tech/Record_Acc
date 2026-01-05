@@ -51,8 +51,8 @@ export function CuratedWorkSection() {
               }}
               className="relative rounded-3xl overflow-hidden border border-white/10 transition-all duration-700 hover:border-white/20 bg-gradient-to-br from-white/5 via-white/5 to-transparent backdrop-blur-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]"
             >
-              {/* Opaque backing to ensure legibility when stacked */}
-              <div className="absolute inset-0 bg-background/60 -z-20" />
+              {/* Opaque backing to ensure legibility when stacked - Reduced for glassier look */}
+              <div className="absolute inset-0 bg-background/40 -z-20" />
 
               {/* Ambient Color Glow Blob */}
               <div className={`absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[100px] opacity-40 pointer-events-none ${project.color}`} />
@@ -62,8 +62,8 @@ export function CuratedWorkSection() {
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center relative z-10">
 
-                {/* Image Side (Left) - Spans 7 cols */}
-                <div className="lg:col-span-7 relative h-[300px] md:h-[400px] w-full flex items-center justify-center group cursor-pointer perspective-1000">
+                {/* Image Side (Left) - Spans 8 cols for larger visual impact */}
+                <div className="lg:col-span-8 relative h-[400px] md:h-[500px] w-full flex items-center justify-center group cursor-pointer perspective-1000">
                   <div className="relative w-full h-full flex items-center justify-center">
 
                     {/* === ANIMATION 1: DECK SHUFFLE (YoloMart) === */}
@@ -190,8 +190,8 @@ export function CuratedWorkSection() {
                   </div>
                 </div>
 
-                {/* Content Side (Right) - Spans 5 cols */}
-                <div className="lg:col-span-5 flex flex-col justify-center">
+                {/* Content Side (Right) - Spans 4 cols */}
+                <div className="lg:col-span-4 flex flex-col justify-center">
                   {project.recognition && (
                     <Badge variant="secondary" className="mb-4 w-fit px-3 py-1">{project.recognition}</Badge>
                   )}

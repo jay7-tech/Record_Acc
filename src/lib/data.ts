@@ -64,18 +64,18 @@ export const projects: Project[] = [
         color: "bg-[#FF3366]/10", // Pinkish
         animationType: "perspective-push",
         description: {
-            paragraph: "A seamless 'Phygital' retail ecosystem merging in-store RFID interactions with a smart digital storefront. Connects physical product interactions to a real-time digital cart, featuring an AI-powered nutrition assistant and smart comparison engine.",
+            paragraph: "A seamless 'Phygital' retail ecosystem connecting in-store RFID interactions to a real-time digital cart. Features an AI-powered smart comparison engine for instant analytics.",
             features: [
-                "Scan & Go: Advanced client-side barcode/QR scanning with @zxing for instant product details and comparative nutrition analysis.",
-                "RFID 'Magic' Cart: Real-time WebSocket synchronization that instantly updates the digital cart when physical items are picked up (RFID-tagged).",
-                "AI Shopping Assistant: Integrated ChatWidget providing personalized dietary recommendations and recipe suggestions based on user preferences."
+                "Scan & Go: Instant client-side barcode scanning with comparative nutrition analysis.",
+                "RFID 'Magic' Cart: Real-time WebSocket sync updates digital cart on physical item pickup.",
+                "AI Assistant: Integrated ChatWidget for personalized dietary and recipe recommendations."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/yolomart",
         tags: [
             { name: "React + Vite", icon: SiReact },
             { name: "Node.js & WS", icon: SiNodedotjs },
-            { name: "RFID Tech", icon: Share2 }, // Using Share2 as a proxy for connection/radio if Radio isn't available, or I'll add imports
+            { name: "RFID Tech", icon: Share2 },
             { name: "WebSockets", icon: Waves },
         ],
         isFeatured: true,
@@ -84,14 +84,14 @@ export const projects: Project[] = [
         title: "Neuro-AI | Cognitive Care Ecosystem",
         recognition: "A Holistic Digital Ecosystem for Alzheimer's & Dementia Care.",
         images: ["neuro-ai-hero", "neuro-ai-2"],
-        color: "bg-[#00BCD4]/10", // Cyan/Teal for Compassion/Medical
+        color: "bg-[#00BCD4]/10", // Cyan/Teal
         animationType: "parallax-fan",
         description: {
-            paragraph: "Confronting the silent epidemic of Alzheimer's, Neuro-AI is a holistic digital ecosystem designed to bridge the gap between patients, caregivers, and clinicians. It leverages advanced Generative AI to preserve patient identity, reduce caregiver burnout, and provide doctors with actionable, longitudinal data.",
+            paragraph: "A holistic digital ecosystem bridging patients, caregivers, and clinicians. Uses Generative AI to preserve identity, reduce burnout, and provide actionable longitudinal data.",
             features: [
-                "Patient Empowerment: Revolutionizes dementia care with a Gemini-powered AI Companion that offers 24/7 empathetic interaction and adaptive cognitive games to preserve identity.",
-                "Compassionate Care Loop: Unifies the care continuum via a 3-role sync monitoring system, providing real-time mood analytics to prevent caregiver burnout.",
-                "High-Value Tech Stack: Architected a scalable ecosystem using Next.js 15, TypeScript, and Google Genkit for enterprise-grade security and AI performance."
+                "AI Companion: Gemini-powered 24/7 empathetic interaction and adaptive cognitive games.",
+                "Care Loop: 3-role sync monitoring with real-time mood analytics for caregivers.",
+                "Tech Stack: Scalable ecosystem on Next.js 15, TypeScript, and Google Genkit."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/Neuro.ai.git",
@@ -110,11 +110,11 @@ export const projects: Project[] = [
         color: "bg-[#8e44ad]/10", // Purple
         animationType: "vertical-shuffle",
         description: {
-            paragraph: "Conceptualized and deployed a high-energy platform for anonymous voice connections using Flask and WebSockets, fostering spontaneous social interactions.",
+            paragraph: "A high-energy platform for anonymous voice connections using Flask and WebSockets. Fosters spontaneous social interactions with a focus on user privacy.",
             features: [
-                "Deployed a robust WebRTC engine with STUN/TURN servers for reliable connections.",
-                "Revolutionized UX with an audio-reactive interface that pulses with voice frequency.",
-                "Championed a 'Consent-First' architecture for revealing social handles."
+                "WebRTC Engine: Robust STUN/TURN integration for reliable, low-latency connections.",
+                "Audio-Reactive UI: Dynamic interface that pulses with voice frequency in real-time.",
+                "Privacy First: 'Consent-First' architecture for secure and anonymous socializing."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/High_five.git",

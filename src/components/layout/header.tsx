@@ -8,7 +8,7 @@ export default function Header() {
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
-    { name: 'CV', href: '/resume.pdf', target: '_blank' },
+    { name: 'CV', href: '/JayadeepGowda_CV.pdf', target: '_blank' },
   ];
 
   return (
