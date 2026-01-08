@@ -25,12 +25,12 @@ export function CuratedWorkSection() {
         </h2>
       </div>
 
-      <div className="mt-16 flex flex-col gap-20 pb-20">
+      <div className="mt-16 flex flex-col gap-32 pb-32">
         {projects.filter(p => p.isFeatured).map((project, index) => {
           const projectImages = project.images.map(id => getImage(id)).filter((img): img is typeof PlaceHolderImages[0] => !!img);
 
           // Calculate sticky top offset
-          const uniqueTop = 80 + (index * 40);
+          const uniqueTop = 80 + (index * 50);
 
           return (
             <motion.div
@@ -41,12 +41,13 @@ export function CuratedWorkSection() {
                 zIndex: index + 10,
               }}
               variants={{
-                hidden: { opacity: 0, y: 100, scale: 0.9 },
+                hidden: { opacity: 0, scale: 0.95, y: 50, filter: "blur(10px)" },
                 show: {
                   opacity: 1,
-                  y: 0,
                   scale: 1,
-                  transition: { type: "spring", stiffness: 40, damping: 15 }
+                  y: 0,
+                  filter: "blur(0px)",
+                  transition: { type: "spring", stiffness: 50, damping: 20, duration: 0.8 }
                 }
               }}
               className="relative rounded-2xl overflow-hidden border-2 border-white/20 transition-all duration-700 hover:border-white/30 hover:shadow-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]"
@@ -278,13 +279,22 @@ export function CuratedWorkSection() {
         })}
       </div>
 
-      <div className="mt-20 flex justify-center">
-        <Button asChild size="lg" variant="outline" className="rounded-full px-8 py-6 text-lg border-white/10 hover:bg-white/5 hover:border-primary/50 transition-all">
-          <Link href="/projects">
-            See More Projects
-          </Link>
-        </Button>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5 }}
+        className="mt-20 flex justify-center"
+      >
+        <div className="relative group">
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Button asChild size="lg" variant="outline" className="relative rounded-full px-8 py-6 text-lg border-white/10 hover:bg-white/5 hover:border-primary/50 transition-all">
+            <Link href="/projects">
+              See More Projects
+            </Link>
+          </Button>
+        </div>
+      </motion.div>
     </AnimatedSection>
   );
 }
