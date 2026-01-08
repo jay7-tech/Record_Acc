@@ -46,7 +46,7 @@ type Project = {
     recognition: string | null;
     images: string[];
     color: string;
-    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery';
+    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery' | '3d-flip-reveal';
     description: {
         paragraph: string;
         features: string[];
@@ -85,7 +85,7 @@ export const projects: Project[] = [
         recognition: "A Holistic Digital Ecosystem for Alzheimer's & Dementia Care.",
         images: ["neuro-ai-hero", "neuro-ai-2"],
         color: "bg-[#00BCD4]/10", // Cyan/Teal
-        animationType: "parallax-fan",
+        animationType: "perspective-push",
         description: {
             paragraph: "A holistic digital ecosystem bridging patients, caregivers, and clinicians. Uses Generative AI to preserve identity, reduce burnout, and provide actionable longitudinal data.",
             features: [
