@@ -153,8 +153,23 @@ export const projects: Project[] = [
 
 export const experiences = [
     {
+        role: "Intern",
+        organization: "Frillory Design House",
+        category: "INTERNSHIP",
+        details: [
+            "Collaborated with the Co-Founder on strategic design outreach and digital content narratives.",
+            "Catalyzed firm presence by curating high-impact social media creatives and marketing materials.",
+        ],
+        image: "/images/project-assets/frillory certificate.jpg", // Frillory certificate
+        images: [
+            "/images/project-assets/frillory certificate.jpg",
+        ]
+    },
+
+    {
         role: "Core Organizer",
         organization: "IDEATHON 2025",
+        category: "INSTITUTIONAL",
         details: [
             "Spearheaded the orchestration of a national-level ideathon, hosting over 200+ teams and engaging 50+ colleges.",
             "Directed large-scale operational logistics, crisis resolution, in coordination with a dynamic core team.",
@@ -170,6 +185,7 @@ export const experiences = [
     {
         role: "Technical Event Moderator",
         organization: "Poster Presentation",
+        category: "INSTITUTIONAL",
         details: [
             "Arbitrated technical events, expertly coordinating communication between participants, esteemed judges, and organizing teams.",
             "Managed critical event timelines and presenter introductions, demonstrating impeccable time management skills.",
@@ -180,19 +196,7 @@ export const experiences = [
             "https://images.unsplash.com/photo-1475721027767-pns-placeholder?q=80&w=600&auto=format&fit=crop"
         ]
     },
-    {
-        role: "Intern",
-        organization: "Frillory Design House",
-        details: [
-            "Collaborated with the Co-Founder on strategic design outreach and digital content narratives.",
-            "Catalyzed firm presence by curating high-impact social media creatives and marketing materials.",
-        ],
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop", // Modern Office/Design
-        images: [
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1497215842964-222b4bef9728?q=80&w=600&auto=format&fit=crop"
-        ]
-    },
+
 ];
 
 export const marqueeSkills = [

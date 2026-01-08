@@ -119,7 +119,7 @@ export function ExperienceCard({ exp, alwaysExpanded = false }: { exp: any, alwa
                                                 <img
                                                     src={images[currentIndex]}
                                                     alt={`${exp.role} - image ${currentIndex + 1}`}
-                                                    className="w-full h-full object-cover"
+                                                    className="w-full h-full object-contain bg-white/5"
                                                 />
 
                                                 {/* Simple Controls (only if multiple) */}

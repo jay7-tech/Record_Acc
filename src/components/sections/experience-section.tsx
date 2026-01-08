@@ -47,7 +47,6 @@ export function ExperienceSection() {
             <ExperienceCard
               exp={{
                 ...exp,
-                category: "Work Experience",
                 images: exp.images || (exp.image ? [exp.image] : [])
               }}
             />
