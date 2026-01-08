@@ -71,7 +71,7 @@ export const projects: Project[] = [
                 "AI Assistant: Integrated ChatWidget for personalized dietary and recipe recommendations."
             ]
         },
-        githubUrl: "https://github.com/jay7-tech/yolomart",
+        githubUrl: "https://github.com/jay7-tech/Yolo_mart-main.git",
         tags: [
             { name: "React + Vite", icon: SiReact },
             { name: "Node.js & WS", icon: SiNodedotjs },
