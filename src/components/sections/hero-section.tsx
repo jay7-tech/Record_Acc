@@ -143,12 +143,12 @@ export function HeroSection() {
 
         {/* Animated Description */}
         <motion.p
-          className="mt-8 text-muted-foreground text-lg md:text-xl max-w-xl mx-auto leading-relaxed"
+          className="mt-8 text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
           variants={descriptionVariants}
           initial="hidden"
           animate="visible"
         >
-          Building the future with intelligent robotics and seamless digital ecosystems.
+          Engineering at the intersection of AI & Machine Learning, Robotics, and Full-Stack Project Building to architect high-impact, intelligent solutions.
         </motion.p>
 
         {/* Animated Buttons */}

@@ -14,7 +14,7 @@ export const personalInfo = {
         { name: "GitHub", url: "https://github.com/jay7-tech", icon: SiGithub },
         { name: "Instagram", url: "https://www.instagram.com/jayadeep_gowda_?igsh=MWZsMGNud25qcjFyaw==", icon: SiInstagram },
     ],
-    summary: "An impact-focused Engineering undergraduate specializing in Robotics and Artificial Intelligence. I drive innovation by fusing cutting-edge technology with an entrepreneurial mindset to architect sustainable solutions with tangible real-world impact. Proficient across the MERN stack, advanced machine learning, and autonomous hardware, I am a strategic communicator who excels at mastering complex technical challenges through excellence and strategic communication.",
+    summary: "As a Robotics and AI/ML Engineer, I specialize in bridging the gap between advanced Machine Learning architectures and physical autonomous systems. I drive innovation by fusing cutting-edge technology with an entrepreneurial mindset to architect scalable, high-impact intelligent solutions—from computer vision pipelines to localized LLM integration. My approach combines robotic precision with modern full-stack development to solve complex real-world challenges with technical excellence.",
 };
 
 export const skills = [
