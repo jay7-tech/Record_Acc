@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Brain, Network, Cpu, Workflow } from "lucide-react";
-import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs } from "react-icons/si";
+import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain } from "react-icons/si";
 import type { IconType } from "react-icons";
 
 export const personalInfo = {
@@ -18,27 +18,27 @@ export const personalInfo = {
 };
 
 export const skills = [
-    { name: "MongoDB", description: "Database", icon: "SiMongodb" },
-    { name: "Express.js", description: "Backend framework", icon: "SiExpress" },
-    { name: "React", description: "Frontend library", icon: "SiReact" },
+    { name: "Python", description: "Primary Language", icon: "SiPython" },
+    { name: "JavaScript", description: "Frontend & Backend", icon: "SiJavascript" },
+    { name: "TypeScript", description: "Typed Logic", icon: "SiTypescript" },
+    { name: "C++", description: "Systems & Robotics", icon: "SiCplusplus" },
+    { name: "SQL", description: "Relational Databases", icon: "SiPostgresql" },
+    { name: "MongoDB", description: "Document Database", icon: "SiMongodb" },
+    { name: "FastAPI", description: "High-performance API", icon: "SiFastapi" },
     { name: "Node.js", description: "Runtime environment", icon: "SiNodedotjs" },
-    { name: "JavaScript", description: "", icon: "SiJavascript" },
-    { name: "TypeScript", description: "", icon: "SiTypescript" },
+    { name: "React", description: "Frontend library", icon: "SiReact" },
+    { name: "Next.js", description: "Full-stack framework", icon: "SiNextdotjs" },
     { name: "Tailwind CSS", description: "Styling", icon: "SiTailwindcss" },
-    { name: "Python", description: "", icon: "SiPython" },
-    { name: "Machine Learning", description: "", icon: "Share2" },
-    { name: "Computer Vision", description: "", icon: "ScanLine" },
-    { name: "YOLO", description: "Object detection", icon: "YoloIcon" },
-    { name: "ABB Robot Simulation", description: "Industrial arm operation and simulation", icon: "Bot" },
-    { name: "Autodesk", description: "Engineering and design", icon: "SiAutodesk" },
-    { name: "Firebase", description: "Cloud services and deployment", icon: "SiFirebase" },
     { name: "Docker", description: "Containerization", icon: "SiDocker" },
     { name: "Git", description: "Version control", icon: "SiGit" },
-    { name: "GitHub", description: "Repository hosting", icon: "SiGithub" },
+    { name: "Machine Learning", description: "Applied ML", icon: "SiPytorch" },
+    { name: "Computer Vision", description: "Real-time Inference", icon: "ScanLine" },
+    { name: "Large Language Models", description: "Generative AI", icon: "Bot" },
+    { name: "LangChain", description: "AI Orchestration", icon: "SiLangchain" },
+    { name: "Ollama", description: "Local LLM Serving", icon: "SiOllama" },
+    { name: "Embedded Systems", description: "Hardware Integration", icon: "Cpu" },
     { name: "WebRTC", description: "Real-time communication", icon: "SiWebrtc" },
-    { name: "Flask", description: "Python web framework", icon: "SiFlask" },
-    { name: "OpenCV", icon: "SiOpencv" },
-    { name: "C++", icon: "SiCplusplus" },
+    { name: "AutoDesk", description: "Engineering Design", icon: "SiAutodesk" },
 ];
 
 type Project = {
@@ -66,17 +66,17 @@ export const projects: Project[] = [
         description: {
             paragraph: "Cognis turns past reasoning into a first-class signal. Unlike stateless LLMs that allow repetitive cognitive loops, Cognis stores reflections as structured vector memory, detects recurring failure patterns in O(n) time, and intervenes to prevent repeated mistakes—shifting AI from just answering questions to actively preventing failure.",
             features: [
-                "Memory-Augmented Reasoning: Persists reflections in vector memory instead of treating history as disposable logs.",
-                "Temporal Pattern Scoring: Analyzes reflections over time to detect recurring themes and failure loops.",
-                "Intervention Pipeline: Conditions responses on prior failures ('You've been here before') to reduce unproductive queries by 40–60%."
+                "Memory-Augmented Architecture: Architected a system to detect and store recurring reasoning failures across sessions.",
+                "Temporal Pattern Scoring: Developed a custom algorithm driving 40–60% reduction in unproductive AI queries.",
+                "Local-First Performance: Deployed a localized inference service achieving sub-200ms retrieval latency using Ollama."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/Cognis",
         tags: [
-            { name: "Memory-Augmentation", icon: Brain },
+            { name: "FastAPI", icon: SiFastapi },
             { name: "VectorDB & FAISS", icon: HardDrive },
-            { name: "Local LLMs (Ollama)", icon: Cpu },
-            { name: "Temporal Analytics", icon: Network },
+            { name: "Ollama (Local LLMs)", icon: SiOllama },
+            { name: "Memory-Augmentation", icon: Brain },
         ],
         isFeatured: true,
     },
@@ -119,7 +119,7 @@ export const projects: Project[] = [
         },
         githubUrl: "https://github.com/jay7-tech/High_five.git",
         tags: [
-            { name: "Flask", icon: SiFlask },
+            { name: "FastAPI", icon: SiFastapi },
             { name: "WebSockets", icon: Waves },
             { name: "WebRTC", icon: SiWebrtc },
             { name: "JavaScript", icon: SiJavascript },
@@ -145,7 +145,7 @@ export const projects: Project[] = [
             { name: "Next.js 15", icon: SiNextdotjs },
             { name: "Google Genkit", icon: SiGoogle },
             { name: "Gemini AI", icon: Bot },
-            { name: "TypeScript", icon: SiTypescript },
+            { name: "Ollama", icon: SiOllama },
         ],
         isFeatured: false,
     },
@@ -180,8 +180,9 @@ export const experiences = [
         organization: "Frillory Design House",
         category: "INTERNSHIP",
         details: [
-            "Collaborated with the Co-Founder on strategic design outreach and digital content narratives.",
-            "Catalyzed firm presence by curating high-impact social media creatives and marketing materials.",
+            "Optimized technical workflows, improving content publishing consistency by 30%.",
+            "Reduced manual content handling effort by 25% through tooling and layout optimization.",
+            "Collaborated with designers to deliver production-ready assets under deadline-driven workflows."
         ],
         image: "/images/project-assets/frillory certificate.jpg", // Frillory certificate
         images: [

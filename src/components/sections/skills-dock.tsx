@@ -4,8 +4,13 @@ import { skills } from '@/lib/data';
 import { AnimatedSection } from '../animated-section';
 import React from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Bot, Share2, ScanLine } from 'lucide-react';
-import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus } from 'react-icons/si';
+import { Bot, Share2, ScanLine, Cpu } from 'lucide-react';
+import {
+  SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript,
+  SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub,
+  SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus,
+  SiPostgresql, SiFastapi, SiLangchain, SiOllama, SiPytorch, SiNextdotjs
+} from 'react-icons/si';
 
 
 const YoloIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -39,6 +44,13 @@ const iconMap: { [key: string]: React.ElementType } = {
   YoloIcon,
   SiOpencv,
   SiCplusplus,
+  SiPostgresql,
+  SiFastapi,
+  SiLangchain,
+  SiOllama,
+  SiPytorch,
+  SiNextdotjs,
+  Cpu,
 };
 
 

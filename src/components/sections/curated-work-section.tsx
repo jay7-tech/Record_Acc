@@ -50,18 +50,10 @@ export function CuratedWorkSection() {
                   transition: { type: "spring", stiffness: 50, damping: 20, duration: 0.8 }
                 }
               }}
-              className="relative rounded-2xl overflow-hidden border-2 border-white/20 transition-all duration-700 hover:border-white/30 hover:shadow-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]"
+              className="group relative rounded-3xl overflow-hidden bg-white border border-zinc-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-700 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]"
             >
-              {/* Enhanced opaque backing for better glassmorphism */}
-              <div className="absolute inset-0 bg-background/60 -z-20" />
 
-              {/* Ambient Color Glow Blob */}
-              <div className={`absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[100px] opacity-40 pointer-events-none ${project.color}`} />
-
-              {/* Noise Texture (Optional, simulates high-end feel) */}
-              <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] -z-10 brightness-100 invert" />
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-16 px-10 items-center relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10 px-8 items-center relative z-10">
 
                 {/* Image Side (Left) - Spans 6 cols with glass container */}
                 <div className="lg:col-span-6 relative w-full group cursor-pointer perspective-1000">
@@ -290,27 +282,27 @@ export function CuratedWorkSection() {
                   </ul>
 
                   {project.recognition && (
-                    <p className="mb-8 text-sm font-semibold text-zinc-800 italic leading-relaxed">
+                    <p className="mb-6 text-sm font-semibold text-zinc-800 italic leading-relaxed">
                       {project.recognition}
                     </p>
                   )}
 
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map(tag => {
-                      const Icon = tag.icon
-                      return (
-                        <Badge key={tag.name} variant="outline" className="flex items-center gap-1.5 py-1.5 px-3 bg-background/50 backdrop-blur-sm">
-                          <Icon className="h-4 w-4" />
-                          {tag.name}
-                        </Badge>
-                      )
-                    })}
-                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => {
+                        const Icon = tag.icon
+                        return (
+                          <Badge key={tag.name} variant="outline" className="flex items-center gap-1.5 py-1.5 px-3 bg-background/50 backdrop-blur-sm border-zinc-200">
+                            <Icon className="h-4 w-4" />
+                            {tag.name}
+                          </Badge>
+                        )
+                      })}
+                    </div>
 
-                  <div className="flex items-center gap-4">
-                    <Button asChild size="lg" variant="outline" className="rounded-full w-full sm:w-auto border-zinc-200 bg-white/50 hover:bg-zinc-50 hover:border-zinc-300 text-zinc-700 shadow-sm transition-all hover:scale-[1.02]">
+                    <Button asChild size="sm" variant="outline" className="rounded-full border-zinc-200 bg-white/50 hover:bg-zinc-50 hover:border-zinc-300 text-zinc-700 shadow-sm transition-all hover:scale-[1.02] active:scale-95 shrink-0">
                       <Link href={project.githubUrl} target="_blank">
-                        <SiGithub className="mr-2 h-5 w-5" />
+                        <SiGithub className="mr-2 h-4 w-4" />
                         View on GitHub
                       </Link>
                     </Button>
