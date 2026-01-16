@@ -5,7 +5,7 @@ import type { IconType } from "react-icons";
 
 export const personalInfo = {
     name: "Jayadeep Gowda KB",
-    title: "Robotics & AI Engineer and Full-Stack Development Architect",
+    title: "AI & ML Developer | Robotics | Full-Stack Engineer",
     location: "Bangalore, India",
     phone: "+91 8310491224",
     email: "jayadeepgowda24@gmail.com",
@@ -38,7 +38,8 @@ export const skills = [
     { name: "Ollama", description: "Local LLM Serving", icon: "SiOllama" },
     { name: "Embedded Systems", description: "Hardware Integration", icon: "Cpu" },
     { name: "WebRTC", description: "Real-time communication", icon: "SiWebrtc" },
-    { name: "AutoDesk", description: "Engineering Design", icon: "SiAutodesk" },
+    { name: "OpenCV", description: "Computer Vision", icon: "SiOpencv" },
+    { name: "Antigravity", description: "Agentic AI", icon: "AntigravityIcon" },
 ];
 
 type Project = {

@@ -21,6 +21,28 @@ const YoloIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+const AntigravityIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" {...props}>
+    <defs>
+      <linearGradient id="antigravity-gradient" x1="0%" y1="100%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#22D3EE" /> {/* Cyan */}
+        <stop offset="20%" stopColor="#4ADE80" /> {/* Green */}
+        <stop offset="40%" stopColor="#FACC15" /> {/* Yellow */}
+        <stop offset="60%" stopColor="#FB923C" /> {/* Orange */}
+        <stop offset="80%" stopColor="#F87171" /> {/* Red */}
+        <stop offset="100%" stopColor="#818CF8" /> {/* Purple */}
+      </linearGradient>
+    </defs>
+    <path
+      d="M20 80 C20 30, 80 30, 80 80"
+      fill="none"
+      stroke="url(#antigravity-gradient)"
+      strokeWidth="12"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 
 const iconMap: { [key: string]: React.ElementType } = {
   SiMongodb,
@@ -51,6 +73,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   SiPytorch,
   SiNextdotjs,
   Cpu,
+  AntigravityIcon,
 };
 
 
