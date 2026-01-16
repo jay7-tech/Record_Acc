@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine } from "lucide-react";
+import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Brain, Network, Cpu, Workflow } from "lucide-react";
 import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs } from "react-icons/si";
 import type { IconType } from "react-icons";
 
@@ -46,7 +46,7 @@ type Project = {
     recognition: string | null;
     images: string[];
     color: string;
-    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery' | '3d-flip-reveal';
+    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery' | '3d-flip-reveal' | 'cinematic-hover';
     description: {
         paragraph: string;
         features: string[];
@@ -58,17 +58,40 @@ type Project = {
 
 export const projects: Project[] = [
     {
+        title: "Cognis — Cognitive Pattern Engine",
+        recognition: "Cognis solves the core flaw of conversational AI: LLMs answer, but they don’t remember when answering didn’t work.",
+        images: ["cognis-hero", "cognis-2"],
+        color: "bg-[#7c3aed]/10", // Violet/Purple
+        animationType: "perspective-push",
+        description: {
+            paragraph: "Cognis turns past reasoning into a first-class signal. Unlike stateless LLMs that allow repetitive cognitive loops, Cognis stores reflections as structured vector memory, detects recurring failure patterns in O(n) time, and intervenes to prevent repeated mistakes—shifting AI from just answering questions to actively preventing failure.",
+            features: [
+                "Memory-Augmented Reasoning: Persists reflections in vector memory instead of treating history as disposable logs.",
+                "Temporal Pattern Scoring: Analyzes reflections over time to detect recurring themes and failure loops.",
+                "Intervention Pipeline: Conditions responses on prior failures ('You've been here before') to reduce unproductive queries by 40–60%."
+            ]
+        },
+        githubUrl: "https://github.com/jay7-tech/Cognis",
+        tags: [
+            { name: "Memory-Augmentation", icon: Brain },
+            { name: "VectorDB & FAISS", icon: HardDrive },
+            { name: "Local LLMs (Ollama)", icon: Cpu },
+            { name: "Temporal Analytics", icon: Network },
+        ],
+        isFeatured: true,
+    },
+    {
         title: "YoloMart | Smart Retail Ecosystem",
-        recognition: "Secured 2nd Place at GlitchVerse 2k25 Project Expo at BIT.",
+        recognition: "YoloMart bridges the gap between brick-and-mortar and e-commerce: picking up an item in-store is as analyzable as a click online.",
         images: ["yolomart-1", "yolomart-2"],
         color: "bg-[#FF3366]/10", // Pinkish
         animationType: "perspective-push",
         description: {
-            paragraph: "A seamless 'Phygital' retail ecosystem connecting in-store RFID interactions to a real-time digital cart. Features an AI-powered smart comparison engine for instant analytics.",
+            paragraph: "YoloMart unifies the fractured retail experience into a seamless 'Phygital' ecosystem. Unlike traditional stores with blind spots or disconnected apps, YoloMart treats every physical interaction—pickup, scan, cart add—as a digital event, eliminating checkout lines and empowering data-driven decisions.",
             features: [
-                "Scan & Go: Instant client-side barcode scanning with comparative nutrition analysis.",
-                "RFID 'Magic' Cart: Real-time WebSocket sync updates digital cart on physical item pickup.",
-                "AI Assistant: Integrated ChatWidget for personalized dietary and recipe recommendations."
+                "In-Store Digitization: RFID & WebSocket sync updates the digital cart instantly when physical items are handled.",
+                "Frictionless Checkout: Scan & Go architecture eliminates queues with client-side comparison and instant payment.",
+                "Context-Aware Assistant: AI analyzes cart contents in real-time to offer dietary insights and recipe synergy."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/Yolo_mart-main.git",
@@ -81,11 +104,34 @@ export const projects: Project[] = [
         isFeatured: true,
     },
     {
+        title: "High Five | Real-Time Social Platform",
+        recognition: "High Five reimagine social discovery: connection is instantaneous, but privacy is absolute.",
+        images: ["high-five-1", "high-five-2"],
+        color: "bg-[#8e44ad]/10", // Purple
+        animationType: "perspective-push",
+        description: {
+            paragraph: "High Five restores spontaneity to digital interaction without compromising privacy. Unlike algorithm-heavy platforms that mine user data, High Five operates on a 'consent-first' ephemeral model, using WebRTC for encrypted, peer-to-peer voice connections that leave no digital footprint.",
+            features: [
+                "Zero-Trace Connectivity: Ephemeral WebRTC architecture ensures voice data flows peer-to-peer and is never stored.",
+                "Audio-Reactive Interface: Real-time frequency visualization transforms voice data into a dynamic, living interface.",
+                "Consent-First Design: Dark-pattern-free UI where mutual active engagement is required for every interaction."
+            ]
+        },
+        githubUrl: "https://github.com/jay7-tech/High_five.git",
+        tags: [
+            { name: "Flask", icon: SiFlask },
+            { name: "WebSockets", icon: Waves },
+            { name: "WebRTC", icon: SiWebrtc },
+            { name: "JavaScript", icon: SiJavascript },
+        ],
+        isFeatured: true,
+    },
+    {
         title: "Neuro-AI | Cognitive Care Ecosystem",
         recognition: "A Holistic Digital Ecosystem for Alzheimer's & Dementia Care.",
         images: ["neuro-ai-hero", "neuro-ai-2"],
         color: "bg-[#00BCD4]/10", // Cyan/Teal
-        animationType: "perspective-push",
+        animationType: "quad-gallery",
         description: {
             paragraph: "A holistic digital ecosystem bridging patients, caregivers, and clinicians. Uses Generative AI to preserve identity, reduce burnout, and provide actionable longitudinal data.",
             features: [
@@ -101,30 +147,7 @@ export const projects: Project[] = [
             { name: "Gemini AI", icon: Bot },
             { name: "TypeScript", icon: SiTypescript },
         ],
-        isFeatured: true,
-    },
-    {
-        title: "High Five | Real-Time Social Platform",
-        recognition: null,
-        images: ["high-five-1", "high-five-2"],
-        color: "bg-[#8e44ad]/10", // Purple
-        animationType: "vertical-shuffle",
-        description: {
-            paragraph: "A high-energy platform for anonymous voice connections using Flask and WebSockets. Fosters spontaneous social interactions with a focus on user privacy.",
-            features: [
-                "WebRTC Engine: Robust STUN/TURN integration for reliable, low-latency connections.",
-                "Audio-Reactive UI: Dynamic interface that pulses with voice frequency in real-time.",
-                "Privacy First: 'Consent-First' architecture for secure and anonymous socializing."
-            ]
-        },
-        githubUrl: "https://github.com/jay7-tech/High_five.git",
-        tags: [
-            { name: "Flask", icon: SiFlask },
-            { name: "WebSockets", icon: Waves },
-            { name: "WebRTC", icon: SiWebrtc },
-            { name: "JavaScript", icon: SiJavascript },
-        ],
-        isFeatured: true,
+        isFeatured: false,
     },
     {
         title: "Movifi | Online Show Booking Website",

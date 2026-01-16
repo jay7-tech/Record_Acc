@@ -65,6 +65,18 @@
       "description": "Feature image for High Five project - Dark Consent UI",
       "imageUrl": "/images/project-assets/high-five-dark-consent-zoomed.png",
       "imageHint": "high five features"
+    },
+    {
+      "id": "cognis-hero",
+      "description": "Hero image for Cognis project - Cognitive Pattern Detection",
+      "imageUrl": "/images/project-assets/cognis-hero.png",
+      "imageHint": "cognis ai brain interface"
+    },
+    {
+      "id": "cognis-2",
+      "description": "Details image for Cognis project - Metrics Dashboard",
+      "imageUrl": "/images/project-assets/cognis-details.png",
+      "imageHint": "cognis data visualization"
     }
   ]
 }

@@ -25,7 +25,7 @@ export function CuratedWorkSection() {
         </h2>
       </div>
 
-      <div className="mt-16 flex flex-col gap-32 pb-32">
+      <div className="mt-24 flex flex-col gap-20 pb-24">
         {projects.filter(p => p.isFeatured).map((project, index) => {
           const projectImages = project.images.map(id => getImage(id)).filter((img): img is typeof PlaceHolderImages[0] => !!img);
 
@@ -61,7 +61,7 @@ export function CuratedWorkSection() {
               {/* Noise Texture (Optional, simulates high-end feel) */}
               <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] -z-10 brightness-100 invert" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 items-center relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-16 px-10 items-center relative z-10">
 
                 {/* Image Side (Left) - Spans 6 cols with glass container */}
                 <div className="lg:col-span-6 relative w-full group cursor-pointer perspective-1000">
@@ -225,15 +225,53 @@ export function CuratedWorkSection() {
                         </div>
                       )}
 
+                      {/* === ANIMATION 8: CINEMATIC HOVER (Professional) === */}
+                      {/* Smooth scale and elegant detail reveal */}
+                      {project.animationType === 'cinematic-hover' && (
+                        <div className="relative w-full h-full overflow-hidden rounded-xl">
+                          {/* Main Image Layer */}
+                          {projectImages[0] && (
+                            <div className="absolute inset-0 w-full h-full transition-transform duration-1000 cubic-bezier(0.25, 0.46, 0.45, 0.94) group-hover:scale-105">
+                              <Image
+                                src={projectImages[0].imageUrl}
+                                alt={project.title}
+                                fill
+                                className="object-cover"
+                              />
+                              {/* Gradient overlay for depth */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40" />
+                            </div>
+                          )}
+
+                          {/* Secondary Detail Peek (Slides up) */}
+                          {projectImages[1] && (
+                            <div className="absolute bottom-4 right-4 w-[40%] aspect-video rounded-lg overflow-hidden border border-white/30 shadow-2xl 
+                                          transform translate-y-[120%] opacity-0 
+                                          transition-all duration-700 cubic-bezier(0.19, 1, 0.22, 1) 
+                                          group-hover:translate-y-0 group-hover:opacity-100 group-hover:rotate-[-2deg]">
+                              <div className="absolute inset-0 bg-black/40 backdrop-blur-md -z-10" />
+                              <Image
+                                src={projectImages[1].imageUrl}
+                                alt="Detail View"
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+
+                          {/* Optional "View" Indicator */}
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+                            <Plus className="w-8 h-8 text-white" />
+                          </div>
+                        </div>
+                      )}
+
                     </div>
                   </div>
                 </div>
 
                 {/* Content Side (Right) - Spans 6 cols */}
                 <div className="lg:col-span-6 flex flex-col justify-center">
-                  {project.recognition && (
-                    <Badge variant="secondary" className="mb-4 w-fit px-3 py-1">{project.recognition}</Badge>
-                  )}
                   <h3 className="font-headline text-3xl md:text-4xl font-bold mb-4">
                     {project.title}
                   </h3>
@@ -251,6 +289,12 @@ export function CuratedWorkSection() {
                     ))}
                   </ul>
 
+                  {project.recognition && (
+                    <p className="mb-8 text-sm font-semibold text-zinc-800 italic leading-relaxed">
+                      {project.recognition}
+                    </p>
+                  )}
+
                   <div className="flex flex-wrap gap-2 mb-8">
                     {project.tags.map(tag => {
                       const Icon = tag.icon
@@ -264,7 +308,7 @@ export function CuratedWorkSection() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <Button asChild size="lg" className="rounded-full w-full sm:w-auto">
+                    <Button asChild size="lg" variant="outline" className="rounded-full w-full sm:w-auto border-zinc-200 bg-white/50 hover:bg-zinc-50 hover:border-zinc-300 text-zinc-700 shadow-sm transition-all hover:scale-[1.02]">
                       <Link href={project.githubUrl} target="_blank">
                         <SiGithub className="mr-2 h-5 w-5" />
                         View on GitHub

@@ -19,6 +19,7 @@ type FormState = {
 };
 
 export async function submitContactForm(prevState: FormState, formData: FormData): Promise<FormState> {
+  // Validate form fields
   const validatedFields = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -26,6 +27,7 @@ export async function submitContactForm(prevState: FormState, formData: FormData
   });
 
   if (!validatedFields.success) {
+    console.error("Validation failed:", validatedFields.error.flatten().fieldErrors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Please correct the errors below.",
@@ -35,8 +37,21 @@ export async function submitContactForm(prevState: FormState, formData: FormData
   const { name, email, message } = validatedFields.data;
 
   try {
+    // Check if API key exists
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      console.error("RESEND_API_KEY is not configured in environment variables");
+      return {
+        message: "Email service is not configured. Please contact me directly at jayadeepgowda24@gmail.com",
+        errors: {}
+      };
+    }
+
+    console.log("Attempting to send email from:", name, "with email:", email);
+
     // Initialize Resend with your API key
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(apiKey);
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
@@ -69,14 +84,23 @@ ${message}
     });
 
     if (error) {
-      console.error("Resend error:", error);
+      console.error("Resend API error:", JSON.stringify(error, null, 2));
+
+      // Provide more specific error messages
+      if (error.message?.includes("API key")) {
+        return {
+          message: "Email service authentication failed. Please contact me directly at jayadeepgowda24@gmail.com",
+          errors: {}
+        };
+      }
+
       return {
-        message: "Something went wrong sending the email. Please contact me directly at jayadeepgowda24@gmail.com",
+        message: "Failed to send email. Please try again or contact me directly at jayadeepgowda24@gmail.com",
         errors: {}
       };
     }
 
-    console.log("Email sent successfully via Resend!", data);
+    console.log("Email sent successfully via Resend!", JSON.stringify(data, null, 2));
 
     return {
       message: "Signal Received! 🚀 Thanks for reaching out. I'll get back to you shortly.",
@@ -84,9 +108,17 @@ ${message}
     };
 
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Unexpected error sending email:", error);
+
+    // Log detailed error information
+    if (error instanceof Error) {
+      console.error("Error name:", error.name);
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+    }
+
     return {
-      message: "Something went wrong sending the email. Please contact me directly at jayadeepgowda24@gmail.com",
+      message: "An unexpected error occurred. Please contact me directly at jayadeepgowda24@gmail.com",
       errors: {}
     };
   }
