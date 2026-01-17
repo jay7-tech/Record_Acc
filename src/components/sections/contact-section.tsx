@@ -39,18 +39,17 @@ export function ContactSection() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state.message && Object.keys(state.errors).length === 0) {
+    if (state.message) {
+      const isError = Object.keys(state.errors).length > 0;
       toast({
-        title: "Success!",
+        variant: isError ? "destructive" : "default",
+        title: isError ? "Error" : "Success!",
         description: state.message,
       });
-      formRef.current?.reset();
-    } else if (state.message && Object.keys(state.errors).length > 0) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: state.message,
-      });
+
+      if (!isError) {
+        formRef.current?.reset();
+      }
     }
   }, [state, toast]);
 
@@ -126,17 +125,17 @@ export function ContactSection() {
                 <form ref={formRef} action={dispatch} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" placeholder="Your Name" className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    <Input id="name" name="name" placeholder="Your Name" required className="bg-white/5 border-white/10 focus:border-primary/50" />
                     {state.errors?.name && <p className="text-sm text-destructive">{state.errors.name[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="bg-white/5 border-white/10 focus:border-primary/50" />
                     {state.errors?.email && <p className="text-sm text-destructive">{state.errors.email[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" placeholder="Your message..." className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[120px]" />
+                    <Textarea id="message" name="message" placeholder="Your message..." required className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[120px]" />
                     {state.errors?.message && <p className="text-sm text-destructive">{state.errors.message[0]}</p>}
                   </div>
                   <SubmitButton />

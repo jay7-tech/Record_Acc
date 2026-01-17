@@ -164,7 +164,7 @@ export const projects: Project[] = [
                 "Ensured secure and efficient booking and payment processing."
             ]
         },
-        githubUrl: "https://github.com/jay7-tech/movifi",
+        githubUrl: "https://github.com/jay7-tech/movifi-repo.git",
         tags: [
             { name: "TypeScript", icon: SiTypescript },
             { name: "React", icon: SiReact },
@@ -182,7 +182,7 @@ export const experiences = [
         category: "INTERNSHIP",
         details: [
             "Optimized technical workflows, improving content publishing consistency by 30%.",
-            "Reduced manual content handling effort by 25% through tooling and layout optimization.",
+            "Reduced manual content handling effort by 25% through Gen-Ai tooling and layout optimization.",
             "Collaborated with designers to deliver production-ready assets under deadline-driven workflows."
         ],
         image: "/images/project-assets/frillory certificate.jpg", // Frillory certificate
@@ -196,8 +196,8 @@ export const experiences = [
         organization: "IDEATHON 2025",
         category: "INSTITUTIONAL",
         details: [
-            "Spearheaded the orchestration of a national-level ideathon, hosting over 200+ teams and engaging 50+ colleges.",
-            "Directed large-scale operational logistics, crisis resolution, in coordination with a dynamic core team.",
+            "Co-led the end-to-end orchestration of a national-level ideathon, successfully scaling the event to host 200+ teams and 50+ colleges.",
+            "Drove large-scale operational logistics and strategic planning, ensuring a seamless experience for over 600+ participants and stakeholders.",
         ],
         image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop",
         images: [
@@ -244,10 +244,10 @@ export const certifications = [
     },
     {
         title: "PLC & Industrial Automation",
-        issuer: "Siemens",
+        issuer: "Siemens-forage",
         image: "https://images.unsplash.com/photo-1518314916381-77a37c2a49ae?q=80&w=800&auto=format&fit=crop",
         description: "Technical certification in industrial control systems and automated manufacturing workflows.",
-        category: "Robotics",
+        category: "Automation",
         color: "from-amber-500/20 to-orange-500/20",
         link: "/simens.pdf"
     },
@@ -276,7 +276,6 @@ export const marqueeSkills = [
     "RELIABLE",
     "PERFECTION",
     "SCALABLE",
-    "PRESS START ▶",
 ];
 
 export const skills_old = {

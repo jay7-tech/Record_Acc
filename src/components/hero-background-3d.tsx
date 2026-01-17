@@ -12,6 +12,8 @@ function CrystalNetwork() {
     const { mouse, viewport } = useThree();
     const isMobile = useIsMobile();
 
+    if (isMobile) return null;
+
     const connections = useMemo(() => {
         const points = [];
         const lines = [];
@@ -119,6 +121,8 @@ function FloatingDebris() {
     const group = useRef<THREE.Group>(null!);
     const isMobile = useIsMobile();
 
+    if (isMobile) return null;
+
     const debris = useMemo(() => {
         const count = isMobile ? 10 : 30;
         return new Array(count).fill(0).map((_, i) => {
@@ -166,30 +170,31 @@ export function HeroBackground3D() {
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/20 z-10 pointer-events-none" />
 
-            {/* dpr is fixed to 1 for mobile for performance */}
-            <Canvas gl={{ antialias: !isMobile, alpha: true, powerPreference: "high-performance" }} dpr={isMobile ? 1 : [1, 1.5]}>
-                <AdaptiveDpr pixelated />
-                <PerspectiveCamera makeDefault position={[0, 0, 35]} fov={35} near={0.1} far={100} />
+            {!isMobile && (
+                <Canvas gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }} dpr={[1, 1.5]}>
+                    <AdaptiveDpr pixelated />
+                    <PerspectiveCamera makeDefault position={[0, 0, 35]} fov={35} near={0.1} far={100} />
 
-                <ambientLight intensity={0.5} />
-                <spotLight position={[20, 20, 20]} angle={0.5} penumbra={1} intensity={1} color="#d8b4fe" />
-                <pointLight position={[-10, -10, -10]} intensity={1} color="#3b82f6" />
+                    <ambientLight intensity={0.5} />
+                    <spotLight position={[20, 20, 20]} angle={0.5} penumbra={1} intensity={1} color="#d8b4fe" />
+                    <pointLight position={[-10, -10, -10]} intensity={1} color="#3b82f6" />
 
-                <Environment preset="city" resolution={128} />
+                    <Environment preset="city" resolution={128} />
 
-                <CrystalNetwork />
-                <FloatingDebris />
-                <OrbitalSystem />
+                    <CrystalNetwork />
+                    <FloatingDebris />
+                    <OrbitalSystem />
 
-                <Sparkles
-                    count={isMobile ? 40 : 100}
-                    scale={30}
-                    size={isMobile ? 1 : 2}
-                    speed={0.3}
-                    opacity={0.4}
-                    color="#e9d5ff"
-                />
-            </Canvas>
+                    <Sparkles
+                        count={100}
+                        scale={30}
+                        size={2}
+                        speed={0.3}
+                        opacity={0.4}
+                        color="#e9d5ff"
+                    />
+                </Canvas>
+            )}
         </div>
     );
 }

@@ -85,18 +85,19 @@ ${message}
 
     if (error) {
       console.error("CRITICAL: Resend API failed to send email.");
-      console.error("Error Details:", JSON.stringify(error, null, 2));
-      console.error("Submitted Data:", { name, email, message });
+      console.error("Error Name:", error.name);
+      console.error("Error Message:", error.message);
 
-      // Return a "Success" message to the UI to avoid annoying error states, 
-      // but include the direct email just in case.
+      // Fallback: Log the data so it's not lost (visible in Vercel logs)
+      console.log("CONTACT FORM FALLBACK - Data received:", { name, email, message });
+
       return {
-        message: "Message received! 🚀 (Note: Direct relay is currently being optimized; feel free to also reach me at jayadeepgowda24@gmail.com)",
+        message: "Message received but the direct relay is undergoing a quick upgrade. 🚀 I'll see your message in my logs, or you can email me directly at jayadeepgowda24@gmail.com",
         errors: {},
       };
     }
 
-    console.log("Email sent successfully via Resend!", JSON.stringify(data, null, 2));
+    console.log("Email sent successfully via Resend!", data?.id);
 
     return {
       message: "Signal Received! 🚀 Thanks for reaching out. I'll get back to you shortly.",
