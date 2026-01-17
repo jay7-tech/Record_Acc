@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type JSX } from 'react';
 import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Brain, Network, Cpu, Workflow } from "lucide-react";
 import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain } from "react-icons/si";
 import type { IconType } from "react-icons";
@@ -221,7 +221,51 @@ export const experiences = [
             "https://images.unsplash.com/photo-1475721027767-pns-placeholder?q=80&w=600&auto=format&fit=crop"
         ]
     },
+];
 
+export const certifications = [
+    {
+        title: "Machine Learning & AI Bootcamp",
+        issuer: "Udemy",
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop",
+        description: "Comprehensive validation of neural networks, deep learning models, and predictive analytics pipelines.",
+        category: "Machine Learning",
+        color: "from-blue-600/20 to-indigo-600/20",
+        link: "/Ml udemy certificate.pdf"
+    },
+    {
+        title: "Infosys Springboard: Emerging Tech",
+        issuer: "Infosys",
+        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+        description: "Certified expertise in modern tech stacks and corporate-level software development lifecycles.",
+        category: "Full-Stack",
+        color: "from-cyan-500/20 to-blue-500/20",
+        link: "/Infosys.pdf"
+    },
+    {
+        title: "PLC & Industrial Automation",
+        issuer: "Siemens",
+        image: "https://images.unsplash.com/photo-1518314916381-77a37c2a49ae?q=80&w=800&auto=format&fit=crop",
+        description: "Technical certification in industrial control systems and automated manufacturing workflows.",
+        category: "Robotics",
+        color: "from-amber-500/20 to-orange-500/20",
+        link: "/simens.pdf"
+    },
+    {
+        title: "Version Control: Git & GitHub",
+        issuer: "Professional Certification",
+        image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=800&auto=format&fit=crop",
+        description: "Certified proficiency in distributed version control, collaborative branching strategies, and repository management.",
+        category: "DevOps",
+        color: "from-orange-600/20 to-red-600/20",
+        link: "/LUEGGMAR1251657.pdf"
+    }
+];
+
+export const impactMetrics = [
+    { label: "Event Reach", value: "200+ Teams", description: "Coordinated national-level participants at Ideathon 2025" },
+    { label: "Projects Built", value: "15+", description: "From AI Agents to Embedded Systems" },
+    { label: "Tech Communities", value: "3+", description: "Active contribution to institutional tech hubs" },
 ];
 
 export const marqueeSkills = [
