@@ -6,11 +6,13 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { SkillsDock } from "@/components/sections/skills-dock";
 import { AboutSection } from "@/components/sections/about-section";
 import { AestheticBackground } from "@/components/aesthetic-background";
+import { HudOverlay } from "@/components/ui/hud-overlay";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center overflow-x-hidden relative min-h-screen">
       <AestheticBackground />
+      <HudOverlay />
       <HeroSection />
       <SkillsMarquee />
       <div className="container px-4 md:px-6 space-y-24 md:space-y-32 my-24 md:my-32">

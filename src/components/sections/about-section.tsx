@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { personalInfo } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { AnimatedSection } from '../animated-section';
+import { TextDecoder } from '../ui/text-decoder';
 
 export function AboutSection() {
   const profileImage = PlaceHolderImages.find((img) => img.id === 'profile-picture');
@@ -42,7 +43,9 @@ export function AboutSection() {
         </div>
 
         <div className="md:col-span-2 text-center md:text-left">
-          <h2 className="font-headline text-3xl md:text-4xl mb-4 text-foreground">About Me</h2>
+          <h2 className="font-headline text-3xl md:text-4xl mb-4 text-foreground uppercase tracking-tight">
+            <TextDecoder text="About Me" />
+          </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             {personalInfo.summary}
           </p>

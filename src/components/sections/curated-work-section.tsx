@@ -8,8 +8,9 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { AnimatedSection } from '../animated-section';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { Plus } from 'lucide-react';
+import { Plus, Activity } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+import { TextDecoder } from '../ui/text-decoder';
 
 export function CuratedWorkSection() {
   const getImage = (id: string) => {
@@ -20,7 +21,7 @@ export function CuratedWorkSection() {
     <AnimatedSection id="projects">
       <div className="text-center">
         <p className="text-sm uppercase text-muted-foreground tracking-widest">Build Records</p>
-        <h2 className="font-headline text-4xl md:text-5xl mt-2">
+        <h2 className="font-headline text-4xl md:text-5xl mt-2 uppercase tracking-tighter">
           Curated <span className="text-primary">Work</span>
         </h2>
       </div>
@@ -263,8 +264,14 @@ export function CuratedWorkSection() {
 
                 {/* Content Side (Right) - Spans 6 cols */}
                 <div className="lg:col-span-6 flex flex-col justify-center">
-                  <h3 className="font-headline text-3xl md:text-4xl font-bold mb-4">
+                  <h3 className="font-headline text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
                     {project.title}
+                    <motion.div
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Activity className="h-5 w-5 text-primary/60" />
+                    </motion.div>
                   </h3>
 
                   <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
