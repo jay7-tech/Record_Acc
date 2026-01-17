@@ -19,7 +19,6 @@ type FormState = {
 };
 
 export async function submitContactForm(prevState: FormState, formData: FormData): Promise<FormState> {
-  // Validate form fields
   const validatedFields = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -27,91 +26,52 @@ export async function submitContactForm(prevState: FormState, formData: FormData
   });
 
   if (!validatedFields.success) {
-    console.error("Validation failed:", validatedFields.error.flatten().fieldErrors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Please correct the errors below.",
+      message: "Please fill out all fields correctly.",
     };
   }
 
   const { name, email, message } = validatedFields.data;
 
   try {
-    // Check if API key exists
     const apiKey = process.env.RESEND_API_KEY;
-
     if (!apiKey) {
-      console.error("ERROR: RESEND_API_KEY is not configured in environment variables.");
+      console.error("Missing RESEND_API_KEY");
       return {
-        message: "Signal Received! 🚀 (Direct relay is undergoing maintenance; I'll see your message soon or you can reach me at jayadeepgowda24@gmail.com)",
-        errors: {}
-      };
-    }
-
-    console.log("Attempting to send email from:", name, "with email:", email);
-
-    // Initialize Resend with your API key
-    const resend = new Resend(apiKey);
-
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // Resend's test email (you can use your own domain later)
-      to: ["jayadeepgowda24@gmail.com"], // Your email address
-      replyTo: email, // Allow replying directly to the user
-      subject: `New Portfolio Contact from ${name}`,
-      text: `
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-      `,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb; border-radius: 8px;">
-          <h2 style="color: #7c3aed; margin-bottom: 20px;">New Portfolio Contact 📬</h2>
-          <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <p style="margin-bottom: 10px;"><strong style="color: #374151;">Name:</strong> ${name}</p>
-            <p style="margin-bottom: 10px;"><strong style="color: #374151;">Email:</strong> <a href="mailto:${email}" style="color: #7c3aed;">${email}</a></p>
-            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-            <p style="margin-bottom: 10px;"><strong style="color: #374151;">Message:</strong></p>
-            <p style="color: #4b5563; line-height: 1.6; white-space: pre-wrap;">${message}</p>
-          </div>
-          <p style="margin-top: 20px; color: #6b7280; font-size: 14px; text-align: center;">
-            Sent from your portfolio contact form
-          </p>
-        </div>
-      `,
-    });
-
-    if (error) {
-      console.error("CRITICAL: Resend API failed to send email.");
-      console.error("Error Name:", error.name);
-      console.error("Error Message:", error.message);
-
-      // Fallback: Log the data so it's not lost (visible in Vercel logs)
-      console.log("CONTACT FORM FALLBACK - Data received:", { name, email, message });
-
-      return {
-        message: "Message received but the direct relay is undergoing a quick upgrade. 🚀 I'll see your message in my logs, or you can email me directly at jayadeepgowda24@gmail.com",
+        message: "Email service is not configured. Please check your API key.",
         errors: {},
       };
     }
 
-    console.log("Email sent successfully via Resend!", data?.id);
+    const resend = new Resend(apiKey);
+
+    const { error } = await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
+      to: ["jayadeepgowda24@gmail.com"],
+      replyTo: email,
+      subject: `New Message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    });
+
+    if (error) {
+      console.error("Resend Error:", error);
+      return {
+        message: "Failed to send message. Please ensure you are sending to your Resend-registered email address.",
+        errors: {},
+      };
+    }
 
     return {
-      message: "Signal Received! 🚀 Thanks for reaching out. I'll get back to you shortly.",
+      message: "Message sent successfully!",
       errors: {},
     };
 
   } catch (err) {
-    console.error("UNEXPECTED ERROR in contact form action:", err);
-
-    // Even on crash, we return a success-like state to keep the UX clean, 
-    // while providing the direct contact info.
+    console.error("Form error:", err);
     return {
-      message: "Signal Received! 🚀 (Relay optimization in progress; if urgent, please reach me at jayadeepgowda24@gmail.com)",
-      errors: {}
+      message: "Oops! Something went wrong. Please try again later.",
+      errors: {},
     };
   }
 }
