@@ -44,11 +44,10 @@ export function ExperienceSection() {
             <motion.div
               key={index}
               variants={{
-                hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
+                hidden: { opacity: 0, y: 50 },
                 show: {
                   opacity: 1,
                   y: 0,
-                  filter: "blur(0px)",
                   transition: {
                     type: "spring",
                     stiffness: 40,

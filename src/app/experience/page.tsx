@@ -7,6 +7,7 @@ import Link from "next/link";
 import { experiences } from "@/lib/data";
 import { useState } from "react";
 import { ExperienceCard } from "@/components/experience-card";
+import Image from "next/image";
 
 export default function ExperiencePage() {
     // Combine real experiences with some expanded/older ones for the "full list" feel
@@ -88,7 +89,7 @@ export default function ExperiencePage() {
                 <div className="space-y-24 mt-12 md:mt-20">
                     {allExperiences.map((exp, index) => {
                         const isEven = index % 2 === 0;
-                        const displayImage = (exp.images && exp.images.length > 0) ? exp.images[0] : (exp.image || "");
+                        const displayImage = (exp.images && exp.images.length > 0) ? exp.images[0] : ((exp as any).image || "");
 
                         return (
                             <div key={index}
@@ -102,10 +103,11 @@ export default function ExperiencePage() {
 
                                         {displayImage ? (
                                             <div className="relative aspect-[16/9] md:aspect-[4/3] w-full overflow-hidden">
-                                                <img
+                                                <Image
                                                     src={displayImage}
                                                     alt={exp.role}
-                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    fill
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                                                 />
                                             </div>
                                         ) : (

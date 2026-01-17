@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Building2, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from 'next/image';
 
 export function ExperienceCard({ exp, alwaysExpanded = false }: { exp: any, alwaysExpanded?: boolean }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -116,10 +117,11 @@ export function ExperienceCard({ exp, alwaysExpanded = false }: { exp: any, alwa
                                                 transition={{ duration: 0.3 }}
                                                 className="relative w-full h-full"
                                             >
-                                                <img
+                                                <Image
                                                     src={images[currentIndex]}
                                                     alt={`${exp.role} - image ${currentIndex + 1}`}
-                                                    className="w-full h-full object-contain bg-white/5"
+                                                    fill
+                                                    className="object-contain bg-white/5"
                                                 />
 
                                                 {/* Simple Controls (only if multiple) */}

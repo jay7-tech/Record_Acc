@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 interface Entity {
     id: number;
     x: number;
@@ -16,8 +18,11 @@ interface Entity {
 
 export function ClickSparkle() {
     const [entities, setEntities] = useState<Entity[]>([]);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
+        if (isMobile) return;
+
         const handleClick = (e: MouseEvent) => {
             const id = Date.now();
 

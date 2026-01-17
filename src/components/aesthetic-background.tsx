@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Star {
     x: number;
@@ -18,31 +19,33 @@ export function AestheticBackground() {
     const starsRef = useRef<Star[]>([]);
     const mouseRef = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number | undefined>(undefined);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
         if (!ctx) return;
 
         // Set canvas size
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            initStars();
         };
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
 
         // Initialize stars
         const initStars = () => {
             const stars: Star[] = [];
-            const starCount = Math.floor((canvas.width * canvas.height) / 8000); // Responsive star count
+            // Significantly reduce star count on mobile
+            const density = isMobile ? 15000 : 8000;
+            const starCount = Math.floor((window.innerWidth * window.innerHeight) / density);
 
             for (let i = 0; i < starCount; i++) {
                 stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
                     size: Math.random() * 2 + 0.5,
                     opacity: Math.random() * 0.5 + 0.3,
                     twinkleSpeed: Math.random() * 0.02 + 0.01,
@@ -53,13 +56,22 @@ export function AestheticBackground() {
             }
             starsRef.current = stars;
         };
-        initStars();
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         // Mouse move handler
         const handleMouseMove = (e: MouseEvent) => {
             mouseRef.current = { x: e.clientX, y: e.clientY };
         };
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                mouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+        };
+
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove);
 
         // Animation loop
         let time = 0;
@@ -67,149 +79,119 @@ export function AestheticBackground() {
             time += 0.01;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Detect theme
             const isDarkMode = document.documentElement.classList.contains('dark');
 
-            // Draw grid with theme-aware colors
+            // Draw Grid - OPTIMIZED: CSS background is better, but if we must use canvas, 
+            // only draw it at a lower frequency or use a single path
             ctx.strokeStyle = isDarkMode
-                ? 'rgba(168, 85, 247, 0.07)'
-                : 'rgba(168, 85, 247, 0.1)';
+                ? 'rgba(168, 85, 247, 0.05)'
+                : 'rgba(168, 85, 247, 0.08)';
             ctx.lineWidth = 1;
-            const gridSize = 22; // Balanced spacing
+            const gridSize = isMobile ? 44 : 22; // Larger grid on mobile
 
+            ctx.beginPath();
             for (let x = 0; x < canvas.width; x += gridSize) {
-                ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, canvas.height);
-                ctx.stroke();
             }
-
             for (let y = 0; y < canvas.height; y += gridSize) {
-                ctx.beginPath();
                 ctx.moveTo(0, y);
                 ctx.lineTo(canvas.width, y);
-                ctx.stroke();
             }
+            ctx.stroke();
 
             // Draw and animate stars
             starsRef.current.forEach((star) => {
-                // Calculate distance from mouse
                 const dx = mouseRef.current.x - star.x;
                 const dy = mouseRef.current.y - star.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+                const distanceSq = dx * dx + dy * dy;
                 const maxDistance = 150;
+                const maxDistanceSq = maxDistance * maxDistance;
 
-                // Interactive movement
-                if (distance < maxDistance) {
+                if (distanceSq < maxDistanceSq) {
+                    const distance = Math.sqrt(distanceSq);
                     const force = (maxDistance - distance) / maxDistance;
                     star.vx += (dx / distance) * force * 0.5;
                     star.vy += (dy / distance) * force * 0.5;
                 }
 
-                // Apply velocity with damping
                 star.x += star.vx;
                 star.y += star.vy;
                 star.vx *= 0.95;
                 star.vy *= 0.95;
 
-                // Wrap around edges
                 if (star.x < 0) star.x = canvas.width;
                 if (star.x > canvas.width) star.x = 0;
                 if (star.y < 0) star.y = canvas.height;
                 if (star.y > canvas.height) star.y = 0;
 
-                // Pulsing effect
                 const pulse = Math.sin(time * star.twinkleSpeed + star.twinkleOffset);
-                const currentOpacity = (star.opacity + pulse * 0.3) * 0.4; // Lighter, more transparent
+                const currentOpacity = (star.opacity + pulse * 0.3) * 0.4;
                 const currentSize = star.size * (1 + pulse * 0.2);
 
-                // Color based on size - theme aware
                 let color;
                 if (star.size > 2) {
-                    color = isDarkMode ? '168, 85, 247' : '109, 40, 217'; // Deep purple for light mode
+                    color = isDarkMode ? '168, 85, 247' : '109, 40, 217';
                 } else if (star.size > 1.5) {
-                    color = isDarkMode ? '147, 197, 253' : '37, 99, 235'; // Royal blue for light mode
+                    color = isDarkMode ? '147, 197, 253' : '37, 99, 235';
                 } else {
-                    color = isDarkMode ? '255, 255, 255' : '75, 85, 99'; // Dark gray for light mode
+                    color = isDarkMode ? '255, 255, 255' : '75, 85, 99';
                 }
 
-                // Draw outer glow
-                const glowGradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, currentSize * 5);
-                glowGradient.addColorStop(0, `rgba(${color}, ${currentOpacity * 0.5})`);
-                glowGradient.addColorStop(0.4, `rgba(${color}, ${currentOpacity * 0.2})`);
-                glowGradient.addColorStop(1, `rgba(${color}, 0)`);
+                // Simplified drawing on mobile
+                if (isMobile) {
+                    ctx.fillStyle = `rgba(${color}, ${currentOpacity})`;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, currentSize, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    // Desktop: Premium effects
+                    const glowGradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, currentSize * 5);
+                    glowGradient.addColorStop(0, `rgba(${color}, ${currentOpacity * 0.5})`);
+                    glowGradient.addColorStop(0.4, `rgba(${color}, ${currentOpacity * 0.2})`);
+                    glowGradient.addColorStop(1, `rgba(${color}, 0)`);
 
-                ctx.fillStyle = glowGradient;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, currentSize * 5, 0, Math.PI * 2);
-                ctx.fill();
+                    ctx.fillStyle = glowGradient;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, currentSize * 5, 0, Math.PI * 2);
+                    ctx.fill();
 
-                // Draw 8-pointed sparkle/starburst
-                ctx.save();
-                ctx.translate(star.x, star.y);
+                    ctx.save();
+                    ctx.translate(star.x, star.y);
+                    ctx.fillStyle = `rgba(${color}, ${currentOpacity})`;
+                    ctx.beginPath();
+                    const points = 8;
+                    const longRadius = currentSize * 3;
+                    const shortRadius = currentSize * 1.5;
+                    const innerRadius = currentSize * 0.3;
 
-                // Main sparkle shape with alternating ray lengths
-                ctx.fillStyle = `rgba(${color}, ${currentOpacity})`;
-                ctx.beginPath();
-
-                // Create 8-pointed star with alternating long and short rays
-                const points = 8;
-                const longRadius = currentSize * 3;
-                const shortRadius = currentSize * 1.5;
-                const innerRadius = currentSize * 0.3;
-
-                for (let i = 0; i < points * 2; i++) {
-                    let radius;
-                    if (i % 2 === 0) {
-                        // Outer points - alternate between long and short
-                        radius = (i / 2) % 2 === 0 ? longRadius : shortRadius;
-                    } else {
-                        // Inner points
-                        radius = innerRadius;
+                    for (let i = 0; i < points * 2; i++) {
+                        const radius = i % 2 === 0 ? ((i / 2) % 2 === 0 ? longRadius : shortRadius) : innerRadius;
+                        const angle = (Math.PI / points) * i - Math.PI / 2;
+                        const x = Math.cos(angle) * radius;
+                        const y = Math.sin(angle) * radius;
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
                     }
-
-                    const angle = (Math.PI / points) * i - Math.PI / 2; // Start from top
-                    const x = Math.cos(angle) * radius;
-                    const y = Math.sin(angle) * radius;
-
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
                 }
-
-                ctx.closePath();
-                ctx.fill();
-
-                // Add bright center core
-                const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, currentSize * 0.8);
-                centerGradient.addColorStop(0, isDarkMode
-                    ? `rgba(255, 255, 255, ${currentOpacity})`
-                    : `rgba(${color}, ${currentOpacity})`);
-                centerGradient.addColorStop(1, `rgba(${color}, ${currentOpacity * 0.5})`);
-
-                ctx.fillStyle = centerGradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, currentSize * 0.8, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.restore();
             });
 
             animationFrameRef.current = requestAnimationFrame(animate);
         };
         animate();
 
-        // Cleanup
         return () => {
             window.removeEventListener('resize', resizeCanvas);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchmove', handleTouchMove);
             if (animationFrameRef.current) {
                 cancelAnimationFrame(animationFrameRef.current);
             }
         };
-    }, []);
+    }, [isMobile]);
 
     return (
         <canvas

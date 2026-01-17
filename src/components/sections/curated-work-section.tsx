@@ -41,12 +41,11 @@ export function CuratedWorkSection() {
                 zIndex: index + 10,
               }}
               variants={{
-                hidden: { opacity: 0, scale: 0.95, y: 50, filter: "blur(10px)" },
+                hidden: { opacity: 0, scale: 0.95, y: 50 },
                 show: {
                   opacity: 1,
                   scale: 1,
                   y: 0,
-                  filter: "blur(0px)",
                   transition: { type: "spring", stiffness: 50, damping: 20, duration: 0.8 }
                 }
               }}
