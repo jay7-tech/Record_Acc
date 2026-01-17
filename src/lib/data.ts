@@ -269,13 +269,16 @@ export const impactMetrics = [
 ];
 
 export const marqueeSkills = [
-    "HEY THERE",
-    "CIAO",
-    "INTERACTIVE",
-    "LOADING...",
-    "RELIABLE",
-    "PERFECTION",
-    "SCALABLE",
+    "NEURAL ARCHITECT",
+    "COSMIC CODE",
+    "SYNAPTIC SYNERGY",
+    "SILICON SOUL",
+    "BEYOND BINARY",
+    "ALGORITHMIC ARTISTRY",
+    "ROBOTIC PRECISION",
+    "QUANTUM LEAP",
+    "DIGITAL FRONTIER",
+    "EMERGENT DESIGN",
 ];
 
 export const skills_old = {

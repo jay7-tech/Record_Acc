@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 import { HeroBackground3D } from '../hero-background-3d';
 import { motion } from 'framer-motion';
+import { NeuralHeartbeat } from '@/components/ui/neural-heartbeat';
 
 export function HeroSection() {
   // Subtle and Aesthetic Animation Variants
@@ -82,7 +83,16 @@ export function HeroSection() {
       {/* Interactive 3D Background */}
       <HeroBackground3D />
 
-      <div className="relative z-10 max-w-4xl pt-24">
+      <div className="relative z-10 max-w-4xl pt-24 flex flex-col items-center">
+        {/* Neural Heartbeat Status */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mb-8"
+        >
+          <NeuralHeartbeat />
+        </motion.div>
         {/* Subtle Animated Name with Glow Effect */}
         <motion.h1
           className="relative font-headline text-5xl md:text-7xl lg:text-8xl leading-tight tracking-tight drop-shadow-2xl"

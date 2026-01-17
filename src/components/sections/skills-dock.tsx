@@ -11,6 +11,7 @@ import {
   SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus,
   SiPostgresql, SiFastapi, SiLangchain, SiOllama, SiPytorch, SiNextdotjs
 } from 'react-icons/si';
+import { Magnetic } from '@/components/ui/magnetic';
 
 
 const YoloIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -127,12 +128,16 @@ export function SkillsDock() {
               return (
                 <Tooltip key={skill.name}>
                   <TooltipTrigger asChild>
-                    <motion.div
-                      variants={item}
-                      className="group flex h-20 w-20 items-center justify-center rounded-2xl bg-background/40 border border-white/20 backdrop-blur-md p-4 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:-translate-y-2 hover:shadow-lg hover:shadow-violet-500/20"
-                    >
-                      <Icon className="h-full w-full text-foreground/80 transition-all duration-300 group-hover:text-violet-600 group-hover:scale-110" />
-                    </motion.div>
+                    <div className="flex items-center justify-center">
+                      <Magnetic>
+                        <motion.div
+                          variants={item}
+                          className="group flex h-20 w-20 items-center justify-center rounded-2xl bg-background/40 border border-white/20 backdrop-blur-md p-4 transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:-translate-y-2 hover:shadow-lg hover:shadow-violet-500/20"
+                        >
+                          <Icon className="h-full w-full text-foreground/80 transition-all duration-300 group-hover:text-violet-600 group-hover:scale-110" />
+                        </motion.div>
+                      </Magnetic>
+                    </div>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{skill.name}</p>
