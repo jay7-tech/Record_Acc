@@ -24,6 +24,7 @@ function SubmitButton() {
 }
 
 interface ContactFormState {
+  success?: boolean;
   message: string;
   errors: {
     name?: string[];
@@ -40,14 +41,14 @@ export function ContactSection() {
 
   useEffect(() => {
     if (state.message) {
-      const isError = Object.keys(state.errors).length > 0;
+      const isSuccess = state.success;
       toast({
-        variant: isError ? "destructive" : "default",
-        title: isError ? "Error" : "Success!",
+        variant: isSuccess ? "default" : "destructive",
+        title: isSuccess ? "Success!" : "Error",
         description: state.message,
       });
 
-      if (!isError) {
+      if (isSuccess) {
         formRef.current?.reset();
       }
     }

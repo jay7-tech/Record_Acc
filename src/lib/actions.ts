@@ -10,6 +10,7 @@ const contactSchema = z.object({
 });
 
 type FormState = {
+  success?: boolean;
   message: string;
   errors: {
     name?: string[];
@@ -27,6 +28,7 @@ export async function submitContactForm(prevState: FormState, formData: FormData
 
   if (!validatedFields.success) {
     return {
+      success: false,
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Please fill out all fields correctly.",
     };
@@ -39,7 +41,8 @@ export async function submitContactForm(prevState: FormState, formData: FormData
     if (!apiKey) {
       console.error("Missing RESEND_API_KEY");
       return {
-        message: "Email service is not configured. Please check your API key.",
+        success: false,
+        message: "Email service is briefly unavailable. Please reach out directly to jayadeepgowda24@gmail.com - I'd love to hear from you!",
         errors: {},
       };
     }
@@ -57,12 +60,14 @@ export async function submitContactForm(prevState: FormState, formData: FormData
     if (error) {
       console.error("Resend Error:", error);
       return {
-        message: "Failed to send message. Please ensure you are sending to your Resend-registered email address.",
+        success: false,
+        message: "Something went wrong. Please feel free to email me at jayadeepgowda24@gmail.com instead!",
         errors: {},
       };
     }
 
     return {
+      success: true,
       message: "Message sent successfully!",
       errors: {},
     };
@@ -70,7 +75,8 @@ export async function submitContactForm(prevState: FormState, formData: FormData
   } catch (err) {
     console.error("Form error:", err);
     return {
-      message: "Oops! Something went wrong. Please try again later.",
+      success: false,
+      message: "Something went wrong. Please feel free to email me at jayadeepgowda24@gmail.com instead!",
       errors: {},
     };
   }
