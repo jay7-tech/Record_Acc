@@ -40,6 +40,8 @@ export const skills = [
     { name: "WebRTC", description: "Real-time communication", icon: "SiWebrtc" },
     { name: "OpenCV", description: "Computer Vision", icon: "SiOpencv" },
     { name: "Antigravity", description: "Agentic AI", icon: "AntigravityIcon" },
+    { name: "TensorFlow", description: "Deep Learning", icon: "SiPytorch" },
+    { name: "ONNX", description: "Model Optimization", icon: "Cpu" },
 ];
 
 type Project = {
@@ -59,13 +61,37 @@ type Project = {
 
 export const projects: Project[] = [
     {
+        title: "MEMO — Embodied Edge AI Companion",
+        recognition: "Constructed a novel embodied intelligence architecture, optimizing LLM inference on edge hardware.",
+        images: ["memo-hero", "memo-details"],
+        color: "bg-[#2c3e50]/10", // Dark technical blue/grey
+        animationType: "perspective-push",
+        description: {
+            paragraph: "A production-grade embodied AI product architected from bare-metal firmware to high-level cognitive stack. MEMO represents a breakthrough in edge-native robotics, orchestrating a complex multi-modal system that runs 6+ concurrent AI models (Vision, Voice, Touch, LLM, Navigation) on a single Raspberry Pi 5. The custom Event-Driven Nervous System bridges the gap between cognitive reasoning and millisecond-level physical reflexes.",
+            features: [
+                "Production-Grade Architecture: Fault-tolerant, thread-safe EventBus handling high-frequency asynchronous inputs without race conditions.",
+                "Advanced AI Orchestration: Hybrid auditory stack (Vosk + Gemini 1.5 Flash) and parallel vision pipelines with <200ms end-to-end latency.",
+                "Hardware Optimization: Kernel-level optimizations, including adaptive frame skipping and thermal burst management, sustaining 99.9% uptime.",
+                "Full-Stack Ownership: End-to-end development of custom PCB design, 3D-printed chassis, firmware, and the React-based emotion engine."
+            ]
+        },
+        githubUrl: "https://github.com/jay7-tech/MEMO", // Validated URL
+        tags: [
+            { name: "Python", icon: SiPython },
+            { name: "OpenCV", icon: SiOpencv },
+            { name: "TensorFlow", icon: SiPytorch },
+            { name: "Raspberry Pi", icon: Cpu },
+        ],
+        isFeatured: true,
+    },
+    {
         title: "Cognis — Cognitive Pattern Engine",
         recognition: "Cognis solves the core flaw of conversational AI: LLMs answer, but they don’t remember when answering didn’t work.",
         images: ["cognis-hero", "cognis-2"],
         color: "bg-[#7c3aed]/10", // Violet/Purple
         animationType: "perspective-push",
         description: {
-            paragraph: "Cognis turns past reasoning into a first-class signal. Unlike stateless LLMs that allow repetitive cognitive loops, Cognis stores reflections as structured vector memory, detects recurring failure patterns in O(n) time, and intervenes to prevent repeated mistakes—shifting AI from just answering questions to actively preventing failure.",
+            paragraph: "Designed Cognis to transform past reasoning into a first-class signal. Unlike stateless LLMs that allow repetitive cognitive loops, Cognis stores reflections as structured vector memory, detects recurring failure patterns in O(n) time, and intervenes to prevent repeated mistakes—shifting AI from just answering questions to actively preventing failure.",
             features: [
                 "Memory-Augmented Architecture: Architected a system to detect and store recurring reasoning failures across sessions.",
                 "Temporal Pattern Scoring: Developed a custom algorithm driving 40–60% reduction in unproductive AI queries.",
@@ -125,7 +151,7 @@ export const projects: Project[] = [
             { name: "WebRTC", icon: SiWebrtc },
             { name: "JavaScript", icon: SiJavascript },
         ],
-        isFeatured: true,
+        isFeatured: false,
     },
     {
         title: "Neuro-AI | Cognitive Care Ecosystem",
@@ -176,6 +202,20 @@ export const projects: Project[] = [
 ];
 
 export const experiences = [
+    {
+        role: "RnD Intern",
+        organization: "Sirena Technologies",
+        category: "INTERNSHIP",
+        details: [
+            "Nino Humanoids: Architected the kinematic control layer for the 'Nino' platform, developing custom IK solvers and optimizing joint trajectory generation for stable bipedal locomotion.",
+            "Twist Quadruped: Devised the dynamic locomotion stack for 'Twist', implementing Zero Moment Point (ZMP) based stability criteria and torque-control algorithms for uneven terrain adaptation.",
+            "Product Ownership: Orchestrated the full-lifecycle R&D of 'MEMO' from embedded systems design to cognitive architecture, delivering a production-ready embodied AI companion."
+        ],
+        image: "/images/sirena certificate.png",
+        images: [
+            "/images/sirena certificate.png"
+        ]
+    },
     {
         role: "Intern",
         organization: "Frillory Design House",

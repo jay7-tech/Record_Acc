@@ -115,33 +115,60 @@ export function ExperienceCard({ exp, alwaysExpanded = false }: { exp: any, alwa
                                                 animate={{ opacity: 1 }}
                                                 exit={{ opacity: 0 }}
                                                 transition={{ duration: 0.3 }}
-                                                className="relative w-full h-full"
+                                                className="relative w-full h-full flex flex-col"
                                             >
-                                                <Image
-                                                    src={images[currentIndex]}
-                                                    alt={`${exp.role} - image ${currentIndex + 1}`}
-                                                    fill
-                                                    className="object-contain bg-white/5"
-                                                />
+                                                {images[currentIndex].toLowerCase().endsWith('.pdf') ? (
+                                                    <div className="w-full h-full flex flex-col items-center justify-center bg-white/5 text-muted-foreground p-4 text-center">
+                                                        <div className="bg-white/10 p-4 rounded-full mb-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 opacity-70"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M12 18v-6" /><path d="M8 15a2 2 0 0 0 4 0 4 4 0 0 0-8 0" /></svg>
+                                                        </div>
+                                                        <span className="text-sm font-medium mb-1">Certificate Document</span>
+                                                        <a
+                                                            href={images[currentIndex]}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-xs text-primary hover:underline underline-offset-4 mt-2"
+                                                        >
+                                                            Open PDF in new tab
+                                                        </a>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        {/* Blurred Background Layer to fill space */}
+                                                        <Image
+                                                            src={images[currentIndex]}
+                                                            alt="background"
+                                                            fill
+                                                            className="object-cover blur-xl opacity-40 scale-110 grayscale"
+                                                        />
+                                                        {/* Main Image Layer - Fully Visible */}
+                                                        <Image
+                                                            src={images[currentIndex]}
+                                                            alt={`${exp.role} - image ${currentIndex + 1}`}
+                                                            fill
+                                                            className="object-contain relative z-10"
+                                                        />
+                                                    </>
+                                                )}
 
                                                 {/* Simple Controls (only if multiple) */}
                                                 {hasMultipleImages && (
-                                                    <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover/carousel:opacity-100 transition-opacity">
+                                                    <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover/carousel:opacity-100 transition-opacity pointer-events-none">
                                                         <button
                                                             onClick={(e) => prevImage(e)}
-                                                            className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-sm transition-colors"
+                                                            className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-sm transition-colors pointer-events-auto"
                                                         >
                                                             <ChevronLeft className="w-5 h-5" />
                                                         </button>
                                                         <button
                                                             onClick={(e) => nextImage(e)}
-                                                            className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-sm transition-colors"
+                                                            className="p-1.5 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-sm transition-colors pointer-events-auto"
                                                         >
                                                             <ChevronRight className="w-5 h-5" />
                                                         </button>
 
                                                         {/* Dots Bottom */}
-                                                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 p-1 rounded-full bg-black/30 backdrop-blur-sm">
+                                                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 p-1 rounded-full bg-black/30 backdrop-blur-sm pointer-events-auto">
                                                             {images.map((_: any, idx: number) => (
                                                                 <div
                                                                     key={idx}
