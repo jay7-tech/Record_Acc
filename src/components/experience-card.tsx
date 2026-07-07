@@ -102,9 +102,8 @@ export function ExperienceCard({ exp, alwaysExpanded = false }: { exp: any, alwa
                         >
                             <div className={`flex flex-col ${alwaysExpanded ? 'gap-6' : 'md:flex-row gap-8'} items-start pt-4 border-t border-white/5 mt-2`}>
 
-                                {/* Left Column: Clean Simple Image */}
                                 <div
-                                    className={`${alwaysExpanded ? 'w-full aspect-[16/9]' : 'w-full md:w-2/5 aspect-video md:aspect-[4/3] lg:aspect-video'} flex-shrink-0 relative rounded-xl overflow-hidden border border-white/10 bg-muted/20 shadow-2xl group/carousel transition-all duration-300`}
+                                    className={`${alwaysExpanded ? 'w-full aspect-[16/9]' : 'w-full md:w-1/3 aspect-square md:aspect-[3/4]'} flex-shrink-0 relative rounded-xl overflow-hidden border border-white/10 bg-muted/20 shadow-2xl group/carousel transition-all duration-300`}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <AnimatePresence mode="wait">
