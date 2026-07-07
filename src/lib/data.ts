@@ -207,14 +207,13 @@ export const experiences = [
         organization: "IISc Bangalore",
         category: "INTERNSHIP",
         details: [
-            "Engineered advanced ML/DL pipelines to extract high-fidelity physiological markers from noisy MXene-based piezoresistive wristband sensor data, resolving critical signal degradation issues.",
-            "Orchestrated cross-border research initiatives, collaborating with PhD researchers and international partners at AGH University of Kraków to iterate on complex signal processing methodologies.",
-            "Architected a scalable data pipeline for artifact removal and signal reconstruction, directly accelerating physiological research at the Department of Computational and Data Sciences under Prof. Phaneendra K. Yalavarthy."
+            "Transformed noisy, multi-rate sensor telemetry from next-generation MXene piezoresistive wristbands into clean, analysis-ready physiological signal — engineering the full data pipeline from raw ingestion through feature extraction.",
+            "Engineered a rigorous comparative modeling framework spanning classical machine learning and deep learning sequence architectures, validated through stratified cross-validation and a 21-dimensional time/frequency feature space — establishing the benchmark methodology now used to evaluate physiological signal fidelity in the lab.",
+            "Partnered directly with postdoctoral researchers, PhD candidates, and international collaborators in Poland to convert raw sensor telemetry into research-grade analytical assets, bridging materials science and applied ML at IISc's Dept. of Computational & Data Sciences."
         ],
-        image: "/Internship Experience Certificate _ Jayadeep Gowda K B.pdf",
+        image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop",
         images: [
-            "/Internship Experience Certificate _ Jayadeep Gowda K B.pdf",
-            "/Offer Letter-Internship-Jayadeep Gowda K B.pdf"
+            "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop"
         ]
     },
     {
