@@ -203,6 +203,21 @@ export const projects: Project[] = [
 
 export const experiences = [
     {
+        role: "Machine Learning Research Intern",
+        organization: "IISc Bangalore",
+        category: "INTERNSHIP",
+        details: [
+            "Engineered advanced ML/DL pipelines to extract high-fidelity physiological markers from noisy MXene-based piezoresistive wristband sensor data, resolving critical signal degradation issues.",
+            "Orchestrated cross-border research initiatives, collaborating with PhD researchers and international partners at AGH University of Kraków to iterate on complex signal processing methodologies.",
+            "Architected a scalable data pipeline for artifact removal and signal reconstruction, directly accelerating physiological research at the Department of Computational and Data Sciences under Prof. Phaneendra K. Yalavarthy."
+        ],
+        image: "/Internship Experience Certificate _ Jayadeep Gowda K B.pdf",
+        images: [
+            "/Internship Experience Certificate _ Jayadeep Gowda K B.pdf",
+            "/Offer Letter-Internship-Jayadeep Gowda K B.pdf"
+        ]
+    },
+    {
         role: "RnD Intern",
         organization: "Sirena Technologies",
         category: "INTERNSHIP",
