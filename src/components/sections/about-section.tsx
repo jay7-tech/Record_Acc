@@ -30,7 +30,7 @@ export function AboutSection() {
                   alt="A photo of Jaydeep Gowda"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  style={{ objectPosition: 'center 15%' }}
+                  style={{ objectPosition: 'center 35%' }}
                   data-ai-hint={profileImage.imageHint}
                 />
               </div>
