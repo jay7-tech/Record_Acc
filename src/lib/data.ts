@@ -211,9 +211,9 @@ export const experiences = [
             "Engineered a rigorous comparative modeling framework spanning classical machine learning and deep learning sequence architectures, validated through stratified cross-validation and a 21-dimensional time/frequency feature space — establishing the benchmark methodology now used to evaluate physiological signal fidelity in the lab.",
             "Partnered directly with postdoctoral researchers, PhD candidates, and international collaborators in Poland to convert raw sensor telemetry into research-grade analytical assets, bridging materials science and applied ML at IISc's Dept. of Computational & Data Sciences."
         ],
-        image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop",
+        image: "/image.png",
         images: [
-            "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop"
+            "/image.png"
         ]
     },
     {
