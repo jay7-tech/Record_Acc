@@ -62,15 +62,16 @@ export function LabShell({ tabs, activeId: controlledId, onActiveChange }: Props
       </div>
 
       <div className="relative flex flex-col md:flex-row">
-        {/* tool rail */}
-        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.015] p-4 md:w-64 md:shrink-0">
+        {/* tool rail — a wrapping grid on mobile so every tool is visible at once,
+            no scroll gesture required; the full labeled vertical list from md up */}
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 md:flex md:flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.015] p-3 md:p-4 md:w-64 md:shrink-0">
           {tabs.map((tab) => {
             const isActive = tab.id === active?.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActive(tab.id)}
-                className={`relative flex shrink-0 items-start gap-3 rounded-2xl px-4 py-3 text-left transition-colors w-full md:w-auto min-w-[200px] md:min-w-0 ${
+                className={`relative flex flex-col md:flex-row items-center md:items-start gap-1.5 md:gap-3 rounded-2xl px-2 py-2.5 md:px-4 md:py-3 text-center md:text-left transition-colors w-full ${
                   isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
@@ -81,12 +82,12 @@ export function LabShell({ tabs, activeId: controlledId, onActiveChange }: Props
                     transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                   />
                 )}
-                <span className={`relative z-10 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isActive ? 'bg-sky-500/20 dark:bg-sky-400/20 text-sky-700 dark:text-sky-300' : 'bg-slate-900/5 dark:bg-white/5 text-slate-500 dark:text-slate-400'}`}>
+                <span className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isActive ? 'bg-sky-500/20 dark:bg-sky-400/20 text-sky-700 dark:text-sky-300' : 'bg-slate-900/5 dark:bg-white/5 text-slate-500 dark:text-slate-400'}`}>
                   {tab.icon}
                 </span>
                 <span className="relative z-10 min-w-0">
-                  <span className="block text-sm font-semibold">{tab.label}</span>
-                  <span className="block text-xs text-slate-500 dark:text-slate-500 truncate">{tab.tagline}</span>
+                  <span className="block text-[11px] md:text-sm font-semibold leading-tight">{tab.label}</span>
+                  <span className="hidden md:block text-xs text-slate-500 dark:text-slate-500 truncate">{tab.tagline}</span>
                 </span>
               </button>
             );

@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Brain, TrendingUp, Compass, Sparkles, Hand, MousePointerClick } from 'lucide-react';
+import { ArrowLeft, MousePointerClick } from 'lucide-react';
+import {
+  DigitGlyphIcon,
+  ScatterFitIcon,
+  MazeGoalIcon,
+  AttentionGridIcon,
+  HandKeypointsIcon,
+} from '@/components/lab/lab-icons';
 import { LabShell } from '@/components/lab/lab-shell';
 import { DigitRecognizerDemo } from '@/components/lab/digit-recognizer-demo';
 import { RegressionLabDemo } from '@/components/lab/regression-lab-demo';
@@ -14,11 +21,11 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { useState } from 'react';
 
 const TAB_META = {
-  'digit-recognizer': { label: 'Digit Recognizer', icon: Brain },
-  'regression-lab': { label: 'Regression Lab', icon: TrendingUp },
-  'rl-arena': { label: 'RL Arena', icon: Compass },
-  'attention-lab': { label: 'Attention Lab', icon: Sparkles },
-  'pose-tracker': { label: 'Hand Tracker', icon: Hand },
+  'digit-recognizer': { label: 'Digit Recognizer', icon: DigitGlyphIcon },
+  'regression-lab': { label: 'Regression Lab', icon: ScatterFitIcon },
+  'rl-arena': { label: 'RL Arena', icon: MazeGoalIcon },
+  'attention-lab': { label: 'Attention Lab', icon: AttentionGridIcon },
+  'pose-tracker': { label: 'Hand Tracker', icon: HandKeypointsIcon },
 } as const;
 
 export default function LabPage() {
@@ -90,35 +97,35 @@ export default function LabPage() {
                 id: 'digit-recognizer',
                 label: 'Digit Recognizer',
                 tagline: '784-64-32-10 MLP',
-                icon: <Brain className="h-4 w-4" />,
+                icon: <DigitGlyphIcon className="h-4 w-4" />,
                 content: <DigitRecognizerDemo />,
               },
               {
                 id: 'regression-lab',
                 label: 'Regression Lab',
                 tagline: 'Live gradient descent',
-                icon: <TrendingUp className="h-4 w-4" />,
+                icon: <ScatterFitIcon className="h-4 w-4" />,
                 content: <RegressionLabDemo />,
               },
               {
                 id: 'rl-arena',
                 label: 'RL Arena',
                 tagline: 'Live Q-learning',
-                icon: <Compass className="h-4 w-4" />,
+                icon: <MazeGoalIcon className="h-4 w-4" />,
                 content: <RLArenaDemo />,
               },
               {
                 id: 'attention-lab',
                 label: 'Attention Lab',
                 tagline: 'A tiny transformer',
-                icon: <Sparkles className="h-4 w-4" />,
+                icon: <AttentionGridIcon className="h-4 w-4" />,
                 content: <AttentionLabDemo />,
               },
               {
                 id: 'pose-tracker',
                 label: 'Hand Tracker',
                 tagline: 'Live computer vision',
-                icon: <Hand className="h-4 w-4" />,
+                icon: <HandKeypointsIcon className="h-4 w-4" />,
                 content: <PoseTrackerDemo />,
               },
             ]}

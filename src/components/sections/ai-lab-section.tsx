@@ -2,15 +2,22 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Brain, TrendingUp, Swords, Sparkles, Hand, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { AnimatedSection } from '../animated-section';
+import {
+  DigitGlyphIcon,
+  ScatterFitIcon,
+  MazeGoalIcon,
+  AttentionGridIcon,
+  HandKeypointsIcon,
+} from '../lab/lab-icons';
 
 const TOOLS = [
-  { icon: Brain, label: 'Digit Recognizer', hint: 'neural net' },
-  { icon: TrendingUp, label: 'Regression Lab', hint: 'gradient descent' },
-  { icon: Swords, label: 'RL Arena', hint: 'Q-learning agent' },
-  { icon: Sparkles, label: 'Attention Lab', hint: 'mini transformer' },
-  { icon: Hand, label: 'Hand Tracker', hint: 'live pose model' },
+  { icon: DigitGlyphIcon, label: 'Digit Recognizer', hint: 'neural net' },
+  { icon: ScatterFitIcon, label: 'Regression Lab', hint: 'gradient descent' },
+  { icon: MazeGoalIcon, label: 'RL Arena', hint: 'Q-learning agent' },
+  { icon: AttentionGridIcon, label: 'Attention Lab', hint: 'mini transformer' },
+  { icon: HandKeypointsIcon, label: 'Hand Tracker', hint: 'live pose model' },
 ];
 
 export function AiLabSection() {

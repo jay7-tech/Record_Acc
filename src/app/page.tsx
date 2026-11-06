@@ -14,8 +14,18 @@ export default function Home() {
       <AestheticBackground />
       <HeroSection />
       <SkillsMarquee />
-      <div className="container px-4 md:px-6 space-y-16 md:space-y-32 my-12 md:my-32">
+      <div className="container px-4 md:px-6 space-y-16 md:space-y-32 mt-12 md:mt-32 mb-6 md:mb-16">
         <AiLabSection />
+
+        {/* Decorative Glassy Line - AI Lab to Profile */}
+        <div className="relative w-full max-w-4xl mx-auto py-8 md:py-10 flex items-center justify-center">
+          <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
+          <div className="absolute w-2/3 h-[2px] bg-gradient-to-r from-transparent via-blue-400/80 to-transparent blur-[3px]" />
+          <div className="relative z-10 w-3 h-3 rotate-45 border border-sky-500 bg-background shadow-[0_0_20px_rgba(56,189,248,0.6)]">
+            <div className="absolute inset-0 m-0.5 bg-sky-500 animate-pulse" />
+          </div>
+        </div>
+
         <AboutSection />
 
         {/* Decorative Glassy Line - Cosmic Theme */}
