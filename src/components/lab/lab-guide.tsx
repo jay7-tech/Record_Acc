@@ -6,15 +6,15 @@ import { X, Sparkles } from 'lucide-react';
 
 const TIPS: Record<string, string> = {
   'digit-recognizer':
-    "This is a real neural network — 784 to 64 to 32 to 10 neurons. Draw any digit and watch forward-propagation happen, live.",
+    "This is a real neural network — 784 to 64 to 32 to 10 neurons. Draw any digit and watch the signal pass through it live.",
   'regression-lab':
-    'Click to drop data points, then hit run — you\'re watching batch gradient descent minimize loss in real time.',
+    "Click to drop data points, then hit run — you're watching batch gradient descent minimize loss in real time.",
   'rl-arena':
-    "Watch reinforcement learning happen from a cold start — this agent knows nothing at first, stumbles into hazards, and teaches itself the safe route through real Q-learning.",
+    "Watch reinforcement learning happen from a cold start — this agent knows nothing at first, stumbles into hazards, and teaches itself the safe route through real Q learning.",
   'attention-lab':
     "This is a real tiny transformer — the same architecture behind LLMs. The bars are its actual attention weights; try Autocomplete and watch it generate text one real prediction at a time.",
   'pose-tracker':
-    "A pretrained computer-vision model tracking your hand live, 21 points at once, straight from your webcam — fully client-side, nothing uploaded.",
+    "A pretrained computer vision model tracking your hand live, 21 points at once, straight from your webcam, fully on device, nothing uploaded.",
 };
 
 const GREETING = "Hey — I'm your guide. Pick a tool and I'll tell you what's actually happening under the hood.";

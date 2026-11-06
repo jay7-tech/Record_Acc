@@ -89,7 +89,7 @@ export function PinnDemo() {
   const isDark = useIsDark();
   const [running, setRunning] = useState(true);
   const [k, setK] = useState(PRESETS[1].k);
-  const [log, setLog] = useState<string[]>(['net initialized — knows nothing but the equation x\' = -kx and x(0) = 1']);
+  const [log, setLog] = useState<string[]>(['net initialized — knows only the equation x\' = -kx and x(0) = 1']);
   const [stats, setStats] = useState({ step: 0, loss: 0 });
 
   const pushLog = useCallback((line: string) => {
@@ -120,7 +120,7 @@ export function PinnDemo() {
     w.lossHistory = [];
     w.lastLog = -1;
     setStats({ step: 0, loss: 0 });
-    setLog(["net re-initialized — knows nothing but the equation x' = -kx and x(0) = 1"]);
+    setLog(["net reinitialized — knows only the equation x' = -kx and x(0) = 1"]);
   }, []);
 
   const applyPreset = (newK: number, label: string) => {
@@ -255,7 +255,7 @@ export function PinnDemo() {
 
         if (w.lastLog < 0 || w.step - w.lastLog > 150) {
           w.lastLog = w.step;
-          pushLog(`step ${w.step}: physics-residual loss ${l.toFixed(4)}${l < 0.002 ? ' — converged' : ''}`);
+          pushLog(`step ${w.step}: physics residual loss ${l.toFixed(4)}${l < 0.002 ? ' — converged' : ''}`);
         }
       }
       draw();
@@ -321,9 +321,8 @@ export function PinnDemo() {
 
       <TrainingConsole lines={log} label="pinn.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        Zero training data — the red dots are where the equation's own residual is measured, and
-        the only two things the net is ever told are the differential equation and the value at
-        t=0. Everything else it has to work out itself.
+        Zero training data. The red dots mark where the equation&apos;s residual is measured. The
+        net is only told the equation and the value at t=0, everything else it works out itself.
       </p>
     </div>
   );

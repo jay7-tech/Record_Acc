@@ -34,7 +34,7 @@ const TAB_META = {
   'pose-tracker': { label: 'Hand Tracker', icon: HandKeypointsIcon },
   'evolving-walkers': { label: 'Evolving Walkers', icon: WalkerGaitIcon },
   'growing-lab': { label: 'Growing Lab', icon: CellGrowthIcon },
-  'pinn': { label: 'Physics-Informed NN', icon: ConvergingCurveIcon },
+  'pinn': { label: 'Physics Informed NN', icon: ConvergingCurveIcon },
 } as const;
 
 export default function LabPage() {
@@ -78,9 +78,8 @@ export default function LabPage() {
             Built, Not <span className="bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-300 dark:to-blue-500 bg-clip-text text-transparent">Described</span>
           </h1>
           <p className="mt-3 sm:mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-400 hidden sm:block">
-            Real learning systems — backprop, genetic algorithms, cellular automata — trained or
-            evolved from scratch and running live, right here in your browser. No pretrained
-            checkpoints, no canned demos.
+            Real learning systems, trained or evolved from scratch, running live in your browser.
+            No pretrained checkpoints. No canned demos.
           </p>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 sm:hidden">
             Real ML systems, trained from scratch, running live right in your browser.
@@ -104,7 +103,7 @@ export default function LabPage() {
               {
                 id: 'digit-recognizer',
                 label: 'Digit Recognizer',
-                tagline: '784-64-32-10 MLP',
+                tagline: '784 → 64 → 32 → 10 MLP',
                 icon: <DigitGlyphIcon className="h-4 w-4" />,
                 content: <DigitRecognizerDemo />,
               },
@@ -118,7 +117,7 @@ export default function LabPage() {
               {
                 id: 'rl-arena',
                 label: 'RL Arena',
-                tagline: 'Live Q-learning',
+                tagline: 'Live Q learning',
                 icon: <MazeGoalIcon className="h-4 w-4" />,
                 content: <RLArenaDemo />,
               },
@@ -152,7 +151,7 @@ export default function LabPage() {
               },
               {
                 id: 'pinn',
-                label: 'Physics-Informed NN',
+                label: 'Physics Informed NN',
                 tagline: 'Zero training data',
                 icon: <ConvergingCurveIcon className="h-4 w-4" />,
                 content: <PinnDemo />,
@@ -162,7 +161,7 @@ export default function LabPage() {
         </motion.div>
 
         <p className="mt-10 text-center text-xs text-slate-500 dark:text-slate-600 font-mono">
-          Everything above runs client-side — no API, no server, just the math.
+          Everything above runs in your browser — no API, no server, just the math.
         </p>
       </div>
 

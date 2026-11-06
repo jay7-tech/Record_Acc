@@ -98,7 +98,7 @@ export function RLArenaDemo() {
     w.stepInEpisode = 0;
     w.episodeReward = 0;
     setStats({ episode: 0, epsilon: 1, best: -Infinity, avg: 0, lastSteps: 0 });
-    setLog(['new terrain generated — Q-table wiped, learning from scratch again']);
+    setLog(['new terrain generated — Q table wiped, learning from scratch again']);
   }, []);
 
   useEffect(() => {
@@ -422,8 +422,8 @@ export function RLArenaDemo() {
 
       <TrainingConsole lines={log} label="qlearn.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        No pretrained policy — this agent starts knowing nothing and learns the safe route to the
-        goal live, through tabular Q-learning, right in your browser. The glow is its real learned
+        No pretrained policy. This agent starts knowing nothing and learns the safe route to the
+        goal live, through tabular Q learning, right in your browser. The glow is its real learned
         value function spreading out from the goal as it trains.
       </p>
     </div>

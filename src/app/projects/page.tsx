@@ -29,7 +29,7 @@ export default function ProjectsPage() {
                             <TextDecoder text="All" /> <TextDecoder text="Projects" className="text-primary" />
                         </h1>
                         <p className="text-muted-foreground mt-4 max-w-2xl text-lg">
-                            A comprehensive list of my technical projects, experiments, and open-source contributions.
+                            My technical projects, experiments, and open source work.
                         </p>
                     </div>
                 </div>

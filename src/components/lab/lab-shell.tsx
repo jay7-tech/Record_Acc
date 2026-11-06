@@ -45,19 +45,46 @@ export function LabShell({ tabs, activeId: controlledId, onActiveChange }: Props
       />
 
       {/* window chrome bar */}
-      <div className="relative flex items-center gap-3 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.03] px-5 py-3.5">
-        <div className="flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-          <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-          <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+      <div className="relative flex items-center border-b border-slate-200 dark:border-white/[0.08] bg-gradient-to-b from-black/[0.02] to-transparent dark:from-white/[0.06] dark:to-white/[0.015] backdrop-blur-xl px-5 py-3.5">
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent hidden dark:block" />
+
+        <div className="flex items-center gap-2">
+          <span
+            className="relative h-3 w-3 rounded-full ring-1 ring-black/15 dark:ring-black/25"
+            style={{ background: 'radial-gradient(circle at 32% 28%, #ff9d93, #ff5f57 55%, #e0443e)' }}
+          >
+            <svg viewBox="0 0 10 10" className="absolute inset-0 m-auto h-1.5 w-1.5 text-[#5c0400] opacity-0 transition-opacity duration-200 group-hover:opacity-80">
+              <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span
+            className="relative h-3 w-3 rounded-full ring-1 ring-black/15 dark:ring-black/25"
+            style={{ background: 'radial-gradient(circle at 32% 28%, #ffe29a, #febc2e 55%, #d89a1d)' }}
+          >
+            <svg viewBox="0 0 10 10" className="absolute inset-0 m-auto h-1.5 w-1.5 text-[#5c4300] opacity-0 transition-opacity duration-200 group-hover:opacity-80">
+              <path d="M1.5 5h7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span
+            className="relative h-3 w-3 rounded-full ring-1 ring-black/15 dark:ring-black/25"
+            style={{ background: 'radial-gradient(circle at 32% 28%, #9af5ae, #28c840 55%, #1a9c30)' }}
+          >
+            <svg viewBox="0 0 10 10" className="absolute inset-0 m-auto h-1.5 w-1.5 text-[#02400f] opacity-0 transition-opacity duration-200 group-hover:opacity-80">
+              <path d="M2 6.5L3.8 8 8 2.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
+          </span>
         </div>
-        <span className="font-mono text-xs text-slate-500 dark:text-slate-400 ml-2">ai-lab.tsx</span>
-        <span className="relative ml-auto flex items-center gap-1.5 font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+
+        <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-xs text-slate-500 dark:text-slate-400">
+          lab.tsx
+        </span>
+
+        <span className="relative ml-auto flex items-center gap-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 ring-1 ring-emerald-500/25 dark:ring-emerald-400/25 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-300">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 dark:bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
           </span>
-          live
+          Live
         </span>
       </div>
 

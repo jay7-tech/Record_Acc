@@ -94,7 +94,7 @@ export function HeroSection() {
           initial="hidden"
           animate="visible"
         >
-          Engineering at the intersection of AI & Machine Learning, Robotics, and Full-Stack Project Building to architect high-impact, intelligent solutions.
+          Building intelligent solutions at the intersection of AI, Robotics, and Full Stack Engineering.
         </motion.p>
 
         {/* Animated Buttons */}

@@ -311,10 +311,9 @@ export function EvolvingWalkersDemo() {
 
       <TrainingConsole lines={log} label="evolve.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        No hand-coded gait — every creature is just four numbers (stride length, ground-contact
-        time, leg timing offset, energy split) scored by how far it gets on a fixed energy budget.
-        Legs that fire together waste half their push; natural selection has to find alternation on
-        its own.
+        No hand coded gait. Each creature is four numbers (stride, ground contact time, leg
+        offset, energy split) scored by how far it gets. Legs firing together waste power, so
+        evolution has to find alternation on its own.
       </p>
     </div>
   );

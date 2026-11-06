@@ -362,7 +362,7 @@ export function GrowingLabDemo() {
           className="flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm text-slate-500 dark:text-slate-400 transition-colors hover:border-sky-500/40 dark:hover:border-sky-400/40 hover:text-slate-800 dark:hover:text-slate-100"
         >
           <RotateCcw className="h-3.5 w-3.5" />
-          Re-evolve
+          Evolve Again
         </motion.button>
       </div>
 
@@ -373,9 +373,9 @@ export function GrowingLabDemo() {
 
       <TrainingConsole lines={log} label="grow.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        The exact same ~70 numbers run on every cell, every step — one shared local rule, evolved
-        rather than backprop-trained, until a single seed pixel reliably grows into a blob. Damage
-        it and the same rule keeps running on whatever's left.
+        The same ~70 numbers run on every cell, every step. One shared rule, evolved rather than
+        backprop trained, until a seed pixel grows into a blob. Damage it, and the same rule keeps
+        running on whatever is left.
       </p>
     </div>
   );

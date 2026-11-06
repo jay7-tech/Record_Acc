@@ -181,7 +181,7 @@ export function AttentionLabDemo() {
 
       <div className="w-full max-w-md space-y-1.5">
         <p className="mb-1 text-center text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-600">
-          next-character prediction
+          next character prediction
         </p>
         {predictions.map(({ char, p }) => (
           <div key={char} className="flex items-center gap-2">
@@ -222,8 +222,8 @@ export function AttentionLabDemo() {
 
       <TrainingConsole lines={log} label="attention.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        Trained from scratch on a synthetic corpus — the bars are its real attention weights, not a
-        canned animation, and Autocomplete is genuine sampling from its learned next-character
+        Trained from scratch on a synthetic corpus. The bars are its real attention weights, not a
+        canned animation, and Autocomplete is genuine sampling from its learned next character
         distribution, one real forward pass at a time.
       </p>
     </div>

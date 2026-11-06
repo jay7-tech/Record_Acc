@@ -14,7 +14,7 @@ export const personalInfo = {
         { name: "GitHub", url: "https://github.com/jay7-tech", icon: SiGithub },
         { name: "Instagram", url: "https://www.instagram.com/jayadeep_gowda_?igsh=MWZsMGNud25qcjFyaw==", icon: SiInstagram },
     ],
-    summary: "As a Robotics and AI/ML Engineer, I specialize in bridging the gap between advanced Machine Learning architectures and physical autonomous systems. I drive innovation by fusing cutting-edge technology with an entrepreneurial mindset to architect scalable, high-impact intelligent solutions—from computer vision pipelines to localized LLM integration. My approach combines robotic precision with modern full-stack development to solve complex real-world challenges with technical excellence.",
+    summary: "I build intelligent systems that bridge machine learning and the physical world. From computer vision pipelines to local LLM integration, I architect scalable solutions with robotic precision and full stack engineering.",
 };
 
 export const skills = [
@@ -24,27 +24,27 @@ export const skills = [
     { name: "C++", description: "Systems & Robotics", icon: "SiCplusplus" },
     { name: "SQL", description: "Relational Databases", icon: "SiPostgresql" },
     { name: "MongoDB", description: "Document Database", icon: "SiMongodb" },
-    { name: "FastAPI", description: "High-performance API", icon: "SiFastapi" },
-    { name: "Node.js", description: "Runtime environment", icon: "SiNodedotjs" },
-    { name: "React", description: "Frontend library", icon: "SiReact" },
-    { name: "Next.js", description: "Full-stack framework", icon: "SiNextdotjs" },
+    { name: "FastAPI", description: "High Performance API", icon: "SiFastapi" },
+    { name: "Node.js", description: "Runtime Environment", icon: "SiNodedotjs" },
+    { name: "React", description: "Frontend Library", icon: "SiReact" },
+    { name: "Next.js", description: "Full Stack Framework", icon: "SiNextdotjs" },
     { name: "Tailwind CSS", description: "Styling", icon: "SiTailwindcss" },
     { name: "Docker", description: "Containerization", icon: "SiDocker" },
-    { name: "Git", description: "Version control", icon: "SiGit" },
+    { name: "Git", description: "Version Control", icon: "SiGit" },
     { name: "Machine Learning", description: "Applied ML", icon: "SiPytorch" },
-    { name: "Computer Vision", description: "Real-time Inference", icon: "ScanLine" },
+    { name: "Computer Vision", description: "Real Time Inference", icon: "ScanLine" },
     { name: "Large Language Models", description: "Generative AI", icon: "Bot" },
     { name: "LangChain", description: "AI Orchestration", icon: "SiLangchain" },
     { name: "Ollama", description: "Local LLM Serving", icon: "SiOllama" },
     { name: "Embedded Systems", description: "Hardware Integration", icon: "Cpu" },
-    { name: "WebRTC", description: "Real-time communication", icon: "SiWebrtc" },
+    { name: "WebRTC", description: "Real Time Communication", icon: "SiWebrtc" },
     { name: "OpenCV", description: "Computer Vision", icon: "SiOpencv" },
     { name: "Antigravity", description: "Agentic AI", icon: "AntigravityIcon" },
     { name: "TensorFlow", description: "Deep Learning", icon: "SiTensorflow" },
     { name: "ONNX", description: "Model Optimization", icon: "SiOnnx" },
     { name: "PyTorch", description: "Deep Learning Framework", icon: "SiPytorch" },
     { name: "ROS2", description: "Robotics Middleware", icon: "SiRos" },
-    { name: "YOLO", description: "Real-Time Object Detection", icon: "Target" },
+    { name: "YOLO", description: "Real Time Object Detection", icon: "Target" },
     { name: "Hugging Face", description: "Transformer Models", icon: "SiHuggingface" },
     { name: "Linux", description: "Systems & ARM Dev", icon: "SiLinux" },
     { name: "OpenVINO", description: "Edge Inference Toolkit", icon: "SiIntel" },
@@ -68,17 +68,17 @@ export type Project = {
 export const projects: Project[] = [
     {
         title: "MEMO — Embodied Edge AI Companion",
-        recognition: "Constructed a novel embodied intelligence architecture, optimizing LLM inference on edge hardware.",
+        recognition: "Built a novel embodied intelligence architecture, optimizing LLM inference on edge hardware.",
         images: ["memo-hero", "memo-details"],
         color: "bg-[#2c3e50]/10", // Dark technical blue/grey
         animationType: "perspective-push",
         description: {
-            paragraph: "A production-grade embodied AI product architected from bare-metal firmware to high-level cognitive stack. MEMO represents a breakthrough in edge-native robotics, orchestrating a complex multi-modal system that runs 6+ concurrent AI models (Vision, Voice, Touch, LLM, Navigation) on a single Raspberry Pi 5. The custom Event-Driven Nervous System bridges the gap between cognitive reasoning and millisecond-level physical reflexes.",
+            paragraph: "A production grade embodied AI product, built from bare metal firmware up to a full cognitive stack. MEMO runs six or more AI models at once — vision, voice, touch, language, navigation — on a single Raspberry Pi 5, with a custom event driven nervous system linking reasoning to millisecond level reflexes.",
             features: [
-                "Production-Grade Architecture: Fault-tolerant, thread-safe EventBus handling high-frequency asynchronous inputs without race conditions.",
-                "Advanced AI Orchestration: Hybrid auditory stack (Vosk + Gemini 1.5 Flash) and parallel vision pipelines with <200ms end-to-end latency.",
-                "Hardware Optimization: Kernel-level optimizations, including adaptive frame skipping and thermal burst management, sustaining 99.9% uptime.",
-                "Full-Stack Ownership: End-to-end development of custom PCB design, 3D-printed chassis, firmware, and the React-based emotion engine."
+                "Production Grade Architecture: A fault tolerant, thread safe EventBus handles rapid async input with zero race conditions.",
+                "AI Orchestration: Hybrid voice stack (Vosk plus Gemini 1.5 Flash) and parallel vision pipelines run under 200ms end to end.",
+                "Hardware Optimization: Kernel level tuning, adaptive frame skipping, and thermal management keep uptime at 99.9%.",
+                "Full Stack Ownership: Custom PCB, 3D printed chassis, firmware, and a React emotion engine, built end to end."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/MEMO", // Validated URL
@@ -97,11 +97,11 @@ export const projects: Project[] = [
         color: "bg-[#7c3aed]/10", // Violet/Purple
         animationType: "perspective-push",
         description: {
-            paragraph: "Designed Cognis to transform past reasoning into a first-class signal. Unlike stateless LLMs that allow repetitive cognitive loops, Cognis stores reflections as structured vector memory, detects recurring failure patterns in O(n) time, and intervenes to prevent repeated mistakes—shifting AI from just answering questions to actively preventing failure.",
+            paragraph: "Cognis turns past reasoning into a signal the system can act on. It stores reflections as structured vector memory, spots repeating failure patterns in linear time, and steps in before mistakes repeat — shifting AI from answering questions to preventing failure.",
             features: [
-                "Memory-Augmented Architecture: Architected a system to detect and store recurring reasoning failures across sessions.",
-                "Temporal Pattern Scoring: Developed a custom algorithm driving 40–60% reduction in unproductive AI queries.",
-                "Local-First Performance: Deployed a localized inference service achieving sub-200ms retrieval latency using Ollama."
+                "Memory Augmented Architecture: Detects and stores recurring reasoning failures across sessions.",
+                "Temporal Pattern Scoring: A custom algorithm cuts unproductive AI queries by 40 to 60 percent.",
+                "Local First Performance: A local inference service retrieves results in under 200ms using Ollama."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/Cognis",
@@ -109,22 +109,22 @@ export const projects: Project[] = [
             { name: "FastAPI", icon: SiFastapi },
             { name: "VectorDB & FAISS", icon: HardDrive },
             { name: "Ollama (Local LLMs)", icon: SiOllama },
-            { name: "Memory-Augmentation", icon: Brain },
+            { name: "Memory Augmentation", icon: Brain },
         ],
         isFeatured: true,
     },
     {
         title: "YoloMart | Smart Retail Ecosystem",
-        recognition: "YoloMart bridges the gap between brick-and-mortar and e-commerce: picking up an item in-store is as analyzable as a click online.",
+        recognition: "YoloMart connects physical retail and online shopping, so picking up an item in store is as trackable as a click online.",
         images: ["yolomart-1", "yolomart-2"],
         color: "bg-[#FF3366]/10", // Pinkish
         animationType: "perspective-push",
         description: {
-            paragraph: "YoloMart unifies the fractured retail experience into a seamless 'Phygital' ecosystem. Unlike traditional stores with blind spots or disconnected apps, YoloMart treats every physical interaction—pickup, scan, cart add—as a digital event, eliminating checkout lines and empowering data-driven decisions.",
+            paragraph: "YoloMart unifies retail into one seamless phygital ecosystem. Every physical action — pickup, scan, cart add — becomes a digital event, removing checkout lines and powering decisions with real data.",
             features: [
-                "In-Store Digitization: RFID & WebSocket sync updates the digital cart instantly when physical items are handled.",
-                "Frictionless Checkout: Scan & Go architecture eliminates queues with client-side comparison and instant payment.",
-                "Context-Aware Assistant: AI analyzes cart contents in real-time to offer dietary insights and recipe synergy."
+                "In Store Digitization: RFID and WebSocket sync update the digital cart the instant an item is handled.",
+                "Frictionless Checkout: Scan and Go removes queues with on device comparison and instant payment.",
+                "Context Aware Assistant: AI reads cart contents live to suggest dietary insights and recipe pairings."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/Yolo_mart-main.git",
@@ -137,17 +137,17 @@ export const projects: Project[] = [
         isFeatured: true,
     },
     {
-        title: "High Five | Real-Time Social Platform",
-        recognition: "High Five reimagine social discovery: connection is instantaneous, but privacy is absolute.",
+        title: "High Five | Real Time Social Platform",
+        recognition: "High Five reimagines social discovery: connection is instant, privacy is absolute.",
         images: ["high-five-1", "high-five-2"],
         color: "bg-[#8e44ad]/10", // Purple
         animationType: "perspective-push",
         description: {
-            paragraph: "High Five restores spontaneity to digital interaction without compromising privacy. Unlike algorithm-heavy platforms that mine user data, High Five operates on a 'consent-first' ephemeral model, using WebRTC for encrypted, peer-to-peer voice connections that leave no digital footprint.",
+            paragraph: "High Five brings spontaneity back to digital interaction without touching privacy. It runs on a consent first, ephemeral model, using WebRTC for encrypted peer to peer voice that leaves no trace.",
             features: [
-                "Zero-Trace Connectivity: Ephemeral WebRTC architecture ensures voice data flows peer-to-peer and is never stored.",
-                "Audio-Reactive Interface: Real-time frequency visualization transforms voice data into a dynamic, living interface.",
-                "Consent-First Design: Dark-pattern-free UI where mutual active engagement is required for every interaction."
+                "Zero Trace Connectivity: Voice flows peer to peer over WebRTC and is never stored.",
+                "Audio Reactive Interface: Live frequency visuals turn voice into a dynamic, living interface.",
+                "Consent First Design: A clean UI with no dark patterns, built on mutual, active engagement."
             ]
         },
         githubUrl: "https://github.com/jay7-tech/High_five.git",
@@ -160,16 +160,16 @@ export const projects: Project[] = [
         isFeatured: false,
     },
     {
-        title: "Neuro-AI | Cognitive Care Ecosystem",
+        title: "Neuro AI | Cognitive Care Ecosystem",
         recognition: "A Holistic Digital Ecosystem for Alzheimer's & Dementia Care.",
         images: ["neuro-ai-hero", "neuro-ai-2"],
         color: "bg-[#00BCD4]/10", // Cyan/Teal
         animationType: "quad-gallery",
         description: {
-            paragraph: "A holistic digital ecosystem bridging patients, caregivers, and clinicians. Uses Generative AI to preserve identity, reduce burnout, and provide actionable longitudinal data.",
+            paragraph: "A digital ecosystem connecting patients, caregivers, and clinicians. Generative AI helps preserve identity, reduce burnout, and track long term progress.",
             features: [
-                "AI Companion: Gemini-powered 24/7 empathetic interaction and adaptive cognitive games.",
-                "Care Loop: 3-role sync monitoring with real-time mood analytics for caregivers.",
+                "AI Companion: Gemini powered, available 24/7, with empathetic chat and adaptive cognitive games.",
+                "Care Loop: Three role sync monitoring with live mood analytics for caregivers.",
                 "Tech Stack: Scalable ecosystem on Next.js 15, TypeScript, and Google Genkit."
             ]
         },
@@ -189,10 +189,10 @@ export const projects: Project[] = [
         color: "bg-[#3366FF]/10", // Blue
         animationType: "vertical-shuffle",
         description: {
-            paragraph: "Developed a modern, online show booking website using TypeScript, focusing on a clean user interface and robust booking functionality.",
+            paragraph: "A modern show booking site built with TypeScript, focused on a clean interface and reliable booking.",
             features: [
-                "Implemented a type-safe backend with Express.js and MongoDB.",
-                "Designed a responsive and intuitive front-end with React.",
+                "Implemented a type safe backend with Express.js and MongoDB.",
+                "Designed a responsive and intuitive front end with React.",
                 "Ensured secure and efficient booking and payment processing."
             ]
         },
@@ -213,9 +213,9 @@ export const experiences = [
         organization: "IISc Bangalore",
         category: "INTERNSHIP",
         details: [
-            "Transformed noisy, multi-rate sensor telemetry from next-generation MXene piezoresistive wristbands into clean, analysis-ready physiological signal — engineering the full data pipeline from raw ingestion through feature extraction.",
-            "Engineered a rigorous comparative modeling framework spanning classical machine learning and deep learning sequence architectures, validated through stratified cross-validation and a 21-dimensional time/frequency feature space — establishing the benchmark methodology now used to evaluate physiological signal fidelity in the lab.",
-            "Partnered directly with postdoctoral researchers, PhD candidates, and international collaborators in Poland to convert raw sensor telemetry into research-grade analytical assets, bridging materials science and applied ML at IISc's Dept. of Computational & Data Sciences."
+            "Turned noisy sensor data from next generation MXene piezoresistive wristbands into clean, ready to analyze physiological signals, building the full pipeline from ingestion to feature extraction.",
+            "Built a modeling framework comparing classical machine learning and deep learning architectures, validated with stratified cross validation across a 21 dimensional feature space, now the lab's benchmark method.",
+            "Worked with postdoctoral researchers, PhD candidates, and collaborators in Poland to turn raw sensor data into research grade assets, bridging materials science and applied ML."
         ],
         image: "/image.png",
         images: [
@@ -227,9 +227,9 @@ export const experiences = [
         organization: "Sirena Technologies",
         category: "INTERNSHIP",
         details: [
-            "Nino Humanoids: Architected the kinematic control layer for the 'Nino' platform, developing custom IK solvers and optimizing joint trajectory generation for stable bipedal locomotion.",
-            "Twist Quadruped: Devised the dynamic locomotion stack for 'Twist', implementing Zero Moment Point (ZMP) based stability criteria and torque-control algorithms for uneven terrain adaptation.",
-            "Product Ownership: Orchestrated the full-lifecycle R&D of 'MEMO' from embedded systems design to cognitive architecture, delivering a production-ready embodied AI companion."
+            "Nino Humanoid: Built the kinematic control layer for Nino, with custom IK solvers and optimized joint trajectories for stable bipedal walking.",
+            "Twist Quadruped: Built the locomotion stack for Twist, using Zero Moment Point stability and torque control for uneven terrain.",
+            "Product Ownership: Led the full R&D lifecycle of MEMO, from embedded design to cognitive architecture, to a production ready embodied AI companion."
         ],
         image: "/images/sirena certificate.png",
         images: [
@@ -242,8 +242,8 @@ export const experiences = [
         category: "INTERNSHIP",
         details: [
             "Optimized technical workflows, improving content publishing consistency by 30%.",
-            "Reduced manual content handling effort by 25% through Gen-Ai tooling and layout optimization.",
-            "Collaborated with designers to deliver production-ready assets under deadline-driven workflows."
+            "Reduced manual content handling by 25% using generative AI tools and layout optimization.",
+            "Collaborated with designers to deliver production ready assets under tight deadlines."
         ],
         image: "/images/project-assets/frillory certificate.jpg", // Frillory certificate
         images: [
@@ -256,8 +256,8 @@ export const experiences = [
         organization: "IDEATHON 2025",
         category: "INSTITUTIONAL",
         details: [
-            "Co-led the end-to-end orchestration of a national-level ideathon, successfully scaling the event to host 200+ teams and 50+ colleges.",
-            "Drove large-scale operational logistics and strategic planning, ensuring a seamless experience for over 600+ participants and stakeholders.",
+            "Jointly led the full orchestration of a national level ideathon, scaling it to 200+ teams from 50+ colleges.",
+            "Drove large scale logistics and planning for a seamless experience across 600+ participants and stakeholders.",
         ],
         image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop",
         images: [
@@ -272,8 +272,8 @@ export const experiences = [
         organization: "Poster Presentation",
         category: "INSTITUTIONAL",
         details: [
-            "Arbitrated technical events, expertly coordinating communication between participants, esteemed judges, and organizing teams.",
-            "Managed critical event timelines and presenter introductions, demonstrating impeccable time management skills.",
+            "Arbitrated technical events, coordinating communication between participants, judges, and organizers.",
+            "Managed event timelines and presenter introductions with precise time management.",
         ],
         image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=600&auto=format&fit=crop", // Conference/Presentation
         images: [
@@ -297,14 +297,14 @@ export const certifications = [
         title: "Infosys Springboard: Emerging Tech",
         issuer: "Infosys",
         image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
-        description: "Certified expertise in modern tech stacks and corporate-level software development lifecycles.",
-        category: "Full-Stack",
+        description: "Certified expertise in modern tech stacks and corporate software development lifecycles.",
+        category: "Full Stack",
         color: "from-cyan-500/20 to-blue-500/20",
         link: "/Infosys.pdf"
     },
     {
         title: "PLC & Industrial Automation",
-        issuer: "Siemens-forage",
+        issuer: "Siemens (Forage)",
         image: "https://images.unsplash.com/photo-1518314916381-77a37c2a49ae?q=80&w=800&auto=format&fit=crop",
         description: "Technical certification in industrial control systems and automated manufacturing workflows.",
         category: "Automation",
@@ -323,7 +323,7 @@ export const certifications = [
 ];
 
 export const impactMetrics = [
-    { label: "Event Reach", value: "200+ Teams", description: "Coordinated national-level participants at Ideathon 2025" },
+    { label: "Event Reach", value: "200+ Teams", description: "Coordinated national level participants at Ideathon 2025" },
     { label: "Projects Built", value: "15+", description: "From AI Agents to Embedded Systems" },
     { label: "Tech Communities", value: "3+", description: "Active contribution to institutional tech hubs" },
 ];
@@ -342,7 +342,7 @@ export const marqueeSkills = [
 ];
 
 export const skills_old = {
-    "Full-Stack Development": ["MERN Stack", "JavaScript", "Python", "TypeScript", "React", "Node.js", "MongoDB", "Express.js", "Flask"],
+    "Full Stack Development": ["MERN Stack", "JavaScript", "Python", "TypeScript", "React", "Node.js", "MongoDB", "Express.js", "Flask"],
     "Autonomous Systems & AI": ["Computer Vision", "YOLO", "Autonomous Systems", "Robotics Simulation", "ABB Arm Robot"],
     "Tools & Platforms": ["WebSockets", "WebRTC", "Git", "GitHub", "Docker"],
 };

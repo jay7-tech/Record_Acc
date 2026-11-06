@@ -24,7 +24,7 @@ export function DigitRecognizerDemo() {
   const [confidence, setConfidence] = useState(0);
   const [hasInk, setHasInk] = useState(false);
   const [idleMode, setIdleMode] = useState(true);
-  const [log, setLog] = useState<string[]>(['model loaded — 784-64-32-10, 96% held-out accuracy']);
+  const [log, setLog] = useState<string[]>(['model loaded — 784 → 64 → 32 → 10, 96% held out accuracy']);
   const idleIndexRef = useRef(0);
   const resumeIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -131,7 +131,7 @@ export function DigitRecognizerDemo() {
       </div>
 
       <p className="mt-3 sm:mt-6 text-center text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 font-mono max-w-xl mx-auto">
-        {Math.round(MODEL_TEST_ACCURACY * 100)}% held-out accuracy · every connection above is a real trained weight.
+        {Math.round(MODEL_TEST_ACCURACY * 100)}% held out accuracy · every connection above is a real trained weight.
       </p>
     </div>
   );

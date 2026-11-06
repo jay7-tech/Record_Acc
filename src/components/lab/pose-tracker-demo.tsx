@@ -38,7 +38,7 @@ export function PoseTrackerDemo() {
   const [status, setStatus] = useState<Status>('idle');
   const [handCount, setHandCount] = useState(0);
   const [fps, setFps] = useState(0);
-  const [log, setLog] = useState<string[]>(['camera idle — click Start to load the hand-tracking model']);
+  const [log, setLog] = useState<string[]>(['camera idle — click Start to load the hand tracking model']);
 
   const pushLog = useCallback((line: string) => {
     setLog((prev) => [...prev.slice(-30), line]);
@@ -74,7 +74,7 @@ export function PoseTrackerDemo() {
     await video.play();
 
     setStatus('loading-model');
-    pushLog('loading TensorFlow.js hand-tracking model…');
+    pushLog('loading TensorFlow.js hand tracking model…');
     try {
       const tf = await import('@tensorflow/tfjs-core');
       await import('@tensorflow/tfjs-backend-webgl');
@@ -195,7 +195,7 @@ export function PoseTrackerDemo() {
               <>
                 <Camera className="h-8 w-8 text-sky-400" />
                 <p className="max-w-xs text-sm text-slate-300">
-                  A real pretrained deep-learning model tracks your hand live, 21 points per hand, entirely in your browser — nothing is uploaded.
+                  A real pretrained deep learning model tracks your hand live, 21 points per hand, entirely in your browser. Nothing is uploaded.
                 </p>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
@@ -231,7 +231,7 @@ export function PoseTrackerDemo() {
 
       <TrainingConsole lines={log} label="vision.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        Runs a pretrained MediaPipe Hands model via TensorFlow.js, fully client-side — your camera
+        Runs a pretrained MediaPipe Hands model via TensorFlow.js, fully on device. Your camera
         feed is processed in your browser and never sent anywhere.
       </p>
     </div>

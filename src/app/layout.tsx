@@ -12,7 +12,7 @@ import { ScrollRestoration } from '@/components/scroll-restoration';
 
 export const metadata: Metadata = {
   title: 'Jayadeep Gowda',
-  description: 'Visionary Robotics & AI Engineer and Full-Stack Development Architect.',
+  description: 'Robotics and AI Engineer building full stack intelligent systems.',
 };
 
 export default function RootLayout({

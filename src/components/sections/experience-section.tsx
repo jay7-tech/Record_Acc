@@ -21,7 +21,7 @@ export function ExperienceSection() {
           <TextDecoder text="Professional" /> <TextDecoder text="Journey" className="text-gradient-signal" />
         </h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Hands-on experience across machine learning research, R&amp;D, and product design — each backed by a real certificate.
+          Hands on experience across machine learning research, R&amp;D, and product design, each backed by a real certificate.
         </p>
         <div className="mt-5 flex items-center justify-center gap-2 text-sm font-medium text-signal/90">
           <ShieldCheck className="h-4 w-4" />

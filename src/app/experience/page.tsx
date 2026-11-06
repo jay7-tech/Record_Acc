@@ -52,11 +52,11 @@ export default function ExperiencePage() {
             images: exp.images || (exp.image ? [exp.image] : [])
         })),
         {
-            role: "Robotics Club Co-Head",
+            role: "Robotics Club Co Head",
             organization: "College Robotics Society (ROBO CELL)",
             details: [
-                "Collaborated with the team on the end-to-end building and prototyping of diverse multi-disciplinary robotics projects.",
-                "Contributed to organizing technical workshops and club events aimed at fostering innovation and hands-on learning within ROBO CELL."
+                "Collaborated on building and prototyping varied robotics projects end to end.",
+                "Organized technical workshops and club events that fostered innovation and hands on learning."
             ],
             images: [
                 "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?q=80&w=800&auto=format&fit=crop",
@@ -67,7 +67,7 @@ export default function ExperiencePage() {
         },
         {
             role: "Freelance Web Developer",
-            organization: "Self-Employed",
+            organization: "Self Employed",
             details: [
                 "Delivered custom portfolio websites for local businesses using React and Tailwind.",
                 "Optimized site performance, achieving 95+ Lighthouse scores.",
@@ -106,7 +106,7 @@ export default function ExperiencePage() {
                             transition={{ delay: 0.1 }}
                             className="text-muted-foreground mt-4 text-xl max-w-2xl leading-relaxed"
                         >
-                            Architecting intelligent systems and leading technical innovation through hands-on experience and validated expertise.
+                            Architecting intelligent systems and leading technical innovation through hands on experience.
                         </motion.p>
                     </div>
                 </div>

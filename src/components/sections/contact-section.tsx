@@ -119,7 +119,7 @@ export function ContactSection() {
                 </div>
 
                 <p className="text-muted-foreground mb-6 italic">
-                  &quot;I am always exploring new frontiers in tech. If you see a synergy or have an opportunity in mind, I invite you to review my detailed professional history.&quot;
+                  &quot;Always exploring new frontiers in tech. If there&apos;s a synergy or opportunity in mind, take a look at my professional history.&quot;
                 </p>
 
                 <div className="space-y-2.5">
