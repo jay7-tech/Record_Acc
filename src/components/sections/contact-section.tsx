@@ -85,17 +85,10 @@ export function ContactSection() {
         <Spotlight className="group">
         <Card className="relative bg-white/5 backdrop-blur-md border border-white/10 overflow-hidden shadow-2xl group-hover:border-sky-400/30 transition-colors duration-500">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-2 flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              Open to internships &amp; collaborations
-            </div>
             <p className="mono-label text-xs text-muted-foreground mb-1">/ 06 Contact</p>
             <CardTitle className="font-headline text-3xl md:text-4xl text-gradient-signal">Get In Touch</CardTitle>
             <CardDescription className="text-muted-foreground/80">
-              Got an idea, a role, or just want to talk robots? I read every message myself.
+              Got an idea or a role in mind? I read every message myself.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -147,9 +140,6 @@ export function ContactSection() {
                   <p className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"><strong>Phone:</strong> {personalInfo.phone}</p>
                   <p className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"><strong>Location:</strong> {personalInfo.location}</p>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground/70">
-                  Form acting up? That email goes straight to my inbox — usually hear back within a day.
-                </p>
 
                 <div className="mt-8">
                   <Button
@@ -175,17 +165,17 @@ export function ContactSection() {
                 <form ref={formRef} action={dispatch} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" placeholder="Your Name" required className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    <Input id="name" name="name" placeholder="Your Name" required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
                     {state.errors?.name && <p className="text-sm text-destructive">{state.errors.name[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="bg-white/5 border-white/10 focus:border-primary/50" />
+                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
                     {state.errors?.email && <p className="text-sm text-destructive">{state.errors.email[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" placeholder="Your message..." required className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[120px]" />
+                    <Textarea id="message" name="message" placeholder="Your message..." required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors min-h-[120px]" />
                     {state.errors?.message && <p className="text-sm text-destructive">{state.errors.message[0]}</p>}
                   </div>
                   <SubmitButton />

@@ -51,22 +51,18 @@ export function GithubStats() {
       }
     }
 
-    // Separate, independent fetch: the per-year commit count comes from the
-    // (unauthenticated, rate-limited) search API, so a hiccup here should
+    // Separate, independent fetch: GitHub's own commit-search API is too
+    // unreliable for this (it only indexes default-branch commits and
+    // routinely undercounts), so the per-year total comes from the same
+    // contribution-calendar data your GitHub profile's graph is built from —
+    // a free, no-auth, CORS-friendly mirror of it. A hiccup here should
     // never take down the main stats strip above.
     async function loadCommits() {
       try {
-        const results = await Promise.all(
-          YEARS.map(async (year) => {
-            const res = await fetch(
-              `https://api.github.com/search/commits?q=author:${GITHUB_USER}+author-date:${year}-01-01..${year}-12-31`,
-              { headers: { Accept: 'application/vnd.github.cloak-preview+json' } }
-            );
-            if (!res.ok) throw new Error('commit search error');
-            const data = await res.json();
-            return { year, count: data.total_count ?? 0 };
-          })
-        );
+        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=all`);
+        if (!res.ok) throw new Error('contributions api error');
+        const data: { total?: Record<string, number> } = await res.json();
+        const results = YEARS.map((year) => ({ year, count: data.total?.[String(year)] ?? 0 }));
         if (!cancelled) setCommits(results);
       } catch {
         if (!cancelled) setCommitsFailed(true);
@@ -109,20 +105,27 @@ export function GithubStats() {
       ))}
 
       {!commitsFailed && (
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2.5 text-sm">
           <GitCommitHorizontal className="h-3.5 w-3.5 text-signal" />
-          <div className="flex items-end gap-1 h-4" title={commits?.map((c) => `${c.year}: ${c.count}`).join(' · ')}>
+          <div className="flex items-end gap-2.5">
             {(commits ?? YEARS.map((year) => ({ year, count: undefined }))).map(({ year, count }) => (
-              <div
-                key={year}
-                className="w-1.5 rounded-sm bg-signal/70"
-                style={{
-                  height: count === undefined ? 6 : Math.max(3, Math.round((count / maxCommits) * 16)),
-                }}
-              />
+              <div key={year} className="flex flex-col items-center gap-1">
+                <span className="font-semibold text-foreground tabular-nums text-xs leading-none">
+                  {count === undefined ? (
+                    <span className="inline-block h-3 w-4 animate-pulse rounded bg-muted align-middle" />
+                  ) : count}
+                </span>
+                <div
+                  className="w-1.5 rounded-sm bg-signal/70"
+                  style={{
+                    height: count === undefined ? 6 : Math.max(3, Math.round((count / maxCommits) * 16)),
+                  }}
+                />
+                <span className="text-[10px] leading-none text-muted-foreground">&apos;{String(year).slice(2)}</span>
+              </div>
             ))}
           </div>
-          <span className="text-muted-foreground">Commits / yr</span>
+          <span className="text-muted-foreground">Contributions / yr</span>
         </div>
       )}
     </motion.div>

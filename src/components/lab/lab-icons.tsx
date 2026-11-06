@@ -90,3 +90,40 @@ export function HandKeypointsIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/** Evolving Walkers — a two-legged gait mid-stride, with the small arc
+ * behind it standing for "another generation's attempt already tried". */
+export function WalkerGaitIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <path d="M4 20a8 8 0 0 1 4-13" strokeOpacity="0.3" strokeDasharray="2 2" />
+      <circle cx="13" cy="6.5" r="2" />
+      <path d="M13 8.5v5.5M13 10l-3.2 2.5M13 10l4 1.5M9.8 12.5 7.5 20M17 11.5l1.3 8.5" strokeWidth="1.7" />
+    </svg>
+  );
+}
+
+/** Growing Lab — a handful of cells lighting up outward from one seed cell. */
+export function CellGrowthIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <rect x="10.5" y="10.5" width="3" height="3" fill="currentColor" stroke="none" />
+      <rect x="5.5" y="10.5" width="3" height="3" fillOpacity="0.55" fill="currentColor" stroke="none" />
+      <rect x="15.5" y="10.5" width="3" height="3" fillOpacity="0.55" fill="currentColor" stroke="none" />
+      <rect x="10.5" y="5.5" width="3" height="3" fillOpacity="0.55" fill="currentColor" stroke="none" />
+      <rect x="10.5" y="15.5" width="3" height="3" fillOpacity="0.55" fill="currentColor" stroke="none" />
+      <rect x="5.5" y="5.5" width="3" height="3" fillOpacity="0.22" fill="currentColor" stroke="none" />
+      <rect x="15.5" y="15.5" width="3" height="3" fillOpacity="0.22" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** Physics-Informed NN — a learned curve settling onto the true (dashed) one. */
+export function ConvergingCurveIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <path d="M3 19C7 12 9 5 21 5" strokeOpacity="0.3" strokeDasharray="2 2" />
+      <path d="M3 15c3-5 7-8 18-8" strokeWidth="2" />
+    </svg>
+  );
+}

@@ -10,6 +10,9 @@ import {
   MazeGoalIcon,
   AttentionGridIcon,
   HandKeypointsIcon,
+  WalkerGaitIcon,
+  CellGrowthIcon,
+  ConvergingCurveIcon,
 } from '../lab/lab-icons';
 
 const TOOLS = [
@@ -18,6 +21,9 @@ const TOOLS = [
   { icon: MazeGoalIcon, label: 'RL Arena', hint: 'Q-learning agent' },
   { icon: AttentionGridIcon, label: 'Attention Lab', hint: 'mini transformer' },
   { icon: HandKeypointsIcon, label: 'Hand Tracker', hint: 'live pose model' },
+  { icon: WalkerGaitIcon, label: 'Evolving Walkers', hint: 'genetic algorithm' },
+  { icon: CellGrowthIcon, label: 'Growing Lab', hint: 'cellular automaton' },
+  { icon: ConvergingCurveIcon, label: 'Physics-Informed NN', hint: 'zero training data' },
 ];
 
 export function AiLabSection() {
@@ -29,10 +35,11 @@ export function AiLabSection() {
           Jay&apos;s <span className="text-gradient-signal bg-[length:200%_auto] animate-shimmer">Lab</span>
         </h2>
         <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Five things I actually built, not just talked about — a neural net that reads your
-          handwriting, a tiny transformer that finishes your sentences, an agent teaching itself to
-          find the goal, a camera that tracks your hand, and the gradient descent running under all of
-          it. Go on, poke at it — it&apos;s all live, right here.
+          Eight things I actually built, not just talked about — a neural net that reads your
+          handwriting, an agent teaching itself to find the goal, a population of creatures
+          evolving how to walk, a tiny rule that grows and heals itself, a network that learns
+          physics without a single training example, and a few more. Go on, poke at it — it&apos;s
+          all live, right here.
         </p>
       </div>
 
@@ -65,7 +72,7 @@ export function AiLabSection() {
           </span>
         </div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-px bg-white/5">
+        <div className="relative grid grid-cols-1 sm:grid-cols-4 gap-px bg-white/5">
           {TOOLS.map(({ icon: Icon, label, hint }, i) => (
             <motion.div
               key={label}

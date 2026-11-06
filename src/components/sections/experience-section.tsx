@@ -7,6 +7,7 @@ import { ExperienceShowcaseCard } from '../experience-showcase-card';
 import { AnimatedSection } from '../animated-section';
 import { ArrowRight, Award, Building2, ShieldCheck } from 'lucide-react';
 import { Button } from '../ui/button';
+import { TextDecoder } from '../ui/text-decoder';
 
 export function ExperienceSection() {
   const internships = experiences.filter((exp: any) => exp.category === 'INTERNSHIP');
@@ -17,7 +18,7 @@ export function ExperienceSection() {
       <div className="text-center">
         <p className="mono-label text-sm text-muted-foreground">/ 05 Timeline</p>
         <h2 className="font-headline text-4xl md:text-5xl mt-2 uppercase tracking-tighter">
-          Professional <span className="text-gradient-signal">Journey</span>
+          <TextDecoder text="Professional" /> <TextDecoder text="Journey" className="text-gradient-signal" />
         </h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
           Hands-on experience across machine learning research, R&amp;D, and product design — each backed by a real certificate.

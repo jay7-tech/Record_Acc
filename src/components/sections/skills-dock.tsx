@@ -13,6 +13,7 @@ import {
 import { Bot, ScanLine, Cpu, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Magnetic } from '@/components/ui/magnetic';
+import { TextDecoder } from '@/components/ui/text-decoder';
 
 const AntigravityIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" {...props}>
@@ -130,7 +131,7 @@ export function SkillsDock() {
       <div className="text-center">
         <p className="mono-label text-sm text-muted-foreground">/ 03 Stack</p>
         <h2 className="font-headline text-4xl md:text-5xl mt-2">
-          The Build <span className="text-gradient-signal">Manifesto</span>
+          <TextDecoder text="The Build" /> <TextDecoder text="Manifesto" className="text-gradient-signal" />
         </h2>
       </div>
 

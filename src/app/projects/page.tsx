@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/data";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { TextDecoder } from "@/components/ui/text-decoder";
 
 export default function ProjectsPage() {
     const getImage = (id: string) => {
@@ -25,7 +26,7 @@ export default function ProjectsPage() {
                             </Link>
                         </Button>
                         <h1 className="text-4xl md:text-6xl font-headline font-bold">
-                            All <span className="text-primary">Projects</span>
+                            <TextDecoder text="All" /> <TextDecoder text="Projects" className="text-primary" />
                         </h1>
                         <p className="text-muted-foreground mt-4 max-w-2xl text-lg">
                             A comprehensive list of my technical projects, experiments, and open-source contributions.
@@ -57,7 +58,7 @@ export default function ProjectsPage() {
                                 <div className="p-6 md:p-8 space-y-6">
                                     <div className="space-y-2">
                                         <div className="flex justify-between items-start gap-4">
-                                            <h2 className="text-2xl md:text-3xl font-bold font-headline leading-tight">{project.title}</h2>
+                                            <h2 className="text-2xl md:text-3xl font-bold font-headline leading-tight"><TextDecoder text={project.title} /></h2>
                                             <div className="flex gap-2 shrink-0">
                                                 <Button size="icon" variant="ghost" asChild className="rounded-full">
                                                     <Link href={project.githubUrl} target="_blank"><Github className="h-5 w-5" /></Link>

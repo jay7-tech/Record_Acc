@@ -12,6 +12,7 @@ import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Plus, Activity } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+import { TextDecoder } from '../ui/text-decoder';
 
 function getImage(id: string) {
   return PlaceHolderImages.find((img) => img.id === id);
@@ -241,7 +242,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
           <div className="lg:col-span-6 flex flex-col justify-center">
             <span className="mono-label text-xs text-signal mb-2">{indexLabel} / {totalLabel}</span>
             <h3 className="font-headline text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3 text-foreground">
-              {project.title}
+              <TextDecoder text={project.title} />
               <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>
                 <Activity className="h-5 w-5 text-primary/60" />
               </motion.div>
@@ -251,10 +252,10 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
               {project.description.paragraph}
             </p>
 
-            <ul className="mb-8 space-y-3">
+            <ul className="mb-8 space-y-3.5">
               {project.description.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                  <Plus className="h-5 w-5 text-signal flex-shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-3.5 text-muted-foreground">
+                  <span className="relative mt-[7px] flex h-[7px] w-[7px] shrink-0 rotate-45 rounded-[2px] border border-signal/70 bg-signal/25 shadow-[0_0_8px_hsl(var(--signal)/0.6)]" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -302,7 +303,7 @@ export function CuratedWorkSection() {
       <div className="text-center">
         <p className="mono-label text-sm text-muted-foreground">/ 04 Build Records</p>
         <h2 className="font-headline text-4xl md:text-5xl mt-2 uppercase tracking-tighter">
-          Curated <span className="text-gradient-signal">Work</span>
+          <TextDecoder text="Curated" /> <TextDecoder text="Work" className="text-gradient-signal" />
         </h2>
         <GithubStats />
       </div>

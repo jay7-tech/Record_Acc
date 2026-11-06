@@ -9,6 +9,9 @@ import {
   MazeGoalIcon,
   AttentionGridIcon,
   HandKeypointsIcon,
+  WalkerGaitIcon,
+  CellGrowthIcon,
+  ConvergingCurveIcon,
 } from '@/components/lab/lab-icons';
 import { LabShell } from '@/components/lab/lab-shell';
 import { DigitRecognizerDemo } from '@/components/lab/digit-recognizer-demo';
@@ -16,6 +19,9 @@ import { RegressionLabDemo } from '@/components/lab/regression-lab-demo';
 import { RLArenaDemo } from '@/components/lab/rl-arena-demo';
 import { AttentionLabDemo } from '@/components/lab/attention-lab-demo';
 import { PoseTrackerDemo } from '@/components/lab/pose-tracker-demo';
+import { EvolvingWalkersDemo } from '@/components/lab/evolving-walkers-demo';
+import { GrowingLabDemo } from '@/components/lab/growing-lab-demo';
+import { PinnDemo } from '@/components/lab/pinn-demo';
 import { LabGuide } from '@/components/lab/lab-guide';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { useState } from 'react';
@@ -26,6 +32,9 @@ const TAB_META = {
   'rl-arena': { label: 'RL Arena', icon: MazeGoalIcon },
   'attention-lab': { label: 'Attention Lab', icon: AttentionGridIcon },
   'pose-tracker': { label: 'Hand Tracker', icon: HandKeypointsIcon },
+  'evolving-walkers': { label: 'Evolving Walkers', icon: WalkerGaitIcon },
+  'growing-lab': { label: 'Growing Lab', icon: CellGrowthIcon },
+  'pinn': { label: 'Physics-Informed NN', icon: ConvergingCurveIcon },
 } as const;
 
 export default function LabPage() {
@@ -69,10 +78,9 @@ export default function LabPage() {
             Built, Not <span className="bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-300 dark:to-blue-500 bg-clip-text text-transparent">Described</span>
           </h1>
           <p className="mt-3 sm:mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-400 hidden sm:block">
-            Real machine-learning systems, trained from scratch and running live, right here in your
-            browser — a neural net recognizing your handwriting, a reinforcement-learning agent
-            teaching itself a path, a tiny transformer showing you its own attention, and a
-            computer-vision model tracking your hand through your webcam.
+            Real learning systems — backprop, genetic algorithms, cellular automata — trained or
+            evolved from scratch and running live, right here in your browser. No pretrained
+            checkpoints, no canned demos.
           </p>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 sm:hidden">
             Real ML systems, trained from scratch, running live right in your browser.
@@ -127,6 +135,27 @@ export default function LabPage() {
                 tagline: 'Live computer vision',
                 icon: <HandKeypointsIcon className="h-4 w-4" />,
                 content: <PoseTrackerDemo />,
+              },
+              {
+                id: 'evolving-walkers',
+                label: 'Evolving Walkers',
+                tagline: 'Genetic algorithm',
+                icon: <WalkerGaitIcon className="h-4 w-4" />,
+                content: <EvolvingWalkersDemo />,
+              },
+              {
+                id: 'growing-lab',
+                label: 'Growing Lab',
+                tagline: 'Evolved cellular automaton',
+                icon: <CellGrowthIcon className="h-4 w-4" />,
+                content: <GrowingLabDemo />,
+              },
+              {
+                id: 'pinn',
+                label: 'Physics-Informed NN',
+                tagline: 'Zero training data',
+                icon: <ConvergingCurveIcon className="h-4 w-4" />,
+                content: <PinnDemo />,
               },
             ]}
           />

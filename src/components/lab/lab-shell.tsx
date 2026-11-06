@@ -64,7 +64,7 @@ export function LabShell({ tabs, activeId: controlledId, onActiveChange }: Props
       <div className="relative flex flex-col md:flex-row">
         {/* tool rail — a wrapping grid on mobile so every tool is visible at once,
             no scroll gesture required; the full labeled vertical list from md up */}
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 md:flex md:flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.015] p-3 md:p-4 md:w-64 md:shrink-0">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2 md:flex md:flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.015] p-3 md:p-4 md:w-64 md:shrink-0">
           {tabs.map((tab) => {
             const isActive = tab.id === active?.id;
             return (
