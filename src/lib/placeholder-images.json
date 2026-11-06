@@ -1,0 +1,94 @@
+{
+  "placeholderImages": [
+    {
+      "id": "memo-hero",
+      "description": "MEMO blueprint cover — minimal technical line-art of the mecanum-wheel chassis with phone-as-face and abstract luminous eyes",
+      "imageUrl": "/images/project-assets/memo-hero.png",
+      "imageHint": "memo blueprint schematic cover"
+    },
+    {
+      "id": "memo-details",
+      "description": "The real MEMO build — mecanum-wheel chassis with phone-as-face",
+      "imageUrl": "/images/project-assets/memo-details.png",
+      "imageHint": "memo real hardware photo"
+    },
+    {
+      "id": "yolomart",
+      "description": "Smart retail project image",
+      "imageUrl": "/images/project-assets/yolomart-technical-1.png",
+      "imageHint": "smart retail"
+    },
+    {
+      "id": "yolomart-1",
+      "description": "Main image for YoloMart - Smart Storefront",
+      "imageUrl": "/images/project-assets/yolo-1st-image.png",
+      "imageHint": "yolomart storefront"
+    },
+    {
+      "id": "yolomart-2",
+      "description": "Feature image for YoloMart - Admin Dashboard",
+      "imageUrl": "/images/project-assets/yolomart-technical-2.png",
+      "imageHint": "yolomart admin dashboard"
+    },
+    {
+      "id": "highfive",
+      "description": "Social platform project image",
+      "imageUrl": "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c29jaWFsJTIwbWVkaWF8ZW58MHx8fHwxNzY2OTk4MDY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social media"
+    },
+    {
+      "id": "movifi",
+      "description": "Movie booking project image",
+      "imageUrl": "https://images.unsplash.com/photo-1732294672274-123daf18e101?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtb3ZpZSUyMHRpY2tldHN8ZW58MHx8fHwxNzY3MDgxNzIwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie tickets"
+    },
+    {
+      "id": "anveshana",
+      "description": "Power generation project image",
+      "imageUrl": "/images/anveshana.jpg",
+      "imageHint": "energy innovation"
+    },
+    {
+      "id": "profile-picture",
+      "description": "A placeholder image for the author's profile picture",
+      "imageUrl": "/images/profile-picture.jpg",
+      "imageHint": "profile portrait"
+    },
+    {
+      "id": "neuro-ai-hero",
+      "description": "Hero image for Neuro-AI project",
+      "imageUrl": "/images/project-assets/neuro-ai-hero.png",
+      "imageHint": "neuro ai dementia care"
+    },
+    {
+      "id": "neuro-ai-2",
+      "description": "Feature image for Neuro-AI project",
+      "imageUrl": "/images/project-assets/neuro-ai-2.png",
+      "imageHint": "neuro ai features"
+    },
+    {
+      "id": "high-five-1",
+      "description": "Main image for High Five project - Mobile Dashboard Combo",
+      "imageUrl": "/images/project-assets/high-five-dashboard-ultra-safe.png",
+      "imageHint": "high five mobile dashboard"
+    },
+    {
+      "id": "high-five-2",
+      "description": "Feature image for High Five project - Dark Consent UI",
+      "imageUrl": "/images/project-assets/high-five-dark-consent-zoomed.png",
+      "imageHint": "high five features"
+    },
+    {
+      "id": "cognis-hero",
+      "description": "Hero image for Cognis project - Cognitive Pattern Detection",
+      "imageUrl": "/images/project-assets/cognis-hero.png",
+      "imageHint": "cognis ai brain interface"
+    },
+    {
+      "id": "cognis-2",
+      "description": "Details image for Cognis project - Metrics Dashboard",
+      "imageUrl": "/images/project-assets/cognis-details.png",
+      "imageHint": "cognis data visualization"
+    }
+  ]
+}
