@@ -373,8 +373,8 @@ export function RLArenaDemo() {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      <div className="relative rounded-2xl border border-sky-500/20 dark:border-sky-400/20 bg-white dark:bg-[#05070c] p-2 shadow-[0_0_40px_rgba(56,189,248,0.08)]">
-        <canvas ref={canvasRef} className="rounded-xl" style={{ width: W, height: H }} />
+      <div className="relative w-full max-w-[560px] mx-auto rounded-2xl border border-sky-500/20 dark:border-sky-400/20 bg-white dark:bg-[#05070c] p-2 shadow-[0_0_40px_rgba(56,189,248,0.08)]">
+        <canvas ref={canvasRef} className="block w-full h-auto rounded-xl" style={{ aspectRatio: `${W} / ${H}` }} />
       </div>
 
       <div className="w-full max-w-xl">

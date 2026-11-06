@@ -38,6 +38,16 @@ export function AttentionLabDemo() {
 
   const result = useMemo(() => runAttentionForwardPass(text), [text]);
   const predictions = useMemo(() => topK(result.probs, 8), [result]);
+  // Per-character attention, averaged across the 4 heads — drives the glow
+  // behind each letter so "this is what it's looking at" reads as a visual
+  // spotlight, not just a row of bars you have to decode.
+  const attnAvg = useMemo(() => {
+    const n = result.tokens.length;
+    if (!n) return [] as number[];
+    return result.tokens.map((_, i) =>
+      result.lastLayerAttention.reduce((s, row) => s + (row[i] ?? 0), 0) / result.lastLayerAttention.length
+    );
+  }, [result]);
 
   useEffect(() => {
     if (!result.tokens.length || autoRunning) return;
@@ -112,23 +122,45 @@ export function AttentionLabDemo() {
       </div>
 
       <div className="w-full max-w-2xl rounded-2xl border border-sky-500/20 dark:border-sky-400/20 bg-white dark:bg-[#05070c] p-5 shadow-[0_0_40px_rgba(56,189,248,0.08)] overflow-x-auto">
-        <p className="mb-3 text-center text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-600">
-          final-layer attention — 4 heads, from the last character
+        <p className="mb-1 text-center text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-600">
+          what it&apos;s looking at, right now
         </p>
-        <div className="flex flex-wrap items-end justify-center gap-1 min-h-[70px]">
+        <p className="mb-3 text-center text-xs text-slate-500 dark:text-slate-500">
+          Glow = attention. The brighter a letter lights up, the harder the model is leaning on it to
+          guess what comes next.
+        </p>
+        <div className="mb-3 flex flex-wrap items-center justify-center gap-3 text-[10px] font-mono text-slate-400 dark:text-slate-600">
+          {HEAD_COLORS.map((color, h) => (
+            <span key={h} className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: color }} />
+              reader {h + 1}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-end justify-center gap-1.5 min-h-[76px]">
           {result.tokens.map((c, i) => {
             const isLast = i === result.tokens.length - 1;
+            const glow = attnAvg[i] ?? 0;
             return (
-              <div key={i} className="flex flex-col items-center gap-1">
-                <span
+              <div key={i} className="flex flex-col items-center gap-1.5">
+                <motion.span
+                  animate={{ scale: 1 + Math.min(0.3, glow * 0.7) }}
+                  transition={{ duration: 0.18 }}
                   className={`inline-flex h-6 w-5 items-center justify-center rounded text-[12px] font-mono ${
                     isLast
                       ? 'bg-amber-400 text-slate-900 font-bold'
                       : 'bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300'
                   }`}
+                  style={
+                    !isLast && glow > 0.015
+                      ? {
+                          boxShadow: `0 0 ${6 + glow * 26}px rgba(56,189,248,${0.25 + Math.min(0.6, glow * 0.8)})`,
+                        }
+                      : undefined
+                  }
                 >
                   {glyph(c)}
-                </span>
+                </motion.span>
                 <div className="flex gap-[2px] h-6 items-end">
                   {HEAD_COLORS.map((color, h) => {
                     const w = result.lastLayerAttention[h]?.[i] ?? 0;
