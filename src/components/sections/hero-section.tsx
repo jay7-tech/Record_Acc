@@ -64,20 +64,20 @@ export function HeroSection() {
       {/* Interactive 3D Background */}
       <HeroBackground3D />
 
-      <div className="relative z-10 max-w-5xl pt-24 flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl pt-20 sm:pt-24 flex flex-col items-center px-2">
         {/* Kinetic per-letter name reveal */}
-        <h1 className="relative font-headline text-5xl md:text-7xl lg:text-8xl leading-tight tracking-tight [perspective:600px]">
+        <h1 className="relative font-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.15] md:leading-tight tracking-tight [perspective:600px] flex flex-wrap justify-center gap-x-2 gap-y-1">
           <SplitText
             as="span"
             text="JAYADEEP GOWDA"
-            className="relative inline-block text-foreground drop-shadow-2xl"
+            className="relative inline-flex flex-wrap justify-center text-foreground drop-shadow-2xl"
             delay={0.25}
           />
         </h1>
 
         {/* Animated Subtitle */}
         <motion.h2
-          className="mt-6 font-headline text-2xl md:text-3xl lg:text-4xl max-w-2xl mx-auto text-foreground/90 leading-snug drop-shadow-md"
+          className="mt-5 sm:mt-6 font-headline text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-2xl mx-auto text-foreground/90 leading-snug drop-shadow-md"
           variants={subtitleVariants}
           initial="hidden"
           animate="visible"

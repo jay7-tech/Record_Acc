@@ -94,7 +94,7 @@ export function LabShell({ tabs, activeId: controlledId, onActiveChange }: Props
         </div>
 
         {/* content */}
-        <div className="relative flex-1 p-6 md:p-12 min-h-[600px]">
+        <div className="relative flex-1 p-4 sm:p-6 md:p-12 min-h-0 md:min-h-[600px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active?.id}

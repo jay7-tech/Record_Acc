@@ -76,12 +76,12 @@ export function DigitRecognizerDemo() {
 
   return (
     <div>
-      <p className="text-center text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-10">
+      <p className="text-center text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-4 sm:mb-10">
         A real {MODEL_LAYER_SIZES.join('-')} network, trained on handwritten digits with backprop —
-        running forward-propagation live in your browser, no server involved.
+        running live in your browser.
       </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-5 sm:gap-10 items-center">
         <div className="flex flex-col items-center gap-4">
           <DigitCanvas onPixels={handlePixels} />
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-mono">
@@ -126,13 +126,12 @@ export function DigitRecognizerDemo() {
         </div>
       </div>
 
-      <div className="mt-6 flex justify-center">
+      <div className="mt-4 sm:mt-6 flex justify-center">
         <TrainingConsole lines={log} label="inference.log" />
       </div>
 
-      <p className="mt-6 text-center text-xs text-slate-400 dark:text-slate-500 font-mono max-w-xl mx-auto">
-        {Math.round(MODEL_TEST_ACCURACY * 100)}% held-out accuracy · every connection drawn above is a real
-        trained weight, scaled by its actual activation strength.
+      <p className="mt-3 sm:mt-6 text-center text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 font-mono max-w-xl mx-auto">
+        {Math.round(MODEL_TEST_ACCURACY * 100)}% held-out accuracy · every connection above is a real trained weight.
       </p>
     </div>
   );

@@ -39,8 +39,8 @@ export default function LabPage() {
         style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.5), transparent 70%)' }}
       />
 
-      <div className="relative container px-4 md:px-6 py-10 md:py-16 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-10">
+      <div className="relative container px-4 md:px-6 py-6 md:py-16 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-6 md:mb-10">
           <Link
             href="/#ai-lab"
             className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
@@ -58,18 +58,21 @@ export default function LabPage() {
           className="text-center max-w-3xl mx-auto"
         >
           <p className="mono-label text-sm text-sky-600 dark:text-sky-400/80">The AI Lab</p>
-          <h1 className="font-headline text-4xl md:text-6xl mt-3 text-slate-900 dark:text-white">
+          <h1 className="font-headline text-3xl sm:text-4xl md:text-6xl mt-3 text-slate-900 dark:text-white">
             Built, Not <span className="bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-300 dark:to-blue-500 bg-clip-text text-transparent">Described</span>
           </h1>
-          <p className="mt-5 text-lg text-slate-600 dark:text-slate-400">
+          <p className="mt-3 sm:mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-400 hidden sm:block">
             Real machine-learning systems, trained from scratch and running live, right here in your
             browser — a neural net recognizing your handwriting, a reinforcement-learning agent
             teaching itself a path, a tiny transformer showing you its own attention, and a
             computer-vision model tracking your hand through your webcam.
           </p>
-          <p className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-sky-600 dark:text-sky-300">
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 sm:hidden">
+            Real ML systems, trained from scratch, running live right in your browser.
+          </p>
+          <p className="mt-3 sm:mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium text-sky-600 dark:text-sky-300">
             <MousePointerClick className="h-4 w-4" />
-            Pick a tool on the left and try it
+            Pick a tool and try it
           </p>
         </motion.div>
 
@@ -77,7 +80,7 @@ export default function LabPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-12"
+          className="mt-6 sm:mt-12"
         >
           <LabShell
             activeId={activeTab}

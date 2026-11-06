@@ -14,7 +14,7 @@ export default function Home() {
       <AestheticBackground />
       <HeroSection />
       <SkillsMarquee />
-      <div className="container px-4 md:px-6 space-y-24 md:space-y-32 my-24 md:my-32">
+      <div className="container px-4 md:px-6 space-y-16 md:space-y-32 my-12 md:my-32">
         <AiLabSection />
         <AboutSection />
 

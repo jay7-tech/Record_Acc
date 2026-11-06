@@ -58,7 +58,7 @@ export function AiLabSection() {
           </span>
         </div>
 
-        <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-white/5">
+        <div className="relative grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-px bg-white/5">
           {TOOLS.map(({ icon: Icon, label, hint }, i) => (
             <motion.div
               key={label}
@@ -66,13 +66,15 @@ export function AiLabSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative flex flex-col items-center gap-4 bg-[#070a12] px-4 py-14 transition-colors duration-300 group-hover:bg-sky-400/[0.03] hover:!bg-sky-400/[0.07]"
+              className="relative flex flex-row sm:flex-col items-center gap-4 bg-[#070a12] px-5 py-5 sm:px-4 sm:py-14 border-b border-white/5 sm:border-b-0 transition-colors duration-300 group-hover:bg-sky-400/[0.03] hover:!bg-sky-400/[0.07]"
             >
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-400/10 text-sky-300 ring-1 ring-sky-400/20 transition-transform duration-300 group-hover:scale-105">
-                <Icon className="h-7 w-7" />
+              <span className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl bg-sky-400/10 text-sky-300 ring-1 ring-sky-400/20 transition-transform duration-300 group-hover:scale-105">
+                <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
               </span>
-              <span className="text-base font-medium text-slate-300 text-center">{label}</span>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 text-center">{hint}</span>
+              <span className="flex flex-col items-start sm:items-center gap-1 sm:gap-0 text-left sm:text-center">
+                <span className="text-base font-medium text-slate-300">{label}</span>
+                <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500">{hint}</span>
+              </span>
             </motion.div>
           ))}
         </div>

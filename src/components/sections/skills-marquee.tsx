@@ -18,7 +18,7 @@ export function SkillsMarquee() {
   );
 
   return (
-    <div className="relative w-full py-24 z-10 my-10 select-none pointer-events-none">
+    <div className="relative w-full py-10 md:py-24 z-10 my-2 md:my-10 select-none pointer-events-none">
       {/* Background Strap */}
       <div className="absolute inset-0 rotate-6 flex items-center justify-center opacity-60 blur-[1px]">
         <div className="relative w-[200%] h-14 bg-blue-500/20 backdrop-blur-sm flex items-center text-blue-600/40 border-y border-blue-500/10">
