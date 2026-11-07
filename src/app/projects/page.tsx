@@ -1,12 +1,14 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/data";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { PlaceHolderImages, type ImagePlaceholder } from "@/lib/placeholder-images";
 import { TextDecoder } from "@/components/ui/text-decoder";
 import { hexToRgba } from "@/lib/utils";
+import { ProjectMedia } from "@/components/project-media";
 
 export default function ProjectsPage() {
     const getImage = (id: string) => {
@@ -38,7 +40,9 @@ export default function ProjectsPage() {
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     {projects.map((project, index) => {
-                        const image = project.images[0] ? getImage(project.images[0]) : null;
+                        const projectImages = project.images
+                            .map((id) => getImage(id))
+                            .filter((img): img is ImagePlaceholder => !!img);
                         const accentVars = {
                             '--accent-border': hexToRgba(project.color, 0.22),
                             '--accent-border-strong': hexToRgba(project.color, 0.5),
@@ -52,16 +56,9 @@ export default function ProjectsPage() {
                                 className="group relative bg-card/50 border border-[var(--accent-border)] rounded-3xl overflow-hidden hover:border-[var(--accent-border-strong)] transition-colors"
                             >
                                 {/* Image Area */}
-                                <div className="aspect-video relative overflow-hidden bg-muted">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
-                                    {image && (
-                                        <Image
-                                            src={image.imageUrl}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                    )}
+                                <div className="aspect-video relative overflow-hidden bg-muted perspective-1000">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-20 pointer-events-none" />
+                                    <ProjectMedia project={project} projectImages={projectImages} />
                                 </div>
 
                                 {/* Content */}

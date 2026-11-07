@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ExperienceShowcaseCard } from '../experience-showcase-card';
 import { AnimatedSection } from '../animated-section';
-import { ArrowRight, Award, Building2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Award, Building2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { TextDecoder } from '../ui/text-decoder';
 
@@ -21,12 +21,8 @@ export function ExperienceSection() {
           <TextDecoder text="Professional" /> <TextDecoder text="Journey" className="text-gradient-signal" />
         </h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Hands on experience across machine learning research, R&amp;D, and product design, each backed by a real certificate.
+          Hands on experience across machine learning, deep learning, R&amp;D in robotics, and product design.
         </p>
-        <div className="mt-5 flex items-center justify-center gap-2 text-sm font-medium text-signal/90">
-          <ShieldCheck className="h-4 w-4" />
-          {internships.length} verified roles &middot; every one backed by a certificate
-        </div>
       </div>
 
       <motion.div

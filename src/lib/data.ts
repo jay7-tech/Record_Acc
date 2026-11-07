@@ -117,7 +117,7 @@ export const projects: Project[] = [
         recognition: "Cognis solves the core flaw of conversational AI: LLMs answer, but they don’t remember when answering didn’t work.",
         images: ["cognis-hero", "cognis-2"],
         color: "bg-[#7c3aed]/10", // Violet/Purple
-        animationType: "perspective-push",
+        animationType: "3d-flip-reveal",
         description: {
             paragraph: "Cognis turns past reasoning into a signal the system can act on. It stores reflections as structured vector memory, spots repeating failure patterns in linear time, and steps in before mistakes repeat — shifting AI from answering questions to preventing failure.",
             features: [
@@ -137,9 +137,9 @@ export const projects: Project[] = [
     {
         title: "YoloMart | Smart Retail Ecosystem",
         recognition: "YoloMart connects physical retail and online shopping, so picking up an item in store is as trackable as a click online.",
-        images: ["yolomart-1", "yolomart-2"],
+        images: ["yolomart-1", "yolomart-2", "yolomart"],
         color: "bg-[#FF3366]/10", // Pinkish
-        animationType: "perspective-push",
+        animationType: "quad-gallery",
         description: {
             paragraph: "YoloMart unifies retail into one seamless phygital ecosystem. Every physical action — pickup, scan, cart add — becomes a digital event, removing checkout lines and powering decisions with real data.",
             features: [
@@ -162,7 +162,7 @@ export const projects: Project[] = [
         recognition: "High Five reimagines social discovery: connection is instant, privacy is absolute.",
         images: ["high-five-1", "high-five-2"],
         color: "bg-[#8e44ad]/10", // Purple
-        animationType: "perspective-push",
+        animationType: "parallax-fan",
         description: {
             paragraph: "High Five brings spontaneity back to digital interaction without touching privacy. It runs on a consent first, ephemeral model, using WebRTC for encrypted peer to peer voice that leaves no trace.",
             features: [
@@ -185,7 +185,7 @@ export const projects: Project[] = [
         recognition: "A Holistic Digital Ecosystem for Alzheimer's & Dementia Care.",
         images: ["neuro-ai-hero", "neuro-ai-2"],
         color: "bg-[#00BCD4]/10", // Cyan/Teal
-        animationType: "quad-gallery",
+        animationType: "deck-shuffle",
         description: {
             paragraph: "A digital ecosystem connecting patients, caregivers, and clinicians. Generative AI helps preserve identity, reduce burnout, and track long term progress.",
             features: [
@@ -206,9 +206,9 @@ export const projects: Project[] = [
     {
         title: "Movifi | Online Show Booking Website",
         recognition: null,
-        images: ["movifi", "yolomart"],
+        images: ["movifi"],
         color: "bg-[#3366FF]/10", // Blue
-        animationType: "vertical-shuffle",
+        animationType: "cinematic-hover",
         description: {
             paragraph: "A modern show booking site built with TypeScript, focused on a clean interface and reliable booking.",
             features: [
