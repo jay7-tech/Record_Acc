@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RotateCcw, Hand } from 'lucide-react';
+import { RotateCcw, Hand, Skull } from 'lucide-react';
 import { useIsDark } from '@/lib/use-is-dark';
 import { getLabPalette } from '@/lib/lab-palette';
 import { TrainingConsole } from './training-console';
@@ -16,6 +16,9 @@ const POP = 24;
 const GROW_STEPS = 18;
 const FITNESS_TARGET = 0.9;
 const MAX_GENERATIONS = 500;
+const FALL_MS = 380;
+const AFTERGLOW_MS = 550;
+const RECOVERY_WINDOW_MS = 3600;
 
 type Genome = Float32Array;
 
@@ -25,14 +28,34 @@ function randGenome(): Genome {
   return g;
 }
 
+function mutate(genome: Genome, rate: number, scale: number): Genome {
+  const child = new Float32Array(N_PARAMS);
+  for (let i = 0; i < N_PARAMS; i++) {
+    child[i] = genome[i];
+    if (Math.random() < rate) child[i] += (Math.random() - 0.5) * scale;
+    child[i] = Math.max(-2, Math.min(2, child[i]));
+  }
+  return child;
+}
+
+/** A body disk plus four symmetric limb nubs at the cardinal points. A
+ * weight-shared local rule has no sense of position, so growing from one
+ * central seed can only ever reach a shape that shares the grid's own
+ * symmetry — this is the most "creature-like" silhouette (body + legs)
+ * that's actually honest for this architecture to converge on, rather
+ * than faking a one-directional dinosaur profile it could never learn. */
 function buildTarget(): Float32Array {
   const t = new Float32Array(GRID * GRID);
   const cx = (GRID - 1) / 2;
   const cy = (GRID - 1) / 2;
+  const limbs = [
+    [0, -6.3], [0, 6.3], [-6.3, 0], [6.3, 0],
+  ];
   for (let y = 0; y < GRID; y++) {
     for (let x = 0; x < GRID; x++) {
-      const d = Math.hypot(x - cx, y - cy);
-      t[y * GRID + x] = d <= 5.3 ? 1 : 0;
+      const body = Math.hypot(x - cx, y - cy) <= 4.3;
+      const limb = limbs.some(([lx, ly]) => Math.hypot(x - (cx + lx), y - (cy + ly)) <= 1.4);
+      t[y * GRID + x] = body || limb ? 1 : 0;
     }
   }
   return t;
@@ -40,11 +63,22 @@ function buildTarget(): Float32Array {
 
 const TARGET = buildTarget();
 
+function scoreGrid(grid: Float32Array): number {
+  let sq = 0;
+  for (let i = 0; i < grid.length; i++) {
+    const d = grid[i] - TARGET[i];
+    sq += d * d;
+  }
+  return 1 - sq / grid.length;
+}
+
 function seedGrid(): Float32Array {
   const g = new Float32Array(GRID * GRID);
   g[Math.floor(GRID / 2) * GRID + Math.floor(GRID / 2)] = 1;
   return g;
 }
+
+type Impact = { gx: number; gy: number; radius: number; startTime: number; impacted: boolean; impactTime: number };
 
 /** One synchronous update of every cell, using the SAME small weight set
  * everywhere — this weight-sharing (like a convolution) is what makes it
@@ -93,12 +127,16 @@ function step(grid: Float32Array, genome: Genome): Float32Array {
 function fitnessOf(genome: Genome): number {
   let grid = seedGrid();
   for (let s = 0; s < GROW_STEPS; s++) grid = step(grid, genome);
-  let sq = 0;
-  for (let i = 0; i < grid.length; i++) {
-    const d = grid[i] - TARGET[i];
-    sq += d * d;
-  }
-  return 1 - sq / grid.length;
+  return scoreGrid(grid);
+}
+
+/** Simulates a genome forward from an arbitrary (possibly damaged) grid
+ * rather than from the seed — used to test whether a mutated rule would
+ * recover a wounded colony better than the one currently running. */
+function fitnessFrom(grid: Float32Array, genome: Genome, steps: number): number {
+  let g = grid;
+  for (let s = 0; s < steps; s++) g = step(g, genome);
+  return scoreGrid(g);
 }
 
 /**
@@ -134,12 +172,23 @@ export function GrowingLabDemo() {
     previewStep: 0,
     frameCount: 0,
     isDark,
+    impacts: [] as Impact[],
+    extinction: { active: false, triggeredAt: 0, resolved: true },
   });
   worldRef.current.running = running;
   worldRef.current.isDark = isDark;
   worldRef.current.mode = mode;
 
-  const handleDamage = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const spawnImpact = useCallback((gx: number, gy: number, radius: number, delayMs: number) => {
+    worldRef.current.impacts.push({
+      gx, gy, radius,
+      startTime: performance.now() + delayMs,
+      impacted: false,
+      impactTime: 0,
+    });
+  }, []);
+
+  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (worldRef.current.mode !== 'interactive') return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -147,16 +196,21 @@ export function GrowingLabDemo() {
     const gx = Math.floor(((e.clientX - rect.left) / rect.width) * GRID);
     const gy = Math.floor(((e.clientY - rect.top) / rect.height) * GRID);
     if (gx < 0 || gx >= GRID || gy < 0 || gy >= GRID) return;
-    const w = worldRef.current;
-    // Carve out a small wound, not a single pixel, so the regrowth is visible.
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
-        const ny = gy + dy, nx = gx + dx;
-        if (ny >= 0 && ny < GRID && nx >= 0 && nx < GRID) w.previewGrid[ny * GRID + nx] = 0;
-      }
-    }
-    pushLog(`damaged cell (${gx},${gy}) — watching whether the evolved rule heals it`);
+    spawnImpact(gx, gy, 1, 0);
+    pushLog(`asteroid incoming at (${gx}, ${gy})…`);
   };
+
+  const triggerExtinction = useCallback(() => {
+    if (worldRef.current.mode !== 'interactive') return;
+    const n = 6;
+    for (let i = 0; i < n; i++) {
+      const gx = Math.floor(Math.random() * GRID);
+      const gy = Math.floor(Math.random() * GRID);
+      const radius = Math.random() < 0.4 ? 2 : 1;
+      spawnImpact(gx, gy, radius, i * 140);
+    }
+    pushLog('mass extinction event triggered — a swarm of asteroids inbound');
+  }, [spawnImpact, pushLog]);
 
   const restart = useCallback(() => {
     const w = worldRef.current;
@@ -167,9 +221,11 @@ export function GrowingLabDemo() {
     w.fitHistory = [];
     w.previewGrid = seedGrid();
     w.previewStep = 0;
+    w.impacts = [];
+    w.extinction = { active: false, triggeredAt: 0, resolved: true };
     setMode('evolving');
     setStats({ gen: 0, bestFit: 0 });
-    setLog(['new random rule population — gen 0']);
+    setLog(['new random colony — gen 0']);
   }, []);
 
   useEffect(() => {
@@ -208,6 +264,46 @@ export function GrowingLabDemo() {
       for (let i = 0; i <= GRID; i++) {
         ctx.beginPath(); ctx.moveTo(i * CELL, 0); ctx.lineTo(i * CELL, H); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(0, i * CELL); ctx.lineTo(W, i * CELL); ctx.stroke();
+      }
+
+      // Falling asteroids and their impact craters/shockwaves — purely a
+      // rendering overlay, the actual grid wipe happens once in the loop.
+      const nowT = performance.now();
+      for (const imp of w.impacts) {
+        const cx = imp.gx * CELL + CELL / 2;
+        const cyTarget = imp.gy * CELL + CELL / 2;
+        if (!imp.impacted) {
+          const t = (nowT - imp.startTime) / FALL_MS;
+          if (t < 0 || t > 1) continue;
+          const cy = -20 + t * (cyTarget + 20);
+          ctx.strokeStyle = 'rgba(255,140,60,0.55)';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - 16);
+          ctx.lineTo(cx, cy - 4);
+          ctx.stroke();
+          ctx.fillStyle = '#8a5236';
+          ctx.beginPath();
+          ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(255,205,130,0.95)';
+          ctx.beginPath();
+          ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          const t = (nowT - imp.impactTime) / AFTERGLOW_MS;
+          if (t > 1) continue;
+          const ringR = 6 + t * CELL * (imp.radius + 1);
+          ctx.strokeStyle = `rgba(255,120,60,${(1 - t) * 0.8})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(cx, cyTarget, ringR, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.fillStyle = `rgba(50,25,15,${(1 - t) * 0.35})`;
+          ctx.beginPath();
+          ctx.arc(cx, cyTarget, CELL * (imp.radius + 0.5), 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     };
 
@@ -263,8 +359,10 @@ export function GrowingLabDemo() {
         w.mode = 'interactive';
         w.previewGrid = seedGrid();
         w.previewStep = 0;
+        w.impacts = [];
+        w.extinction = { active: false, triggeredAt: 0, resolved: true };
         setMode('interactive');
-        pushLog(`gen ${w.gen}: rule locked in at ${(w.bestFitness * 100).toFixed(1)}% — click the grid to damage it`);
+        pushLog(`gen ${w.gen}: colony locked in at ${(w.bestFitness * 100).toFixed(1)}% — tap the grid to send an asteroid`);
         return;
       }
 
@@ -311,6 +409,60 @@ export function GrowingLabDemo() {
         if (w.running && w.bestGenome && w.frameCount % 4 === 0) {
           w.previewGrid = step(w.previewGrid, w.bestGenome);
         }
+
+        // Land any asteroids whose fall animation has finished, carving a
+        // real crater into the grid and starting a recovery watch.
+        const nowT = performance.now();
+        w.impacts = w.impacts.filter((imp) => {
+          if (!imp.impacted) {
+            if (nowT >= imp.startTime + FALL_MS) {
+              for (let dy = -imp.radius; dy <= imp.radius; dy++) {
+                for (let dx = -imp.radius; dx <= imp.radius; dx++) {
+                  const ny = imp.gy + dy, nx = imp.gx + dx;
+                  if (ny >= 0 && ny < GRID && nx >= 0 && nx < GRID && Math.hypot(dx, dy) <= imp.radius + 0.3) {
+                    w.previewGrid[ny * GRID + nx] = 0;
+                  }
+                }
+              }
+              imp.impacted = true;
+              imp.impactTime = nowT;
+              w.extinction = { active: true, resolved: false, triggeredAt: nowT };
+            }
+            return true;
+          }
+          return nowT - imp.impactTime < AFTERGLOW_MS;
+        });
+
+        // A few seconds after the last impact lands, check whether the
+        // colony recovered on its own. If it's still badly damaged, try a
+        // handful of small mutations of the locked-in rule and adopt
+        // whichever one regrows the colony best from its current, wounded
+        // state — a real evolutionary rescue, not a scripted outcome.
+        if (w.bestGenome && w.extinction.active && !w.extinction.resolved && nowT - w.extinction.triggeredAt > RECOVERY_WINDOW_MS) {
+          const currentFit = scoreGrid(w.previewGrid);
+          const threshold = w.bestFitness * 0.6;
+          if (currentFit < threshold) {
+            const baseline = fitnessFrom(w.previewGrid, w.bestGenome, 24);
+            let bestMutant = w.bestGenome;
+            let bestMutantFit = baseline;
+            for (let k = 0; k < 6; k++) {
+              const cand = mutate(w.bestGenome, 0.25, 0.6);
+              const fit = fitnessFrom(w.previewGrid, cand, 24);
+              if (fit > bestMutantFit) { bestMutantFit = fit; bestMutant = cand; }
+            }
+            if (bestMutantFit > baseline + 0.04) {
+              w.bestGenome = bestMutant;
+              pushLog(`rescue mutation: a hardier rule took over, +${((bestMutantFit - baseline) * 100).toFixed(1)}% recovery`);
+            } else {
+              pushLog(`the colony is struggling to recover — only ${(currentFit * 100).toFixed(1)}% of the shape is left`);
+            }
+          } else {
+            pushLog(`colony recovered on its own — ${(currentFit * 100).toFixed(1)}% match restored`);
+          }
+          w.extinction.resolved = true;
+          w.extinction.active = false;
+        }
+
         drawGrid(w.previewGrid);
       }
       drawChart();
@@ -326,7 +478,7 @@ export function GrowingLabDemo() {
       <div className="relative w-full max-w-sm mx-auto rounded-2xl border border-sky-500/20 dark:border-sky-400/20 bg-white dark:bg-[#05070c] p-2 shadow-[0_0_40px_rgba(56,189,248,0.08)]">
         <canvas
           ref={canvasRef}
-          onClick={handleDamage}
+          onClick={handleCanvasClick}
           className={`block w-full h-auto rounded-xl ${mode === 'interactive' ? 'cursor-crosshair' : ''}`}
           style={{ aspectRatio: `${W} / ${H}` }}
         />
@@ -345,7 +497,7 @@ export function GrowingLabDemo() {
         }`}
       >
         {mode === 'interactive' ? <Hand className="h-3.5 w-3.5" /> : null}
-        {mode === 'interactive' ? 'Rule locked in — click the grid to damage it' : 'Evolving the growth rule…'}
+        {mode === 'interactive' ? 'Rule locked in — tap the grid to send an asteroid' : 'Evolving the growth rule…'}
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-3">
@@ -364,6 +516,16 @@ export function GrowingLabDemo() {
           <RotateCcw className="h-3.5 w-3.5" />
           Evolve Again
         </motion.button>
+        {mode === 'interactive' && (
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={triggerExtinction}
+            className="flex items-center gap-2 rounded-full border border-orange-500/40 dark:border-orange-400/40 bg-orange-500/10 dark:bg-orange-400/10 px-4 py-2 text-sm font-medium text-orange-700 dark:text-orange-300 transition-colors hover:bg-orange-500/20 dark:hover:bg-orange-400/20"
+          >
+            <Skull className="h-3.5 w-3.5" />
+            Mass Extinction
+          </motion.button>
+        )}
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-slate-500 dark:text-slate-400">
@@ -373,9 +535,12 @@ export function GrowingLabDemo() {
 
       <TrainingConsole lines={log} label="grow.log" />
       <p className="text-xs text-slate-400 dark:text-slate-500 -mt-2 text-center max-w-md">
-        The same ~70 numbers run on every cell, every step. One shared rule, evolved rather than
-        backprop trained, until a seed pixel grows into a blob. Damage it, and the same rule keeps
-        running on whatever is left.
+        The same ~70 numbers run on every cell, every step — one shared rule, evolved rather than
+        backprop trained, that grows a creature-like colony from a single seed. Tap the grid to
+        send down an asteroid, or trigger a mass extinction for a swarm of them. Craters wipe real
+        cells, and if the colony can&apos;t recover on its own after a few seconds, a round of small
+        mutations is tried against the damage — the first one that regrows the colony better takes
+        over the rule, live.
       </p>
     </div>
   );
