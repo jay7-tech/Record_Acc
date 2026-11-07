@@ -55,7 +55,7 @@ export type Project = {
     recognition: string | null;
     images: string[];
     color: string;
-    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery' | '3d-flip-reveal' | 'cinematic-hover';
+    animationType: 'deck-shuffle' | 'perspective-push' | 'vertical-shuffle' | 'parallax-fan' | 'quad-gallery' | '3d-flip-reveal' | 'cinematic-hover' | 'map-ping-reveal';
     description: {
         paragraph: string;
         features: string[];
@@ -94,7 +94,7 @@ export const projects: Project[] = [
         recognition: "Rila turns what you watch into what you can act on: a reel becomes a pin, a price, and a countdown.",
         images: ["rila-hero", "rila-2"],
         color: "bg-[#10b981]/10", // Emerald/teal, live location
-        animationType: "cinematic-hover",
+        animationType: "map-ping-reveal",
         description: {
             paragraph: "Rila reads a forwarded Instagram reel or YouTube short, speech and caption both, pulls out the venue, price, and time window, geocodes it, and surfaces it on a map when you are nearby or the offer is about to end. Same day reports on crowds, weather, and closures are cross checked before they ever reach a user.",
             features: [

@@ -10,7 +10,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { AnimatedSection } from '../animated-section';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { Plus, Activity } from 'lucide-react';
+import { Plus, Activity, MapPin } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { TextDecoder } from '../ui/text-decoder';
 import { hexToRgba } from '@/lib/utils';
@@ -244,6 +244,40 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
                     )}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
                       <Plus className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                )}
+
+                {project.animationType === 'map-ping-reveal' && (
+                  <div className="relative w-full h-full overflow-hidden rounded-xl bg-background">
+                    {/* Base layer: the reel/app view, always visible */}
+                    {projectImages[0] && (
+                      <div className="absolute inset-0 w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110">
+                        <Image src={projectImages[0].imageUrl} alt={project.title} fill className="object-cover" />
+                      </div>
+                    )}
+
+                    {/* Second layer: the map/pipeline view, masked behind a circular
+                        "radar ping" that expands outward from a pin on hover — a reel
+                        turning into a map, rather than another sliding inset card. */}
+                    {projectImages[1] && (
+                      <div
+                        className="absolute inset-0 w-full h-full transition-[clip-path] duration-1000 ease-out [clip-path:circle(0%_at_50%_55%)] group-hover:[clip-path:circle(85%_at_50%_55%)]"
+                      >
+                        <Image src={projectImages[1].imageUrl} alt="Map view" fill className="object-cover" />
+                      </div>
+                    )}
+
+                    {/* The pin itself: idles gently at rest, pulses outward like a
+                        live-location ping the moment the card is hovered. */}
+                    <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2">
+                      <span className="absolute inset-0 -m-5 rounded-full border-2 opacity-0 scale-75 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 group-hover:animate-ping" style={{ borderColor: 'var(--accent-text)' }} />
+                      <MapPin
+                        className="relative h-7 w-7 drop-shadow-lg transition-transform duration-500 group-hover:scale-125 group-hover:-translate-y-1"
+                        style={{ color: 'var(--accent-text)' }}
+                        fill="var(--accent-text)"
+                        fillOpacity={0.15}
+                      />
                     </div>
                   </div>
                 )}
