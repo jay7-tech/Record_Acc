@@ -116,6 +116,20 @@
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--foreground) / 0.25);
   }
+
+  /* Mobile already has its own overlay scroll indicator in the browser chrome
+     (the thin bar near the address bar) — our own styled scrollbar on top of
+     that just eats a few px of already-tight width, so drop it below the
+     tablet breakpoint and let the browser's native one do the job. */
+  @media (max-width: 767px) {
+    html {
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
 }
 
 @layer utilities {
