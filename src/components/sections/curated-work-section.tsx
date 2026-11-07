@@ -13,6 +13,7 @@ import { Badge } from '../ui/badge';
 import { Plus, Activity } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { TextDecoder } from '../ui/text-decoder';
+import { hexToRgba } from '@/lib/utils';
 
 function getImage(id: string) {
   return PlaceHolderImages.find((img) => img.id === id);
@@ -36,7 +37,19 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
   // Cursor-tracked spotlight — same mousemove frame as the tilt, no extra listener
   const spotX = useMotionValue(0);
   const spotY = useMotionValue(0);
-  const spotlightBackground = useMotionTemplate`radial-gradient(420px circle at ${spotX}px ${spotY}px, hsl(var(--signal) / 0.12), transparent 70%)`;
+  const accentSoft = hexToRgba(project.color, 0.14);
+  const spotlightBackground = useMotionTemplate`radial-gradient(420px circle at ${spotX}px ${spotY}px, ${accentSoft}, transparent 70%)`;
+
+  // Each project carries its own accent hex (MEMO's steel blue, Cognis's violet,
+  // Rila's emerald, etc.) — surfaced here as CSS variables so the card border,
+  // bullets and quote actually look distinct from one project to the next
+  // instead of every card defaulting to the same sky-blue signal color.
+  const accentVars = {
+    '--accent-border': hexToRgba(project.color, 0.22),
+    '--accent-border-strong': hexToRgba(project.color, 0.45),
+    '--accent-glow': hexToRgba(project.color, 0.22),
+    '--accent-text': hexToRgba(project.color, 1),
+  } as React.CSSProperties;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -83,8 +96,9 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
           rotateY,
           transformStyle: 'preserve-3d',
           transformPerspective: 1200,
+          ...accentVars,
         }}
-        className="relative z-10 rounded-3xl overflow-hidden bg-gradient-to-br from-sky-400/[0.06] via-card/90 to-card/90 border border-sky-400/15 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-shadow duration-700 hover:border-sky-400/30 hover:shadow-[0_30px_60px_-10px_hsl(var(--signal)/0.2)]"
+        className="relative z-10 rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--accent-border)] via-card/90 to-card/90 border border-[var(--accent-border)] backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-shadow duration-700 hover:border-[var(--accent-border-strong)] hover:shadow-[0_30px_60px_-10px_var(--accent-glow)]"
       >
         {/* Cursor-tracked spotlight glow */}
         <motion.div
@@ -240,11 +254,11 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
 
           {/* Content Side (Right) */}
           <div className="lg:col-span-6 flex flex-col justify-center">
-            <span className="mono-label text-xs text-signal mb-2">{indexLabel} / {totalLabel}</span>
-            <h3 className="font-headline text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3 text-foreground">
-              <TextDecoder text={project.title} />
-              <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>
-                <Activity className="h-5 w-5 text-primary/60" />
+            <span className="mono-label text-xs mb-2" style={{ color: 'var(--accent-text)' }}>{indexLabel} / {totalLabel}</span>
+            <h3 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold mb-4 flex items-start gap-3 text-foreground break-words">
+              <span>{project.title}</span>
+              <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="mt-1.5 shrink-0">
+                <Activity className="h-5 w-5" style={{ color: 'var(--accent-text)' }} />
               </motion.div>
             </h3>
 
@@ -255,14 +269,20 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
             <ul className="mb-8 space-y-3.5">
               {project.description.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3.5 text-muted-foreground">
-                  <span className="relative mt-[7px] flex h-[7px] w-[7px] shrink-0 rotate-45 rounded-[2px] border border-signal/70 bg-signal/25 shadow-[0_0_8px_hsl(var(--signal)/0.6)]" />
+                  <span
+                    className="relative mt-[7px] flex h-[7px] w-[7px] shrink-0 rotate-45 rounded-[2px] border"
+                    style={{ borderColor: 'var(--accent-border-strong)', background: 'var(--accent-border)', boxShadow: '0 0 8px var(--accent-glow)' }}
+                  />
                   <span>{feature}</span>
                 </li>
               ))}
             </ul>
 
             {project.recognition && (
-              <p className="mb-6 text-sm font-semibold text-foreground/80 italic leading-relaxed border-l-2 border-signal/50 pl-4">
+              <p
+                className="mb-6 text-sm font-semibold text-foreground/80 italic leading-relaxed border-l-2 pl-4"
+                style={{ borderColor: 'var(--accent-border-strong)' }}
+              >
                 {project.recognition}
               </p>
             )}
@@ -280,7 +300,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
                 })}
               </div>
 
-              <Button asChild size="sm" variant="outline" className="rounded-full border-border bg-background/50 hover:bg-background hover:border-signal/50 text-foreground shadow-sm transition-all hover:scale-[1.02] active:scale-95 shrink-0">
+              <Button asChild size="sm" variant="outline" className="rounded-full border-border bg-background/50 hover:bg-background hover:border-[var(--accent-border-strong)] text-foreground shadow-sm transition-all hover:scale-[1.02] active:scale-95 shrink-0">
                 <Link href={project.githubUrl} target="_blank">
                   <SiGithub className="mr-2 h-4 w-4" />
                   View on GitHub

@@ -110,7 +110,7 @@ export function HeroSection() {
                 size="lg"
                 asChild
                
-                className="rounded-full px-8 py-6 text-lg bg-gradient-to-r from-primary to-signal text-primary-foreground hover:scale-105 transition-transform shadow-lg shadow-primary/25"
+                className="rounded-full px-8 py-6 text-lg bg-gradient-to-r from-signal to-ember text-primary-foreground hover:scale-105 transition-transform shadow-lg shadow-signal/25"
               >
                 <Link href="#contact">Let&apos;s Connect</Link>
               </Button>

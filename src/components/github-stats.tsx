@@ -10,11 +10,8 @@ type Stats = {
   stars: number;
 };
 
-type YearCommits = { year: number; count: number };
-
 const GITHUB_USER = 'jay7-tech';
 const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = [CURRENT_YEAR - 2, CURRENT_YEAR - 1, CURRENT_YEAR];
 
 /**
  * Pulls real, live numbers from the public GitHub REST API at runtime
@@ -24,7 +21,7 @@ const YEARS = [CURRENT_YEAR - 2, CURRENT_YEAR - 1, CURRENT_YEAR];
 export function GithubStats() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [failed, setFailed] = useState(false);
-  const [commits, setCommits] = useState<YearCommits[] | null>(null);
+  const [thisYearCount, setThisYearCount] = useState<number | null>(null);
   const [commitsFailed, setCommitsFailed] = useState(false);
 
   useEffect(() => {
@@ -53,17 +50,16 @@ export function GithubStats() {
 
     // Separate, independent fetch: GitHub's own commit-search API is too
     // unreliable for this (it only indexes default-branch commits and
-    // routinely undercounts), so the per-year total comes from the same
+    // routinely undercounts), so the total comes from the same
     // contribution-calendar data your GitHub profile's graph is built from —
     // a free, no-auth, CORS-friendly mirror of it. A hiccup here should
     // never take down the main stats strip above.
     async function loadCommits() {
       try {
-        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=all`);
+        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=${CURRENT_YEAR}`);
         if (!res.ok) throw new Error('contributions api error');
         const data: { total?: Record<string, number> } = await res.json();
-        const results = YEARS.map((year) => ({ year, count: data.total?.[String(year)] ?? 0 }));
-        if (!cancelled) setCommits(results);
+        if (!cancelled) setThisYearCount(data.total?.[String(CURRENT_YEAR)] ?? 0);
       } catch {
         if (!cancelled) setCommitsFailed(true);
       }
@@ -81,8 +77,6 @@ export function GithubStats() {
     { label: 'Stars Earned', value: stats?.stars, icon: Star },
     { label: 'Followers', value: stats?.followers, icon: Users },
   ];
-
-  const maxCommits = commits ? Math.max(1, ...commits.map((c) => c.count)) : 1;
 
   return (
     <motion.div
@@ -105,27 +99,14 @@ export function GithubStats() {
       ))}
 
       {!commitsFailed && (
-        <div className="flex items-center gap-2.5 text-sm">
-          <GitCommitHorizontal className="h-3.5 w-3.5 text-signal" />
-          <div className="flex items-end gap-2.5">
-            {(commits ?? YEARS.map((year) => ({ year, count: undefined }))).map(({ year, count }) => (
-              <div key={year} className="flex flex-col items-center gap-1">
-                <span className="font-semibold text-foreground tabular-nums text-xs leading-none">
-                  {count === undefined ? (
-                    <span className="inline-block h-3 w-4 animate-pulse rounded bg-muted align-middle" />
-                  ) : count}
-                </span>
-                <div
-                  className="w-1.5 rounded-sm bg-signal/70"
-                  style={{
-                    height: count === undefined ? 6 : Math.max(3, Math.round((count / maxCommits) * 16)),
-                  }}
-                />
-                <span className="text-[10px] leading-none text-muted-foreground">&apos;{String(year).slice(2)}</span>
-              </div>
-            ))}
-          </div>
-          <span className="text-muted-foreground">Contributions / yr</span>
+        <div className="flex items-center gap-2 text-sm">
+          <GitCommitHorizontal className="h-3.5 w-3.5 text-ember" />
+          <span className="font-semibold text-ember tabular-nums">
+            {thisYearCount === null ? (
+              <span className="inline-block h-3 w-6 animate-pulse rounded bg-muted align-middle" />
+            ) : thisYearCount}
+          </span>
+          <span className="text-muted-foreground">contributions in {CURRENT_YEAR}</span>
         </div>
       )}
     </motion.div>

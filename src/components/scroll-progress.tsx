@@ -46,7 +46,7 @@ export function ScrollProgress() {
     <>
       {/* Top progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-primary via-signal to-primary"
+        className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-signal via-primary to-ember"
         style={{ scaleX }}
       />
 

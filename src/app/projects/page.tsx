@@ -6,6 +6,7 @@ import Link from "next/link";
 import { projects } from "@/lib/data";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { TextDecoder } from "@/components/ui/text-decoder";
+import { hexToRgba } from "@/lib/utils";
 
 export default function ProjectsPage() {
     const getImage = (id: string) => {
@@ -38,9 +39,18 @@ export default function ProjectsPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     {projects.map((project, index) => {
                         const image = project.images[0] ? getImage(project.images[0]) : null;
+                        const accentVars = {
+                            '--accent-border': hexToRgba(project.color, 0.22),
+                            '--accent-border-strong': hexToRgba(project.color, 0.5),
+                            '--accent-text': hexToRgba(project.color, 1),
+                        } as React.CSSProperties;
 
                         return (
-                            <div key={index} className="group relative bg-card/50 border border-white/10 rounded-3xl overflow-hidden hover:border-primary/50 transition-colors">
+                            <div
+                                key={index}
+                                style={accentVars}
+                                className="group relative bg-card/50 border border-[var(--accent-border)] rounded-3xl overflow-hidden hover:border-[var(--accent-border-strong)] transition-colors"
+                            >
                                 {/* Image Area */}
                                 <div className="aspect-video relative overflow-hidden bg-muted">
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
@@ -55,10 +65,10 @@ export default function ProjectsPage() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6 md:p-8 space-y-6">
+                                <div className="p-5 sm:p-6 md:p-8 space-y-6">
                                     <div className="space-y-2">
-                                        <div className="flex justify-between items-start gap-4">
-                                            <h2 className="text-2xl md:text-3xl font-bold font-headline leading-tight"><TextDecoder text={project.title} /></h2>
+                                        <div className="flex justify-between items-start gap-3">
+                                            <h2 className="min-w-0 flex-1 break-words text-xl sm:text-2xl md:text-3xl font-bold font-headline leading-tight">{project.title}</h2>
                                             <div className="flex gap-2 shrink-0">
                                                 <Button size="icon" variant="ghost" asChild className="rounded-full">
                                                     <Link href={project.githubUrl} target="_blank"><Github className="h-5 w-5" /></Link>

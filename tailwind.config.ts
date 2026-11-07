@@ -53,6 +53,10 @@ export default {
           DEFAULT: 'hsl(var(--signal))',
           foreground: 'hsl(var(--signal-foreground))',
         },
+        ember: {
+          DEFAULT: 'hsl(var(--ember))',
+          foreground: 'hsl(var(--ember-foreground))',
+        },
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',

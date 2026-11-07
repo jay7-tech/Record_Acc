@@ -89,6 +89,12 @@
       "description": "Details image for Cognis project - Metrics Dashboard",
       "imageUrl": "/images/project-assets/cognis-details.png",
       "imageHint": "cognis data visualization"
+    },
+    {
+      "id": "rila-hero",
+      "description": "Placeholder preview for Rila — replace with a real app screenshot",
+      "imageUrl": "https://picsum.photos/seed/rila-map-live/1200/800",
+      "imageHint": "map app placeholder"
     }
   ]
 }

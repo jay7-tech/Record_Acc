@@ -1,6 +1,6 @@
 import React, { type JSX } from 'react';
-import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Brain, Network, Cpu, Workflow } from "lucide-react";
-import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain } from "react-icons/si";
+import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Network, Cpu, Workflow } from "lucide-react";
+import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain, SiTelegram } from "react-icons/si";
 import type { IconType } from "react-icons";
 
 export const personalInfo = {
@@ -86,7 +86,29 @@ export const projects: Project[] = [
             { name: "Python", icon: SiPython },
             { name: "OpenCV", icon: SiOpencv },
             { name: "TensorFlow", icon: SiPytorch },
-            { name: "Raspberry Pi", icon: Cpu },
+        ],
+        isFeatured: true,
+    },
+    {
+        title: "Rila | Reels To Real World Map",
+        recognition: "Rila turns what you watch into what you can act on: a reel becomes a pin, a price, and a countdown.",
+        images: ["rila-hero"],
+        color: "bg-[#10b981]/10", // Emerald/teal, live location
+        animationType: "cinematic-hover",
+        description: {
+            paragraph: "Rila reads a forwarded Instagram reel or YouTube short, speech and caption both, pulls out the venue, price, and time window, geocodes it, and surfaces it on a map when you are nearby or the offer is about to end. Same day reports on crowds, weather, and closures are cross checked before they ever reach a user.",
+            features: [
+                "Reel To Offer Pipeline: yt-dlp plus Whisper transcription feeds a Groq LLM that pulls venue, price, and time straight from the video.",
+                "Smart Ranking: A near me score blends distance, time left, and interests to decide what surfaces first.",
+                "Multi Source Trust: Live conditions only surface once independent reports actually agree."
+            ]
+        },
+        githubUrl: "https://github.com/jay7-tech/rila",
+        tags: [
+            { name: "FastAPI", icon: SiFastapi },
+            { name: "PostGIS & pgvector", icon: SiPostgresql },
+            { name: "Telegram Bot", icon: SiTelegram },
+            { name: "Docker", icon: SiDocker },
         ],
         isFeatured: true,
     },
@@ -109,7 +131,6 @@ export const projects: Project[] = [
             { name: "FastAPI", icon: SiFastapi },
             { name: "VectorDB & FAISS", icon: HardDrive },
             { name: "Ollama (Local LLMs)", icon: SiOllama },
-            { name: "Memory Augmentation", icon: Brain },
         ],
         isFeatured: true,
     },
@@ -134,7 +155,7 @@ export const projects: Project[] = [
             { name: "RFID Tech", icon: Share2 },
             { name: "WebSockets", icon: Waves },
         ],
-        isFeatured: true,
+        isFeatured: false,
     },
     {
         title: "High Five | Real Time Social Platform",
