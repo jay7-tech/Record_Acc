@@ -92,9 +92,15 @@
     },
     {
       "id": "rila-hero",
-      "description": "Placeholder preview for Rila — replace with a real app screenshot",
-      "imageUrl": "https://picsum.photos/seed/rila-map-live/1200/800",
-      "imageHint": "map app placeholder"
+      "description": "Rila reel to map flow — phone with a shared reel next to a live map of nearby offers",
+      "imageUrl": "/images/project-assets/rila-hero.png",
+      "imageHint": "rila reel to map"
+    },
+    {
+      "id": "rila-2",
+      "description": "Rila pipeline detail — reel ingestion, parsing, geocoding and the resulting map briefing",
+      "imageUrl": "/images/project-assets/rila-2.png",
+      "imageHint": "rila pipeline diagram"
     }
   ]
 }

@@ -92,7 +92,7 @@ export const projects: Project[] = [
     {
         title: "Rila | Reels To Real World Map",
         recognition: "Rila turns what you watch into what you can act on: a reel becomes a pin, a price, and a countdown.",
-        images: ["rila-hero"],
+        images: ["rila-hero", "rila-2"],
         color: "bg-[#10b981]/10", // Emerald/teal, live location
         animationType: "cinematic-hover",
         description: {
