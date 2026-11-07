@@ -81,11 +81,20 @@ export default function ProjectsPage() {
                                     </div>
 
                                     <div className="flex flex-wrap gap-2">
-                                        {project.tags.map((tag, i) => (
-                                            <Badge key={i} variant="secondary" className="px-3 py-1 bg-secondary/20 hover:bg-secondary/30 transition-colors">
-                                                {tag.name}
-                                            </Badge>
-                                        ))}
+                                        {project.tags.map((tag, i) => {
+                                            const Icon = tag.icon;
+                                            return (
+                                                <Badge key={i} variant="outline" className="flex items-center gap-2 py-1 pl-1 pr-3 rounded-full border-[var(--accent-border)] bg-background/50 text-foreground/80">
+                                                    <span
+                                                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                                                        style={{ background: 'var(--accent-border)' }}
+                                                    >
+                                                        <Icon className="h-3.5 w-3.5" style={{ color: 'var(--accent-text)' }} />
+                                                    </span>
+                                                    {tag.name}
+                                                </Badge>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>

@@ -292,8 +292,13 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
                 {project.tags.map((tag) => {
                   const Icon = tag.icon;
                   return (
-                    <Badge key={tag.name} variant="outline" className="flex items-center gap-1.5 py-1.5 px-3 bg-background/50 backdrop-blur-sm border-border text-foreground/80">
-                      <Icon className="h-4 w-4" />
+                    <Badge key={tag.name} variant="outline" className="flex items-center gap-2 py-1 pl-1 pr-3 rounded-full bg-background/50 backdrop-blur-sm border-border text-foreground/80">
+                      <span
+                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                        style={{ background: 'var(--accent-border)' }}
+                      >
+                        <Icon className="h-3.5 w-3.5" style={{ color: 'var(--accent-text)' }} />
+                      </span>
                       {tag.name}
                     </Badge>
                   );

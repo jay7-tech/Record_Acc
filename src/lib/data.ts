@@ -1,6 +1,6 @@
 import React, { type JSX } from 'react';
-import { Linkedin, HardDrive, Waves, Bot, Share2, ScanLine, Network, Cpu, Workflow } from "lucide-react";
-import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain, SiTelegram } from "react-icons/si";
+import { Linkedin, HardDrive, Waves, Share2, ScanLine, Network, Cpu, Workflow } from "lucide-react";
+import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiPython, SiTypescript, SiJavascript, SiDocker, SiGit, SiFlask, SiWebrtc, SiGithub, SiTailwindcss, SiFirebase, SiAutodesk, SiOpencv, SiCplusplus, SiInstagram, SiGoogle, SiGooglegemini, SiNextdotjs, SiFastapi, SiOllama, SiPostgresql, SiPytorch, SiLangchain, SiTelegram } from "react-icons/si";
 import type { IconType } from "react-icons";
 
 export const personalInfo = {
@@ -198,7 +198,7 @@ export const projects: Project[] = [
         tags: [
             { name: "Next.js 15", icon: SiNextdotjs },
             { name: "Google Genkit", icon: SiGoogle },
-            { name: "Gemini AI", icon: Bot },
+            { name: "Gemini AI", icon: SiGooglegemini },
             { name: "Ollama", icon: SiOllama },
         ],
         isFeatured: false,

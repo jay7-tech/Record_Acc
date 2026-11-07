@@ -81,11 +81,13 @@ export function AestheticBackground() {
 
             const isDarkMode = document.documentElement.classList.contains('dark');
 
-            // Draw Grid - OPTIMIZED: CSS background is better, but if we must use canvas, 
+            // Draw Grid - OPTIMIZED: CSS background is better, but if we must use canvas,
             // only draw it at a lower frequency or use a single path
+            // Tied to the site's own --primary lavender rather than a generic violet,
+            // so the grid reads as part of the same palette as the rest of the page.
             ctx.strokeStyle = isDarkMode
-                ? 'rgba(168, 85, 247, 0.05)'
-                : 'rgba(168, 85, 247, 0.08)';
+                ? 'rgba(176, 159, 218, 0.05)'
+                : 'rgba(176, 159, 218, 0.08)';
             ctx.lineWidth = 1;
             const gridSize = isMobile ? 44 : 22; // Larger grid on mobile
 
@@ -129,13 +131,18 @@ export function AestheticBackground() {
                 const currentOpacity = (star.opacity + pulse * 0.3) * 0.4;
                 const currentSize = star.size * (1 + pulse * 0.2);
 
+                // Three-tone palette lifted straight from the site's own design
+                // tokens (--ember, --signal, --primary) instead of a generic
+                // purple/blue/white starfield — the rarest, largest stars carry
+                // the warm ember highlight; mid stars carry the sky-blue signal
+                // color; small background stars stay a soft lavender-white.
                 let color;
-                if (star.size > 2) {
-                    color = isDarkMode ? '168, 85, 247' : '109, 40, 217';
+                if (star.size > 2.3) {
+                    color = isDarkMode ? '246, 136, 40' : '217, 108, 14';
                 } else if (star.size > 1.5) {
-                    color = isDarkMode ? '147, 197, 253' : '37, 99, 235';
+                    color = isDarkMode ? '56, 189, 248' : '14, 130, 194';
                 } else {
-                    color = isDarkMode ? '255, 255, 255' : '75, 85, 99';
+                    color = isDarkMode ? '226, 220, 243' : '120, 108, 160';
                 }
 
                 // Simplified drawing on mobile

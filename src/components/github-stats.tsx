@@ -83,13 +83,17 @@ export function GithubStats() {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
+      className="mt-6 flex flex-wrap items-center justify-center gap-2.5"
     >
-      <span className="mono-label text-[10px] text-muted-foreground">Live from GitHub</span>
+      <span className="mono-label mr-1 text-[10px] text-muted-foreground">Live from GitHub</span>
+
       {items.map(({ label, value, icon: Icon }) => (
-        <div key={label} className="flex items-center gap-2 text-sm">
-          <Icon className="h-3.5 w-3.5 text-signal" />
-          <span className="font-semibold text-foreground tabular-nums">
+        <div
+          key={label}
+          className="flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3.5 py-1.5 text-sm backdrop-blur-sm"
+        >
+          <Icon className="h-4 w-4 text-signal" />
+          <span className="font-bold text-foreground tabular-nums">
             {value === undefined ? (
               <span className="inline-block h-3 w-5 animate-pulse rounded bg-muted align-middle" />
             ) : value}
@@ -99,11 +103,11 @@ export function GithubStats() {
       ))}
 
       {!commitsFailed && (
-        <div className="flex items-center gap-2 text-sm">
-          <GitCommitHorizontal className="h-3.5 w-3.5 text-ember" />
-          <span className="font-semibold text-ember tabular-nums">
+        <div className="flex items-center gap-2 rounded-full border border-ember/40 bg-ember/10 px-3.5 py-1.5 text-sm shadow-[0_0_16px_-6px_hsl(var(--ember)/0.6)]">
+          <GitCommitHorizontal className="h-4 w-4 text-ember" />
+          <span className="text-base font-bold text-ember tabular-nums">
             {thisYearCount === null ? (
-              <span className="inline-block h-3 w-6 animate-pulse rounded bg-muted align-middle" />
+              <span className="inline-block h-3.5 w-7 animate-pulse rounded bg-ember/20 align-middle" />
             ) : thisYearCount}
           </span>
           <span className="text-muted-foreground">contributions in {CURRENT_YEAR}</span>
