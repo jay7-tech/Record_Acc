@@ -124,7 +124,7 @@ export function HeroSection() {
                 variant="outline"
                 asChild
                
-                className="rounded-full px-8 py-6 text-lg backdrop-blur-md bg-background/30 hover:bg-white/10 border-white/10"
+                className="rounded-full px-8 py-6 text-lg backdrop-blur-md bg-background/30 hover:bg-foreground/10 border-foreground/10"
               >
                 <Link href="#projects">View My Work</Link>
               </Button>
@@ -143,7 +143,7 @@ export function HeroSection() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="p-3 bg-background/30 backdrop-blur-md border border-white/10 rounded-full shadow-lg hover:bg-white/10 transition-colors"
+          className="p-3 bg-background/30 backdrop-blur-md border border-foreground/10 rounded-full shadow-lg hover:bg-foreground/10 transition-colors"
         >
           <Button variant="ghost" size="icon" asChild className="rounded-full w-10 h-10 hover:bg-transparent">
             <Link href="#about" aria-label="Scroll to about section">

@@ -35,7 +35,11 @@ export function AnimatedSection({ children, className, id }: { children: ReactNo
       id={id}
       ref={ref}
       className={cn(
-        'transform transition-all duration-700 ease-out',
+        // The nav is a floating pill fixed near the top rather than a
+        // full-width bar, so without this, jumping to a section via the nav
+        // links (or a direct #hash) lands its heading half-hidden behind
+        // the pill instead of just below it.
+        'scroll-mt-24 transform transition-all duration-700 ease-out',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
         className
       )}

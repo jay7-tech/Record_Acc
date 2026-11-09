@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full py-8 px-4 bg-background/60 backdrop-blur-xl z-50 relative mt-auto overflow-hidden border-t border-white/5">
+    <footer className="w-full py-8 px-4 bg-background/60 backdrop-blur-xl z-50 relative mt-auto overflow-hidden border-t border-foreground/5">
       {/* Top Gradient Accent */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
@@ -29,7 +29,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative p-2 rounded-full hover:bg-white/5 transition-all duration-300"
+                className="group relative p-2 rounded-full hover:bg-foreground/5 transition-all duration-300"
                 aria-label={social.name}
               >
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

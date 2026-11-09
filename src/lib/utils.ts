@@ -26,3 +26,23 @@ export function hexToRgba(source: string | null | undefined, alpha: number): str
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+/**
+ * Like hexToRgba, but for solid accent TEXT and icon colors rather than
+ * translucent fills/borders. A project's accent hex is chosen once and
+ * used in both light and dark mode, but a flat hex that reads great on
+ * a white card can disappear on a near-black one (and vice versa) — e.g.
+ * MEMO's dark navy #2c3e50 is ~1.8:1 contrast on a dark card, effectively
+ * invisible. Instead of a fixed color, this returns a CSS color-mix()
+ * expression that blends the accent hue toward the current theme's
+ * --foreground (near-black in light mode, near-white in dark mode). The
+ * 60/40 mix ratio was chosen so every current project accent clears
+ * roughly 5:1 contrast against the card background in BOTH themes, while
+ * still reading as that project's own color rather than generic text.
+ */
+export function hexToAdaptiveText(source: string | null | undefined): string {
+  const fallback = '#38bdf8'; // sky-400
+  const match = source?.match(/#([0-9a-fA-F]{3,8})/);
+  const hex = match ? `#${match[1]}` : fallback;
+  return `color-mix(in srgb, ${hex} 60%, hsl(var(--foreground)) 40%)`;
+}

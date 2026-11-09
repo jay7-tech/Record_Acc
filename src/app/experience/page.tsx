@@ -133,7 +133,7 @@ export default function ExperiencePage() {
                                 >
                                     {/* IMAGE SIDE */}
                                     <div className={`w-full md:w-1/2 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
-                                        <div className="relative group rounded-3xl overflow-hidden border border-white/10 shadow-2xl skew-y-0 hover:skew-y-1 transition-transform duration-500">
+                                        <div className="relative group rounded-3xl overflow-hidden border border-foreground/10 shadow-2xl skew-y-0 hover:skew-y-1 transition-transform duration-500">
                                             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none mix-blend-overlay" />
 
                                             {displayImage ? (
@@ -199,7 +199,7 @@ export default function ExperiencePage() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className={`relative group rounded-3xl overflow-hidden border border-white/5 bg-secondary/20 shadow-xl ${isLarge ? 'md:col-span-8' : 'md:col-span-4'}`}
+                                    className={`relative group rounded-3xl overflow-hidden border border-foreground/5 bg-secondary/20 shadow-xl ${isLarge ? 'md:col-span-8' : 'md:col-span-4'}`}
                                 >
                                     {/* Image Background */}
                                     <div className="absolute inset-0 z-0 text-left">

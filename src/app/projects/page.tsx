@@ -7,7 +7,7 @@ import Link from "next/link";
 import { projects } from "@/lib/data";
 import { PlaceHolderImages, type ImagePlaceholder } from "@/lib/placeholder-images";
 import { TextDecoder } from "@/components/ui/text-decoder";
-import { hexToRgba } from "@/lib/utils";
+import { hexToRgba, hexToAdaptiveText } from "@/lib/utils";
 import { ProjectMedia } from "@/components/project-media";
 
 export default function ProjectsPage() {
@@ -46,7 +46,10 @@ export default function ProjectsPage() {
                         const accentVars = {
                             '--accent-border': hexToRgba(project.color, 0.22),
                             '--accent-border-strong': hexToRgba(project.color, 0.5),
-                            '--accent-text': hexToRgba(project.color, 1),
+                            // Blended toward the theme foreground so the solid
+                            // accent text/icons stay legible in both themes —
+                            // see hexToAdaptiveText.
+                            '--accent-text': hexToAdaptiveText(project.color),
                         } as React.CSSProperties;
 
                         return (

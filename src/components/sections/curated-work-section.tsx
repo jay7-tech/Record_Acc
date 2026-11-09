@@ -12,7 +12,7 @@ import { Badge } from '../ui/badge';
 import { Activity } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { TextDecoder } from '../ui/text-decoder';
-import { hexToRgba } from '@/lib/utils';
+import { hexToRgba, hexToAdaptiveText } from '@/lib/utils';
 import { ProjectMedia } from '../project-media';
 
 function getImage(id: string) {
@@ -48,7 +48,10 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
     '--accent-border': hexToRgba(project.color, 0.22),
     '--accent-border-strong': hexToRgba(project.color, 0.45),
     '--accent-glow': hexToRgba(project.color, 0.22),
-    '--accent-text': hexToRgba(project.color, 1),
+    // Solid text/icon color: blended toward the theme foreground rather than
+    // a flat hex, so e.g. MEMO's dark navy stays legible on a dark card
+    // instead of nearly vanishing — see hexToAdaptiveText for why.
+    '--accent-text': hexToAdaptiveText(project.color),
   } as React.CSSProperties;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -212,7 +215,7 @@ export function CuratedWorkSection() {
       >
         <div className="relative group">
           <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <Button asChild size="lg" variant="outline" className="relative rounded-full px-8 py-6 text-lg border-white/10 hover:bg-white/5 hover:border-signal/50 transition-all">
+          <Button asChild size="lg" variant="outline" className="relative rounded-full px-8 py-6 text-lg border-foreground/10 hover:bg-foreground/5 hover:border-signal/50 transition-all">
             <Link href="/projects">
               See More Projects
             </Link>

@@ -83,7 +83,7 @@ export function ContactSection() {
         </div>
 
         <Spotlight className="group">
-        <Card className="relative bg-white/5 backdrop-blur-md border border-white/10 overflow-hidden shadow-2xl group-hover:border-sky-400/30 transition-colors duration-500">
+        <Card className="relative bg-foreground/[0.03] backdrop-blur-md border border-foreground/10 overflow-hidden shadow-2xl group-hover:border-signal/30 transition-colors duration-500">
           <CardHeader className="text-center">
             <p className="mono-label text-xs text-muted-foreground mb-1">/ 06 Contact</p>
             <CardTitle className="font-headline text-3xl md:text-4xl text-gradient-signal">Get In Touch</CardTitle>
@@ -109,7 +109,7 @@ export function ContactSection() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/social flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 hover:bg-primary/15 hover:border-primary/50 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-6px_rgba(124,58,237,0.4)] transition-all duration-300"
+                        className="group/social flex items-center gap-2 rounded-full border border-foreground/10 bg-foreground/[0.03] px-4 py-2 hover:bg-primary/15 hover:border-primary/50 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.4)] transition-all duration-300"
                       >
                         <Icon className="w-4 h-4 text-muted-foreground group-hover/social:text-primary transition-colors" />
                         <span className="text-sm text-muted-foreground group-hover/social:text-foreground transition-colors">{social.name}</span>
@@ -126,7 +126,7 @@ export function ContactSection() {
                   <button
                     type="button"
                     onClick={copyEmail}
-                    className="group/email flex w-full items-center justify-between gap-2 p-3 rounded-lg bg-white/5 hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-colors text-left"
+                    className="group/email flex w-full items-center justify-between gap-2 p-3 rounded-lg bg-foreground/[0.03] hover:bg-primary/10 border border-transparent hover:border-primary/30 transition-colors text-left"
                   >
                     <span className="flex items-center gap-2 min-w-0">
                       <strong className="shrink-0">Email:</strong>
@@ -137,8 +137,8 @@ export function ContactSection() {
                       {copied ? 'Copied' : 'Copy'}
                     </span>
                   </button>
-                  <p className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"><strong>Phone:</strong> {personalInfo.phone}</p>
-                  <p className="flex items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"><strong>Location:</strong> {personalInfo.location}</p>
+                  <p className="flex items-center gap-2 p-3 rounded-lg bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-colors"><strong>Phone:</strong> {personalInfo.phone}</p>
+                  <p className="flex items-center gap-2 p-3 rounded-lg bg-foreground/[0.03] hover:bg-foreground/[0.06] transition-colors"><strong>Location:</strong> {personalInfo.location}</p>
                 </div>
 
                 <div className="mt-8">
@@ -165,17 +165,17 @@ export function ContactSection() {
                 <form ref={formRef} action={dispatch} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" placeholder="Your Name" required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
+                    <Input id="name" name="name" placeholder="Your Name" required className="bg-foreground/[0.04] border-2 border-foreground/15 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
                     {state.errors?.name && <p className="text-sm text-destructive">{state.errors.name[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
+                    <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="bg-foreground/[0.04] border-2 border-foreground/15 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors" />
                     {state.errors?.email && <p className="text-sm text-destructive">{state.errors.email[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" placeholder="Your message..." required className="bg-white/[0.07] border-2 border-white/25 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors min-h-[120px]" />
+                    <Textarea id="message" name="message" placeholder="Your message..." required className="bg-foreground/[0.04] border-2 border-foreground/15 focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors min-h-[120px]" />
                     {state.errors?.message && <p className="text-sm text-destructive">{state.errors.message[0]}</p>}
                   </div>
                   <SubmitButton />

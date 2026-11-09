@@ -11,8 +11,18 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 259 44% 80%;
-    /* #B09FDA */
+    /* --primary/--signal/--ember below are deliberately darker and more
+       saturated than their .dark counterparts further down. They share the
+       same hues (violet / sky-blue / amber) so the brand identity carries
+       across themes, but a lightness tuned to glow on a near-black page
+       (e.g. the old 80% lightness primary) drops to ~1.9:1 contrast against
+       a white card — effectively invisible as text, and not much better as
+       a button fill under white text. These values were chosen to clear
+       ~4.5:1+ against a white background, which also fixes every solid
+       color derived from them (text-primary/signal/ember, the
+       .text-gradient-signal headings, glow-border, etc.) without touching
+       how any of this looks in dark mode. */
+    --primary: 259 46% 46%;
     --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -25,13 +35,13 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 259 44% 80%;
+    --ring: 259 46% 46%;
     --radius: 0.5rem;
-    --signal: 203 89% 53%;
-    /* silky sky-blue "live" accent */
+    --signal: 203 85% 40%;
+    /* silky sky-blue "live" accent, darkened for light-mode contrast */
     --signal-foreground: 0 0% 100%;
-    --ember: 28 92% 56%;
-    /* warm amber counterpart to --signal, used sparingly for contrast */
+    --ember: 28 88% 38%;
+    /* warm amber counterpart to --signal, darkened for light-mode contrast */
     --ember-foreground: 0 0% 100%;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
