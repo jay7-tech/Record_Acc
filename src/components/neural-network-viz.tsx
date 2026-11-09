@@ -92,9 +92,51 @@ export function NeuralNetworkViz({ rawInput, layerActivations, predictedDigit, h
       const outCenters = probs.map((_, i) => ({ x: outX, y: nodeY(probs.length, i) }));
 
       const pulse = hasInk ? 0.55 + 0.45 * Math.sin(t * 2) : 0;
+      const W0 = MODEL_WEIGHTS[0];
+      const W1 = MODEL_WEIGHTS[1];
+      const W2 = MODEL_WEIGHTS[2];
+
+      // ---- Ambient wash behind the winning output node: makes the whole scene feel "lit" ----
+      if (hasInk) {
+        const outC = outCenters[predictedDigit];
+        const ambient = ctx.createRadialGradient(outC.x, outC.y, 0, outC.x, outC.y, 260);
+        ambient.addColorStop(0, `rgba(${pal.accentRGB},${0.1 + pulse * 0.07})`);
+        ambient.addColorStop(1, `rgba(${pal.accentRGB},0)`);
+        ctx.fillStyle = ambient;
+        ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+      }
+
+      // ---- The "hero path": the single strongest real chain of weights that produced the
+      // prediction, traced backwards from the winning output node. Not fabricated — it's
+      // the actual top-weighted input pixel -> hidden1 node -> hidden2 node -> output edge. ----
+      let heroPath: { input?: { x: number; y: number }; h1: { x: number; y: number }; h2: { x: number; y: number }; out: { x: number; y: number } } | null = null;
+      if (hasInk) {
+        let bestH2 = 0, bestH2Score = -Infinity;
+        for (let i = 0; i < h2.length; i++) {
+          const score = h2[i] * (W2[i]?.[predictedDigit] ?? 0);
+          if (score > bestH2Score) { bestH2Score = score; bestH2 = i; }
+        }
+        let bestH1 = 0, bestH1Score = -Infinity;
+        for (let i = 0; i < h1.length; i++) {
+          const score = h1[i] * (W1[i]?.[bestH2] ?? 0);
+          if (score > bestH1Score) { bestH1Score = score; bestH1 = i; }
+        }
+        let bestInput = -1, bestInputScore = -Infinity;
+        for (let i = 0; i < rawInput.length; i++) {
+          const v = rawInput[i];
+          if (v === 0) continue;
+          const score = v * (W0[i]?.[bestH1] ?? 0);
+          if (score > bestInputScore) { bestInputScore = score; bestInput = i; }
+        }
+        heroPath = {
+          input: bestInput >= 0 ? inputCenters[bestInput] : undefined,
+          h1: h1Centers[bestH1],
+          h2: h2Centers[bestH2],
+          out: outCenters[predictedDigit],
+        };
+      }
 
       // ---- Connections: input -> hidden1 (top-K salient per hidden node) ----
-      const W0 = MODEL_WEIGHTS[0];
       const K = 6;
       for (let j = 0; j < h1.length; j++) {
         const contributions: { i: number; score: number; signed: number }[] = [];
@@ -174,6 +216,26 @@ export function NeuralNetworkViz({ rawInput, layerActivations, predictedDigit, h
             ctx.strokeStyle = pal.positive(0.3 + pulse * 0.4);
             ctx.lineWidth = 2;
             ctx.stroke();
+
+            // second, phase-shifted echo ring — a richer, more "enlightened" layered pulse
+            const echoPulse = 0.5 + 0.5 * Math.sin(t * 2 - 1.1);
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, radius + 17 + echoPulse * 10, 0, Math.PI * 2);
+            ctx.strokeStyle = pal.positive(0.1 + echoPulse * 0.2);
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
+
+          // wide, soft bloom halo behind every lit node for extra glow (bigger on the winner)
+          if (hasInk && glow > 0.08) {
+            const bloomR = radius + 14 + glow * (isPredicted ? 26 : 14);
+            const bloomGrad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, bloomR);
+            bloomGrad.addColorStop(0, `rgba(${pal.nodeGlowRGB},${0.1 + glow * 0.16})`);
+            bloomGrad.addColorStop(1, `rgba(${pal.nodeGlowRGB},0)`);
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, bloomR, 0, Math.PI * 2);
+            ctx.fillStyle = bloomGrad;
+            ctx.fill();
           }
 
           const outerR = radius + 2 + glow * 5;
@@ -215,6 +277,41 @@ export function NeuralNetworkViz({ rawInput, layerActivations, predictedDigit, h
       drawNodeColumn(h1Centers, h1, 2.6);
       drawNodeColumn(h2Centers, h2, 3.8);
       drawNodeColumn(outCenters, probs, 6, true);
+
+      // ---- Signal flow: trace the hero path with a brighter line and particles
+      // streaming along it, so the "thought" driving the prediction is visible, not just implied ----
+      if (heroPath) {
+        const segments: { x: number; y: number }[] = [heroPath.h1, heroPath.h2, heroPath.out];
+        if (heroPath.input) segments.unshift(heroPath.input);
+
+        for (let s = 0; s < segments.length - 1; s++) {
+          const from = segments[s];
+          const to = segments[s + 1];
+
+          ctx.strokeStyle = pal.positive(0.45 + pulse * 0.3);
+          ctx.lineWidth = 2 + pulse * 1.2;
+          ctx.beginPath();
+          ctx.moveTo(from.x, from.y);
+          ctx.lineTo(to.x, to.y);
+          ctx.stroke();
+
+          const dx = to.x - from.x;
+          const dy = to.y - from.y;
+          for (let p = 0; p < 3; p++) {
+            const localT = (t * 0.4 + s * 0.18 + p / 3) % 1;
+            const px = from.x + dx * localT;
+            const py = from.y + dy * localT;
+            const pGrad = ctx.createRadialGradient(px, py, 0, px, py, 6.5);
+            pGrad.addColorStop(0, `rgba(${pal.nodeCoreRGB},0.95)`);
+            pGrad.addColorStop(0.5, `rgba(${pal.nodeGlowRGB},0.55)`);
+            pGrad.addColorStop(1, `rgba(${pal.nodeGlowRGB},0)`);
+            ctx.beginPath();
+            ctx.arc(px, py, 6.5, 0, Math.PI * 2);
+            ctx.fillStyle = pGrad;
+            ctx.fill();
+          }
+        }
+      }
 
       // ---- Column labels ----
       ctx.fillStyle = pal.textDim;

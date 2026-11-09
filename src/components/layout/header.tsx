@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu } from 'lucide-react';
+import { Menu, FolderGit2, Briefcase, Mail, FileDown, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CommandPaletteTrigger } from '@/components/command-palette-trigger';
@@ -16,10 +17,10 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Contact', href: '#contact' },
-  { name: 'CV', href: '/JayadeepGowda_CV.pdf?v=2', target: '_blank' },
+  { name: 'Projects', href: '#projects', icon: FolderGit2 },
+  { name: 'Experience', href: '#experience', icon: Briefcase },
+  { name: 'Contact', href: '#contact', icon: Mail },
+  { name: 'CV', href: '/JayadeepGowda_CV.pdf?v=2', target: '_blank', icon: FileDown },
 ];
 
 export default function Header() {
@@ -66,21 +67,58 @@ export default function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="top" className="rounded-b-3xl pt-10 pb-8">
+            <SheetContent side="top" className="rounded-b-3xl pt-10 pb-8 overflow-hidden">
+              {/* Soft ambient glow behind the menu — echoes the hero's crystal
+                  palette so opening the menu feels like part of the same
+                  designed experience, not a bare system sheet. */}
+              <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-primary/20 blur-[70px] pointer-events-none" />
               <SheetTitle className="sr-only">Navigation</SheetTitle>
-              <div className="flex flex-col items-center gap-2">
-                {navLinks.map((link) => (
-                  <SheetClose asChild key={link.href}>
+              <div className="relative flex flex-col items-stretch gap-2">
+                {navLinks.slice(0, 3).map((link, i) => {
+                  const Icon = link.icon;
+                  return (
+                    <SheetClose asChild key={link.href}>
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: i * 0.06 }}
+                      >
+                        <Link
+                          href={link.href}
+                          target={link.target}
+                          className="group flex items-center gap-3 w-full text-lg font-medium py-3 px-4 rounded-xl transition-colors hover:bg-primary/10"
+                        >
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          {link.name}
+                        </Link>
+                      </motion.div>
+                    </SheetClose>
+                  );
+                })}
+
+                <SheetClose asChild>
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.18 }}
+                  >
                     <Link
-                      href={link.href}
-                      target={link.target}
-                      className="w-full text-center text-lg font-medium py-3 rounded-xl transition-colors hover:bg-muted"
+                      href="/JayadeepGowda_CV.pdf?v=2"
+                      target="_blank"
+                      className="mt-1 flex items-center justify-between w-full text-base font-semibold py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-purple-600 text-primary-foreground shadow-lg shadow-primary/25"
                     >
-                      {link.name}
+                      <span className="flex items-center gap-2">
+                        <FileDown className="h-4 w-4" />
+                        Download CV
+                      </span>
+                      <ArrowUpRight className="h-4 w-4" />
                     </Link>
-                  </SheetClose>
-                ))}
-                <div className="mt-2">
+                  </motion.div>
+                </SheetClose>
+
+                <div className="mt-3 flex justify-center">
                   <CommandPaletteTrigger />
                 </div>
               </div>

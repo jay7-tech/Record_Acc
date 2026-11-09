@@ -100,25 +100,61 @@ export function DigitRecognizerDemo() {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={idleMode ? 'idle' : 'live'}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="absolute top-4 right-4 flex items-center gap-2 rounded-full border border-sky-500/30 dark:border-sky-400/30 bg-white/80 dark:bg-black/60 backdrop-blur-md px-4 py-2 text-sm"
+              key={idleMode ? 'idle' : hasInk ? 'live' : 'empty'}
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              className="absolute top-4 right-4 flex items-center gap-3 rounded-2xl border border-sky-500/30 dark:border-sky-400/30 bg-white/85 dark:bg-black/70 backdrop-blur-xl pl-2.5 pr-4 py-2 shadow-[0_8px_28px_-8px_rgba(56,189,248,0.5)]"
             >
               {idleMode ? (
                 <>
-                  <Wand2 className="h-4 w-4 text-sky-600 dark:text-sky-300" />
-                  <span className="font-semibold text-slate-800 dark:text-slate-100">Watching it think</span>
-                  <span className="text-slate-500 dark:text-slate-400">· digit {predictedDigit} · {Math.round(confidence * 100)}%</span>
+                  {/* "box" the user wants more impressive: a glowing gradient chip instead of a bare icon */}
+                  <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 shadow-[0_0_16px_rgba(56,189,248,0.6)]">
+                    <Wand2 className="h-4 w-4 text-white" />
+                    <motion.span
+                      className="absolute inset-0 rounded-xl border border-white/40"
+                      animate={{ opacity: [0.8, 0, 0.8], scale: [1, 1.4, 1] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut' }}
+                    />
+                  </span>
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-slate-800 dark:text-slate-100 text-sm">Watching it think</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">digit {predictedDigit} · {Math.round(confidence * 100)}% sure</span>
+                  </div>
+                </>
+              ) : hasInk ? (
+                <>
+                  {/* the predicted digit itself IS the icon now — a gradient badge with a pulsing ring and a sparkle accent */}
+                  <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 via-indigo-500 to-fuchsia-500 text-base font-bold text-white shadow-[0_0_20px_rgba(99,102,241,0.65)]">
+                    {predictedDigit}
+                    <motion.span
+                      className="absolute -inset-0.5 rounded-xl border-2 border-white/50"
+                      animate={{ opacity: [0.9, 0.2, 0.9] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                    <Sparkles className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 text-amber-300 drop-shadow-[0_0_4px_rgba(252,211,77,0.9)]" />
+                  </span>
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-slate-800 dark:text-slate-100 text-sm">Predicted {predictedDigit}</span>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <div className="h-1 w-14 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-sky-400 to-fuchsia-500"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${Math.round(confidence * 100)}%` }}
+                          transition={{ duration: 0.5, ease: 'easeOut' }}
+                        />
+                      </div>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{Math.round(confidence * 100)}%</span>
+                    </div>
+                  </div>
                 </>
               ) : (
                 <>
-                  <Sparkles className="h-4 w-4 text-sky-600 dark:text-sky-300" />
-                  <span className="font-semibold text-slate-800 dark:text-slate-100">
-                    {hasInk ? `Predicted ${predictedDigit}` : 'Draw something'}
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-200/70 dark:bg-slate-700/60">
+                    <Sparkles className="h-4 w-4 text-slate-500 dark:text-slate-400" />
                   </span>
-                  {hasInk && <span className="text-slate-500 dark:text-slate-400">· {Math.round(confidence * 100)}% confident</span>}
+                  <span className="font-semibold text-slate-700 dark:text-slate-200 text-sm">Draw something</span>
                 </>
               )}
             </motion.div>

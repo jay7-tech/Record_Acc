@@ -4,7 +4,70 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import { Float, Sparkles, PerspectiveCamera, Environment, MeshTransmissionMaterial, AdaptiveDpr } from "@react-three/drei";
+import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+// Mobile gets no WebGL canvas at all (see HeroBackground3D below) — a real
+// three.js scene with MeshTransmissionMaterial and an HDR environment map is
+// too heavy for a phone GPU/battery. But "nothing" reads as a flat, unfinished
+// hero, which is exactly what this was. This is the budget version: the same
+// floating-crystal, glassy-glow identity, built from pure CSS transforms and
+// blur (GPU-cheap, no WebGL context) via Framer Motion, which is already a
+// dependency used throughout the site.
+const MOBILE_SHAPES = [
+  { kind: "orb" as const, top: "8%", left: "72%", size: 150, color: "#a855f7", duration: 9, delay: 0 },
+  { kind: "orb" as const, top: "58%", left: "6%", size: 130, color: "#3b82f6", duration: 11, delay: 1.2 },
+  { kind: "orb" as const, top: "32%", left: "-6%", size: 90, color: "#c084fc", duration: 8, delay: 0.6 },
+  { kind: "crystal" as const, top: "14%", left: "14%", size: 34, color: "#c4b5fd", duration: 7, delay: 0.3, rotate: 12 },
+  { kind: "crystal" as const, top: "70%", left: "80%", size: 26, color: "#93c5fd", duration: 6.5, delay: 1.6, rotate: -18 },
+  { kind: "crystal" as const, top: "46%", left: "85%", size: 20, color: "#a855f7", duration: 8.5, delay: 0.9, rotate: 32 },
+  { kind: "crystal" as const, top: "80%", left: "20%", size: 22, color: "#93c5fd", duration: 7.5, delay: 2, rotate: -10 },
+];
+
+function MobileHeroGlow() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {MOBILE_SHAPES.map((shape, i) => {
+        if (shape.kind === "orb") {
+          return (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                top: shape.top,
+                left: shape.left,
+                width: shape.size,
+                height: shape.size,
+                background: `radial-gradient(circle, ${shape.color}55 0%, ${shape.color}00 70%)`,
+                filter: "blur(2px)",
+              }}
+              animate={{ y: [0, -22, 0], opacity: [0.5, 0.9, 0.5] }}
+              transition={{ duration: shape.duration, delay: shape.delay, repeat: Infinity, ease: "easeInOut" }}
+            />
+          );
+        }
+        return (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ top: shape.top, left: shape.left, width: shape.size, height: shape.size }}
+            animate={{ y: [0, -16, 0], rotate: [shape.rotate ?? 0, (shape.rotate ?? 0) + 25, shape.rotate ?? 0] }}
+            transition={{ duration: shape.duration, delay: shape.delay, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div
+              className="w-full h-full rounded-[6px] border backdrop-blur-[1px]"
+              style={{
+                borderColor: `${shape.color}80`,
+                background: `linear-gradient(135deg, ${shape.color}33, transparent 70%)`,
+                boxShadow: `0 0 16px ${shape.color}55`,
+              }}
+            />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
 
 // Complex Interconnected Crystal Network - Ring Configuration
 function CrystalNetwork() {
@@ -169,6 +232,8 @@ export function HeroBackground3D() {
     return (
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/20 z-10 pointer-events-none" />
+
+            {isMobile && <MobileHeroGlow />}
 
             {!isMobile && (
                 <Canvas gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }} dpr={[1, 1.5]}>
